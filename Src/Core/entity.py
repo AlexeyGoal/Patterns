@@ -1,11 +1,13 @@
 from abc import ABC
 import uuid
-from Src.Core.exception import arguments_exception
+from Src.Core.exception import arguments_exception, max_length_exception
 
 
 """Абстрактный класс для имени и id объекта"""
 class entity(ABC):
     
+    __max_name_length = 50
+
     """Конструктор класса"""
     def __init__(self):
         self.__name = ""
@@ -32,12 +34,18 @@ class entity(ABC):
     """Сеттер для name"""
     @name.setter
     def name(self, value: str):
-       if value is None or value.strip() == "":
+        if value is None or value.strip() == "":
             raise arguments_exception("name", "name must not be empty")
         
-       self.__name = value
-
         
+
+        new_name = value.strip()
+
+        if len(new_name) > self.__max_name_length:
+            raise max_length_exception("name", len(value), self.__max_name_length)
+
+        self.__name = new_name
+
     """Сравнение сущностей по идентификатору"""
     def __eq__(self, other):
         if not isinstance(other, entity):
