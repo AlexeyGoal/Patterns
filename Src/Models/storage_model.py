@@ -1,9 +1,9 @@
-from Src.Core.entity import entity
-from Src.Core.exception import arguments_exception
+from Src.Core.abstract_model import name_id
+from Src.Core.exception import argument_exception
 
 
 """Модель склада"""    
-class storage_model(entity):
+class storage_model(name_id):
     
  
     """Конструктор склада"""
@@ -24,6 +24,6 @@ class storage_model(entity):
     def address(self, value):
         
         if not isinstance(value, str):
-            raise arguments_exception("address", "adress must be str")
+            raise argument_exception("address", "adress must be str")
 
         self.__address = value.strip()

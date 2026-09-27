@@ -1,11 +1,11 @@
-from Src.Core.entity import entity
-from Src.Core.exception import arguments_exception
+from Src.Core.abstract_model import entity
+from Src.Core.exception import argument_exception
 
 """ Модель единицa измерения"""
-class range_model(entity):
+class range_model(name_id):
     
      
-    """Конструктор единицы измерения"""
+     """Конструктор единицы измерения"""
     def __init__(self, name="", conversion_factor=1, base_range=None):
        
         super().__init__()
@@ -45,7 +45,7 @@ class range_model(entity):
     def base_range(self, value):
        
         if value is not None and not isinstance(value, range_model):
-            raise arguments_exception("base_range", "base_range should be of the type range_model")
+            raise argument_exception("base_range", "base_range should be of the type range_model")
 
         self.__base_range = value
 
