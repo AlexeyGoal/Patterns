@@ -24,9 +24,9 @@ class arguments_exception(Exception):
 
 
 
-"""Исключение при превышении максимальной длины строкового поля"""
+ """Исключение при превышении максимальной длины строкового поля"""
     
-class max_length_exception(arguments_exception):
+class max_length_exception(argument_exception):
     
     """Конструктор исключения превышения длины"""
     def __init__(self, field="", current_length=0, max_length=0):
