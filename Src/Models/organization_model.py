@@ -2,8 +2,8 @@ from Src.Core.entity import entity
 from Src.Core.exception import arguments_exception
 
 """Модель организации"""
-class organization_model(name_id):
-    """ Конструктор организации.""""
+class organization_model(entity):
+    """ Конструктор организации"""
     def __init__(self, name="", inn="", bik="", account="", ownership_form=""):
         
         super().__init__()

@@ -4,7 +4,7 @@ from Src.Models.range_model import range_model
 from Src.Models.nomenclature_group_model import nomenclature_group_model
 
 """Модель номенклатуры"""
-class nomenclature_model(name_id):
+class nomenclature_model(entity):
     
     """Максимальная длина полного наименования"""
     __max_full_name_length = 255
@@ -47,7 +47,7 @@ class nomenclature_model(name_id):
     @group.setter
     def group(self, value):
         if not isinstance(value, nomenclature_group_model):
-            raise argument_exception("group", "group should be of the type nomenclature_group_model")
+            raise arguments_exception("group", "group should be of the type nomenclature_group_model")
 
         self.__group = value
 
