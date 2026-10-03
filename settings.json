@@ -1,0 +1,13 @@
+{
+  "is_first_start": true,
+  "organization": {
+   "name": "Ромашка",
+    "inn": "4444444444",
+    "bik": "012345678",
+    "account": "12345678901234567890",
+    "ownership_form": "ООО"
+  },
+  "boss_name": "Иванов Иван Иванович",
+  "account_name": "Петрова Анна Сергеевна"
+ 
+}
