@@ -47,8 +47,8 @@ def test_net_weight_without_packaging():
     assert recipe.net_weight == 500.0
 
 
-"""Тест расчёта веса нетто с упаковкой"""
-def test_net_weight_with_packaging():
+"""Тест расчёта веса брутто с упаковкой"""
+def test_gross_weight_with_packaging():
 
     gram = range_model("грамм", 1)
     recipe = recipe_model("Тестовый рецепт")
@@ -56,7 +56,8 @@ def test_net_weight_with_packaging():
     recipe.add_item(recipe_item_model.create_ingredient("Мука", 500, gram))
     recipe.packaging = recipe_item_model.create_packaging("Контейнер", 50)
 
-    assert recipe.net_weight == 450.0
+    assert recipe.net_weight == 500.0
+    assert recipe.gross_weight == 550.0
 
 
 """Тест добавления ингредиента и пересчёта брутто"""
@@ -89,30 +90,34 @@ def test_remove_ingredient_updates_gross_weight():
     assert recipe.gross_weight == 200.0
 
 
-"""Тест добавления полуфабриката и пересчёта брутто"""
-def test_add_semi_finished_updates_gross_weight():
+"""Тест добавления полуфабриката и пересчёта нетто"""
+def test_add_semi_finished_updates_net_weight():
 
     gram = range_model("грамм", 1)
     recipe = recipe_model("Тестовый рецепт")
 
-    semi_finished = recipe_item_model.create_semi_finished("Зажарка овощная", 250, gram)
+    semi_finished = recipe_item_model.create_semi_finished("Зажарка овощная", 0, gram)
+    semi_finished.add_item(recipe_item_model.create_ingredient("Морковь", 150, gram))
+    semi_finished.add_item(recipe_item_model.create_ingredient("Лук", 100, gram))
     recipe.add_item(semi_finished)
 
-    assert recipe.gross_weight == 250.0
+    assert recipe.net_weight == 250.0
 
 
-"""Тест удаления полуфабриката и пересчёта брутто"""
-def test_remove_semi_finished_updates_gross_weight():
+"""Тест удаления полуфабриката и пересчёта нетто"""
+def test_remove_semi_finished_updates_net_weight():
 
     gram = range_model("грамм", 1)
     recipe = recipe_model("Тестовый рецепт")
 
-    semi_finished = recipe_item_model.create_semi_finished("Зажарка овощная", 250, gram)
+    semi_finished = recipe_item_model.create_semi_finished("Зажарка овощная", 0, gram)
+    semi_finished.add_item(recipe_item_model.create_ingredient("Морковь", 150, gram))
+    semi_finished.add_item(recipe_item_model.create_ingredient("Лук", 100, gram))
     recipe.add_item(semi_finished)
-    assert recipe.gross_weight == 250.0
+    assert recipe.net_weight == 250.0
 
     recipe.remove_item(semi_finished)
-    assert recipe.gross_weight == 0.0
+    assert recipe.net_weight == 0.0
 
 
 """Тест выброса argument_exception при добавлении некорректной позиции"""

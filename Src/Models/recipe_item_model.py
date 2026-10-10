@@ -4,7 +4,7 @@ from Src.Models.range_model import range_model
 
 
 class recipe_item_type:
-    """Типы позиций рецепта"""
+    """Тypes позиций рецепта"""
     INGREDIENT = "ingredient"
     SEMI_FINISHED = "semi_finished"
     PACKAGING = "packaging"
@@ -21,6 +21,7 @@ class recipe_item_model(entity):
         self.weight = weight
         self.range = range
         self.type = item_type
+        self.__items = []
 
 
     """Геттер веса"""
@@ -74,6 +75,41 @@ class recipe_item_model(entity):
             raise arguments_exception("type", f"type must be one of: {valid_types}")
 
         self.__type = value
+
+
+    """Геттер списка вложенных позиций"""
+    @property
+    def items(self):
+        return list(self.__items)
+
+
+    """Добавление вложенной позиции"""
+    def add_item(self, item):
+
+        if not isinstance(item, recipe_item_model):
+            raise arguments_exception("item", "item should be of the type recipe_item_model")
+
+        self.__items.append(item)
+
+
+    """Удаление вложенной позиции"""
+    def remove_item(self, item):
+
+        if item in self.__items:
+            self.__items.remove(item)
+
+
+    """Рекурсивный расчёт веса позиции"""
+    def calculate_weight(self):
+
+        if self.type == recipe_item_type.INGREDIENT or self.type == recipe_item_type.PACKAGING:
+            return self.weight
+
+        total = 0.0
+        for item in self.__items:
+            total += item.calculate_weight()
+
+        return total
 
 
     """Фабричный метод - создать ингредиент"""

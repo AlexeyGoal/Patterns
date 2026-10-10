@@ -87,37 +87,37 @@ class recipe_model(entity):
         self.__items.append(item)
 
 
-    """Удаление позиции из рецепта"""
+    """Удаление позиции из рецептa"""
     def remove_item(self, item):
 
         if item in self.__items:
             self.__items.remove(item)
 
 
-    """Расчёт веса брутто (сумма весов всех ингредиентов и полуфабрикатов)"""
+    """Расчёт веса нетто (рекурсивная сумма весов всех ингредиентов и полуфабрикатов без упаковки)"""
     @property
-    def gross_weight(self):
+    def net_weight(self):
 
         total = 0.0
 
         for item in self.__items:
             if item.type in (recipe_item_type.INGREDIENT, recipe_item_type.SEMI_FINISHED):
-                total += item.weight
+                total += item.calculate_weight()
 
         return total
 
 
-    """Расчёт веса нетто (вес брутто минус вес упаковки)"""
+    """Расчёт веса брутто (нетто плюс вес упаковки)"""
     @property
-    def net_weight(self):
+    def gross_weight(self):
 
-        net = self.gross_weight
+        gross = self.net_weight
 
         packaging = self.packaging
         if packaging is not None:
-            net -= packaging.weight
+            gross += packaging.calculate_weight()
 
-        return max(net, 0.0)
+        return gross
 
 
     """Фабричный метод - создать рецепт"""
@@ -133,6 +133,12 @@ class recipe_model(entity):
         gram = range_model("грамм", 1)
         piece = range_model("штука", 1)
 
+        noodles = recipe_item_model.create_semi_finished("Лапша домашняя (полуфабрикат)", 0, gram)
+        noodles.add_item(recipe_item_model.create_ingredient("Мука пшеничная", 200, gram))
+        noodles.add_item(recipe_item_model.create_ingredient("Вода", 100, gram))
+        noodles.add_item(recipe_item_model.create_ingredient("Яйца куриные", 50, gram))
+        noodles.add_item(recipe_item_model.create_ingredient("Соль пищевая мелкая", 5, gram))
+
         items = [
             recipe_item_model.create_ingredient("Курица (тушка)", 900, gram),
             recipe_item_model.create_ingredient("Морковь", 150, gram),
@@ -144,7 +150,7 @@ class recipe_model(entity):
             recipe_item_model.create_ingredient("Лавровый лист", 2, piece),
             recipe_item_model.create_ingredient("Зелень укропа", 25, gram),
             recipe_item_model.create_ingredient("Сметана 15%", 160, gram),
-            recipe_item_model.create_semi_finished("Лапша домашняя (полуфабрикат)", 300, gram),
+            noodles,
             recipe_item_model.create_packaging("Порционная тарелка", 400, gram),
         ]
 
