@@ -97,11 +97,14 @@ def test_success_storage_manager_first_start_ranges():
 
 #Проверяет наличие групп Мясные продукты, Овощи, Молочные продукты, Бакалея, Полуфабрикаты и Блюда.
 def test_success_storage_manager_first_start_groups():
-    
+
+    if hasattr(storage_manager, 'instance'):
+        del storage_manager.instance
+
     manager = storage_manager()
     manager.convert()
 
-    assert len(manager.groups) == 6
+    assert len(manager.groups) == 7
     group_names = [g.name for g in manager.groups.values()]
     assert "Мясные продукты" in group_names
     assert "Овощи" in group_names
@@ -109,9 +112,13 @@ def test_success_storage_manager_first_start_groups():
     assert "Бакалея" in group_names
     assert "Полуфабрикаты" in group_names
     assert "Блюда" in group_names
+    assert "Упаковка" in group_names
 
 # Проверяет корректные связи номенклатуры с группами и единицами.
 def test_success_storage_manager_first_start_nomenclatures():
+
+    if hasattr(storage_manager, 'instance'):
+        del storage_manager.instance
 
     # Подготовка
     manager = storage_manager()
@@ -120,7 +127,7 @@ def test_success_storage_manager_first_start_nomenclatures():
     manager.convert()
 
     # Проверки
-    assert len(manager.nomenclatures) == 12
+    assert len(manager.nomenclatures) == 17
     nom_names = [n.name for n in manager.nomenclatures.values()]
     assert "Курица (тушка)" in nom_names
     assert "Морковь" in nom_names

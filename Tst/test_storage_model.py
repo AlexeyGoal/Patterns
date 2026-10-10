@@ -59,9 +59,29 @@ def test_false_eq_storage_model_compare_with_string():
 
 """Тест два склада с одинаковым именем, но разными ID — не равны"""
 def test_false_eq_storage_model_same_name_different_id():
-    
+
     storage1 = storage_model("Основной склад")
     storage2 = storage_model("Основной склад")
 
     assert storage1 != storage2
     assert storage1.name == storage2.name
+
+
+"""Тест фабричного метода create_main_storage"""
+def test_success_storage_model_create_main_storage():
+
+    storage = storage_model.create_main_storage()
+
+    assert storage.name == "Основной склад"
+    assert storage.address == "ул. Промышленная, 5, пом. 101"
+    assert storage.id is not None
+
+
+"""Тест фабричного метода create_fridge"""
+def test_success_storage_model_create_fridge():
+
+    storage = storage_model.create_fridge()
+
+    assert storage.name == "Холодильник цеха"
+    assert storage.address == "ул. Промышленная, 5, пом. 102"
+    assert storage.id is not None

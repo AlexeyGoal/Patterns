@@ -82,6 +82,72 @@ def test_argument_exception_range_model_string_factor():
 
 """Тест выброса argument_exception при передаче строки в качестве базовой единицы"""
 def test_argument_exception_range_model_invalid_base_type():
-    
+
     with pytest.raises(arguments_exception):
         range_model("кг", 1000, "грамм")
+
+
+"""Тест фабричного метода create_kilogram"""
+def test_success_range_model_create_kilogram():
+
+    kg = range_model.create_kilogram()
+
+    assert kg.name == "килограмм"
+    assert kg.conversion_factor == 1000
+    assert kg.base_range is not None
+    assert kg.base_range.name == "грамм"
+    assert kg.base_range.conversion_factor == 1
+    assert kg.base_range.base_range is None
+
+
+"""Тест фабричного метода create_kilogram с пользовательскими именами"""
+def test_success_range_model_create_kilogram_custom_names():
+
+    kg = range_model.create_kilogram("кг", "г")
+
+    assert kg.name == "кг"
+    assert kg.base_range.name == "г"
+    assert kg.conversion_factor == 1000
+
+
+"""Тест фабричного метода create_gram"""
+def test_success_range_model_create_gram():
+
+    gram = range_model.create_gram()
+
+    assert gram.name == "грамм"
+    assert gram.conversion_factor == 1
+    assert gram.base_range is None
+
+
+"""Тест фабричного метода create_milliliter"""
+def test_success_range_model_create_milliliter():
+
+    ml = range_model.create_milliliter()
+
+    assert ml.name == "миллилитр"
+    assert ml.conversion_factor == 1
+    assert ml.base_range is None
+
+
+"""Тест фабричного метода create_liter"""
+def test_success_range_model_create_liter():
+
+    liter = range_model.create_liter()
+
+    assert liter.name == "литр"
+    assert liter.conversion_factor == 1000
+    assert liter.base_range is not None
+    assert liter.base_range.name == "миллилитр"
+    assert liter.base_range.conversion_factor == 1
+    assert liter.base_range.base_range is None
+
+
+"""Тест фабричного метода create_piece"""
+def test_success_range_model_create_piece():
+
+    piece = range_model.create_piece()
+
+    assert piece.name == "штука"
+    assert piece.conversion_factor == 1
+    assert piece.base_range is None
