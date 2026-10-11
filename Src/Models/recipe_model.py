@@ -14,6 +14,7 @@ class recipe_model(entity):
         self.name = name
         self.description = description
         self.__items = []
+        self.__sub_recipes = []
 
 
     """Геттер описания рецепта"""
@@ -78,6 +79,18 @@ class recipe_model(entity):
             self.__items.append(value)
 
 
+    """Геттер списка вложенных рецептов"""
+    @property
+    def sub_recipes(self):
+        return list(self.__sub_recipes)
+
+
+    """Флаг составной рецептуры"""
+    @property
+    def is_composite(self):
+        return len(self.__sub_recipes) > 0
+
+
     """Добавление позиции в рецепт"""
     def add_item(self, item):
 
@@ -87,14 +100,36 @@ class recipe_model(entity):
         self.__items.append(item)
 
 
-    """Удаление позиции из рецептa"""
+    """Удаление позиции из рецепта"""
     def remove_item(self, item):
 
         if item in self.__items:
             self.__items.remove(item)
 
 
-    """Расчёт веса нетто (рекурсивная сумма весов всех ингредиентов и полуфабрикатов без упаковки)"""
+    """Добавление вложенного рецепта (блюдо в блюде)"""
+    def add_sub_recipe(self, recipe):
+
+        if not isinstance(recipe, recipe_model):
+            raise arguments_exception("recipe", "recipe should be of the type recipe_model")
+
+        if recipe is self:
+            raise arguments_exception("recipe", "recipe cannot contain itself")
+
+        if recipe.__contains_recipe(self):
+            raise arguments_exception("recipe", "circular reference detected")
+
+        self.__sub_recipes.append(recipe)
+
+
+    """Удаление вложенного рецепта"""
+    def remove_sub_recipe(self, recipe):
+
+        if recipe in self.__sub_recipes:
+            self.__sub_recipes.remove(recipe)
+
+
+    """Расчёт веса нетто (рекурсивная сумма весов всех ингредиентов, полуфабрикатов и вложенных карт без упаковки)"""
     @property
     def net_weight(self):
 
@@ -103,6 +138,9 @@ class recipe_model(entity):
         for item in self.__items:
             if item.type in (recipe_item_type.INGREDIENT, recipe_item_type.SEMI_FINISHED):
                 total += item.calculate_weight()
+
+        for sub in self.__sub_recipes:
+            total += sub.net_weight
 
         return total
 
@@ -118,6 +156,19 @@ class recipe_model(entity):
             gross += packaging.calculate_weight()
 
         return gross
+
+
+    """Проверка наличия рецепта в поддереве (защита от циклов)"""
+    def __contains_recipe(self, target):
+
+        if self == target:
+            return True
+
+        for sub in self.__sub_recipes:
+            if sub.__contains_recipe(target):
+                return True
+
+        return False
 
 
     """Фабричный метод - создать рецепт"""

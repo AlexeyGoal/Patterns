@@ -344,3 +344,79 @@ def test_recipe_manager_remove_item_updates_weight():
     manager.recipe.remove_item(item_to_remove)
 
     assert manager.recipe.gross_weight == initial_gross - item_to_remove.weight
+
+
+"""Тест добавления вложенного рецепта (блюдо в блюде)"""
+def test_add_sub_recipe():
+
+    gram = range_model("грамм", 1)
+
+    soup = recipe_model.create("Суп-лапша домашняя", "Описание")
+    soup.add_item(recipe_item_model.create_ingredient("Курица", 500, gram))
+
+    noodles = recipe_model.create("Лапша домашняя", "Полуфабрикат")
+    noodles.add_item(recipe_item_model.create_ingredient("Мука", 200, gram))
+    noodles.add_item(recipe_item_model.create_ingredient("Вода", 100, gram))
+
+    soup.add_sub_recipe(noodles)
+
+    assert soup.is_composite
+    assert len(soup.sub_recipes) == 1
+    assert soup.sub_recipes[0] is noodles
+
+
+"""Тест выброса исключения при циклической ссылке"""
+def test_circular_reference_exception():
+
+    recipe_a = recipe_model.create("Рецепт A", "Описание A")
+    recipe_b = recipe_model.create("Рецепт B", "Описание B")
+
+    recipe_a.add_sub_recipe(recipe_b)
+
+    with pytest.raises(arguments_exception):
+        recipe_b.add_sub_recipe(recipe_a)
+
+
+"""Тест выброса исключения при добавлении рецепта самого в себя"""
+def test_self_reference_exception():
+
+    recipe = recipe_model.create("Рецепт", "Описание")
+
+    with pytest.raises(arguments_exception):
+        recipe.add_sub_recipe(recipe)
+
+
+"""Тест удаления вложенного рецепта"""
+def test_remove_sub_recipe():
+
+    gram = range_model("грамм", 1)
+
+    soup = recipe_model.create("Суп", "Описание")
+    noodles = recipe_model.create("Лапша", "Полуфабрикат")
+    noodles.add_item(recipe_item_model.create_ingredient("Мука", 200, gram))
+
+    soup.add_sub_recipe(noodles)
+    assert soup.is_composite
+
+    soup.remove_sub_recipe(noodles)
+    assert not soup.is_composite
+
+
+"""Тест рекурсивного расчёта веса с вложенными картами"""
+def test_recursive_weight_with_sub_recipes():
+
+    gram = range_model("грамм", 1)
+
+    soup = recipe_model.create("Суп-лапша домашняя", "Описание")
+    soup.add_item(recipe_item_model.create_ingredient("Курица", 500, gram))
+    soup.add_item(recipe_item_model.create_ingredient("Морковь", 150, gram))
+
+    noodles = recipe_model.create("Лапша домашняя", "Полуфабрикат")
+    noodles.add_item(recipe_item_model.create_ingredient("Мука", 200, gram))
+    noodles.add_item(recipe_item_model.create_ingredient("Вода", 100, gram))
+
+    soup.add_sub_recipe(noodles)
+    soup.packaging = recipe_item_model.create_packaging("Тарелка", 400, gram)
+
+    assert soup.net_weight == 950.0
+    assert soup.gross_weight == 1350.0
