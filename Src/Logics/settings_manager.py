@@ -2,6 +2,7 @@ from Src.Core.abstract_manager import abstract_manager
 from Src.Core.validator import validator, operation_exception
 from Src.Models.settings_model import settings_model
 from Src.Models.organization_model import organization_model
+from Src.Models.range_model import range_model
 import json
 
 
@@ -12,6 +13,12 @@ class settings_manager(abstract_manager):
     _settings: settings_model = None
     __is_loaded: bool = False
     __data: dict = None
+
+
+    """Фабричный метод - создать килограмм (делегирует создание range_model)"""
+    @staticmethod
+    def create_kilogram() -> range_model:
+        return range_model.create_kilogram()
 
     # Singleton
     def __new__(cls):

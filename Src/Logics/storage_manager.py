@@ -60,80 +60,70 @@ class storage_manager(abstract_manager):
 
     # Генерация базовых и производных единиц измерения
     def __create_ranges(self) -> None:
-        
-        gram = range_model(name="грамм", conversion_factor=1, base_range=None)
-        kilogram = range_model(name="килограмм", conversion_factor=1000, base_range=gram)
-        piece = range_model(name="штука", conversion_factor=1, base_range=None)
-        milliliter = range_model(name="миллилитр", conversion_factor=1, base_range=None)
-        liter = range_model(name="литр", conversion_factor=1000, base_range=milliliter)
-       
 
-        for r in (gram, kilogram, piece, liter, milliliter):
+        kilogram = range_model.create_kilogram()
+        gram = kilogram.base_range
+        liter = range_model.create_liter()
+        milliliter = liter.base_range
+        piece = range_model.create_piece()
+
+        for r in (gram, kilogram, milliliter, liter, piece):
             self.add_range(r)
+
+       
 
 
     def __create_groups(self) -> None:
-    
-        meat = nomenclature_group_model(name="Мясные продукты")
-        vegetables = nomenclature_group_model(name="Овощи")
-        dairy = nomenclature_group_model(name="Молочные продукты")
-        grocery = nomenclature_group_model(name="Бакалея")
-        semi_finished = nomenclature_group_model(name="Полуфабрикаты")
-        dishes = nomenclature_group_model(name="Блюда")
 
-        self.add_group(meat)
-        self.add_group(vegetables)
-        self.add_group(dairy)
-        self.add_group(grocery)
-        self.add_group(semi_finished)
-        self.add_group(dishes)
+        for group in (
+            nomenclature_group_model.create_grocery(),
+            nomenclature_group_model.create_dairy(),
+            nomenclature_group_model.create_dishes(),
+            nomenclature_group_model.create_packaging(),
+            nomenclature_group_model.create_meat(),
+            nomenclature_group_model.create_vegetables(),
+            nomenclature_group_model.create_semi_finished(),
+        ):
+            self.add_group(group)
 
 
     # Генерация номенклатуры.
     def __create_nomenclatures(self) -> None:
-        
+
         groups_by_name = {g.name: g for g in self._groups.values()}
         ranges_by_name = {r.name: r for r in self._ranges.values()}
 
-        meat = groups_by_name.get("Мясные продукты")
-        vegetables = groups_by_name.get("Овощи")
-        dairy = groups_by_name.get("Молочные продукты")
-        grocery = groups_by_name.get("Бакалея")
-        semi_finished = groups_by_name.get("Полуфабрикаты")
-        dishes = groups_by_name.get("Блюда")
-
-        kg = ranges_by_name.get("килограмм")
-        liter = ranges_by_name.get("литр")
-        piece = ranges_by_name.get("штука")
-
         items = [
-            nomenclature_model("Курица (тушка)", "Курица охлаждённая, тушка", meat, kg),
-            nomenclature_model("Морковь", "Морковь свежая столовая", vegetables, kg),
-            nomenclature_model("Лук репчатый", "Лук репчатый свежий", vegetables, kg),
-            nomenclature_model("Картофель", "Картофель свежий продовольственный", vegetables, kg),
-            nomenclature_model("Лапша домашняя (полуфабрикат)", "Лапша домашняя, полуфабрикат", semi_finished, kg),
-            nomenclature_model("Масло сливочное", "Масло сливочное крестьянское 72.5%", dairy, kg),
-            nomenclature_model("Соль пищевая мелкая", "Соль поваренная пищевая мелкая", grocery, kg),
-            nomenclature_model("Перец черный молотый", "Перец чёрный молотый", grocery, kg),
-            nomenclature_model("Лавровый лист", "Лавровый лист сушёный", grocery, piece),
-            nomenclature_model("Зелень укропа", "Укроп свежий", vegetables, kg),
-            nomenclature_model("Сметана 15%", "Сметана 15%", dairy, kg),
-            nomenclature_model("Суп-лапша домашняя", "Суп-лапша домашняя", dishes, piece),
+            nomenclature_model.create_flour(groups_by_name.get("Бакалея"), ranges_by_name.get("килограмм")),
+            nomenclature_model.create_milk(groups_by_name.get("Молочные продукты"), ranges_by_name.get("литр")),
+            nomenclature_model.create_eggs(groups_by_name.get("Молочные продукты"), ranges_by_name.get("штука")),
+            nomenclature_model.create_butter(groups_by_name.get("Молочные продукты"), ranges_by_name.get("килограмм")),
+            nomenclature_model.create_sugar(groups_by_name.get("Бакалея"), ranges_by_name.get("килограмм")),
+            nomenclature_model.create_salt(groups_by_name.get("Бакалея"), ranges_by_name.get("килограмм")),
+            nomenclature_model.create_cottage_cheese(groups_by_name.get("Молочные продукты"), ranges_by_name.get("килограмм")),
+            nomenclature_model.create_sunflower_oil(groups_by_name.get("Бакалея"), ranges_by_name.get("литр")),
+            nomenclature_model.create_breakfast_box(groups_by_name.get("Упаковка"), ranges_by_name.get("штука")),
+            nomenclature_model.create_chicken(groups_by_name.get("Мясные продукты"), ranges_by_name.get("килограмм")),
+            nomenclature_model.create_carrot(groups_by_name.get("Овощи"), ranges_by_name.get("килограмм")),
+            nomenclature_model.create_onion(groups_by_name.get("Овощи"), ranges_by_name.get("килограмм")),
+            nomenclature_model.create_potato(groups_by_name.get("Овощи"), ranges_by_name.get("килограмм")),
+            nomenclature_model.create_semi_finished_noodles(groups_by_name.get("Полуфабрикаты"), ranges_by_name.get("килограмм")),
+            nomenclature_model.create_sour_cream(groups_by_name.get("Молочные продукты"), ranges_by_name.get("килограмм")),
+            nomenclature_model.create_bay_leaf(groups_by_name.get("Бакалея"), ranges_by_name.get("штука")),
+            nomenclature_model.create_dish_noodle_soup(groups_by_name.get("Блюда"), ranges_by_name.get("штука")),
         ]
 
         for item in items:
             self.add_nomenclature(item)
+
 
     
     
     # Генерация складов
     def __create_storages(self) -> None:
         
-        main_storage = storage_model(name="Основной склад", address="ул. Промышленная, 5, пом. 101")
-        fridge = storage_model(name="Холодильник цеха", address="ул. Промышленная, 5, пом. 102")
-
-        self.add_storage(main_storage)
-        self.add_storage(fridge)
+        self.add_storage(storage_model.create_main_storage())
+        self.add_storage(storage_model.create_fridge())
 
 
     # Добавить склад
