@@ -111,6 +111,26 @@ class recipe_item_model(entity):
 
         return total
 
+    """Уникальный код позиции"""
+    @property
+    def unique_code(self) -> str:
+        return str(self.id)
+
+    """Вес брутто (с учетом упаковки для полуфабрикатов)"""
+    @property
+    def brutto(self) -> float:
+        return self.calculate_weight()
+
+    """Вес нетто (без учета упаковки)"""
+    @property
+    def netto(self) -> float:
+        if self.type == recipe_item_type.SEMI_FINISHED:
+            total = 0.0
+            for item in self.__items:
+                total += item.calculate_weight()
+            return total
+        return self.weight
+
 
     """Фабричный метод - создать ингредиент"""
     @staticmethod

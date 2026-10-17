@@ -66,6 +66,9 @@ class settings_manager(abstract_manager):
             if "is_first_start" in self.__data:
                 self._settings.is_first_start = bool(self.__data.get("is_first_start"))
 
+            if "response_format" in self.__data:
+                self._settings.response_format = str(self.__data.get("response_format"))
+
             return True
 
         except Exception:
