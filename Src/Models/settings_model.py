@@ -3,16 +3,22 @@ from Src.Core.validator import validator
 from Src.Models.organization_model import organization_model
 
 
+# Допустимые форматы ответа
+VALID_RESPONSE_FORMATS = ("CSV", "Markdown", "XML", "TXT", "HTML")
+
+
 # модель натсроек приложения 
 class settings_model(entity):
    
     __organization: organization_model = None
-   
+    
     __boss_name: str = ""
     
     __account_name: str = ""
 
     __is_first_start: bool = False
+
+    __response_format: str = "TXT"
    
     # карточка организации
     @property
@@ -56,3 +62,19 @@ class settings_model(entity):
     def is_first_start(self, value: bool) -> None:
         validator.validate(value, bool)
         self.__is_first_start = value
+
+    # Формат ответа (CSV, Markdown, XML, TXT, HTML)
+    @property
+    def response_format(self) -> str:
+        return self.__response_format
+
+    @response_format.setter
+    def response_format(self, value: str) -> None:
+        validator.validate(value, str, 10)
+        normalized = value.strip()
+        if normalized not in VALID_RESPONSE_FORMATS:
+            raise ValueError(
+                f"Недопустимый формат ответа: '{normalized}'. "
+                f"Допустимые значения: {', '.join(VALID_RESPONSE_FORMATS)}"
+            )
+        self.__response_format = normalized
