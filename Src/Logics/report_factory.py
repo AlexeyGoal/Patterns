@@ -15,15 +15,16 @@ from Src.Core.exception import arguments_exception
 """
 class report_factory(abstract_report_factory):
     """
-    Фабрика для создания и подбора отчетов на основе перечисления report_type_dto.
+    Фабрика для создания и подбора отчетов на основе перечисления report_type_dto
+    или строкового имени формата (для API и настроек приложения).
     Инкапсулирует настройки приложения для определения формата отчета по умолчанию.
     """
 
     # Маппинг: тип отчета -> класс реализации
     _mapping: dict[report_type_dto, type[abstract_report]]
 
-    # Маппинг: формат ответа из настроек -> тип отчета
-    _format_mapping: dict[str, report_type_dto]
+    # Маппинг: строковое имя формата -> тип отчета
+    _names: dict[str, report_type_dto]
 
     # Менеджер настроек (singleton)
     _settings: settings_manager = None
@@ -43,13 +44,21 @@ class report_factory(abstract_report_factory):
         self._mapping[report_type_dto.XML] = xml_report
         self._mapping[report_type_dto.HTML] = html_report
 
-        self._format_mapping = {
-            "TXT": report_type_dto.TXT,
-            "CSV": report_type_dto.CSV,
-            "Markdown": report_type_dto.MARKDOWN,
-            "XML": report_type_dto.XML,
-            "HTML": report_type_dto.HTML,
+        self._names = {
+            "txt": report_type_dto.TXT,
+            "text": report_type_dto.TXT,
+            "csv": report_type_dto.CSV,
+            "markdown": report_type_dto.MARKDOWN,
+            "xml": report_type_dto.XML,
+            "html": report_type_dto.HTML,
         }
+
+    @property
+    def supported_formats(self) -> list:
+        """
+        Список поддерживаемых строковых имен форматов.
+        """
+        return list(self._names.keys())
 
     def create(self, report_type: report_type_dto) -> abstract_report:
         """
@@ -64,22 +73,38 @@ class report_factory(abstract_report_factory):
         report_cls = self._mapping[report_type]
         return report_cls() if isinstance(report_cls, type) else report_cls
 
+    def create_by_name(self, name: str) -> abstract_report:
+        """
+        Создает экземпляр отчета по строковому имени формата (регистронезависимо).
+        :param name: Имя формата (например, "csv" или "Markdown")
+        :return: Экземпляр отчета или None, если формат не поддерживается
+        """
+        if name is None:
+            return None
+
+        report_type = self._names.get(str(name).strip().lower())
+        if report_type is None:
+            return None
+
+        return self.create(report_type)
+
     def create_default(self) -> abstract_report:
         """
         Создает отчет по умолчанию на основе настроек приложения (response_format).
+        Формат определяется по строковому имени (регистронезависимо).
         :return: Экземпляр соответствующего класса отчета
         :raises argument_exception: Если формат не реализован
         """
         response_format = self._settings.settings.response_format
-        report_type = self._format_mapping.get(response_format)
+        report = self.create_by_name(response_format)
 
-        if report_type is None:
+        if report is None:
             raise argument_exception(
                 "response_format",
                 f"Формат ответа '{response_format}' не поддерживается!"
             )
 
-        return self.create(report_type)
+        return report
 
 
 # Алиасы для соблюдения стандартов и совместимости

@@ -1,49 +1,40 @@
 from Src.Core.abstract_report import abstract_report, AbstractReport
-from Src.Models.recipe_model import recipe_model
+from Src.Core.entity import entity
 from Src.Core.validator import validator
 from Src.Dtos.report_result_dto import report_result_dto
-from Src.Logics.entity_fields import extract_entity_fields
+from Src.Logics.report_source_builder import report_source_builder
 
 
 """
-Реализация текстового представления отчета по рецепту
+Реализация текстового представления отчета
 """
 class text_report(abstract_report):
     """
-    Класс построения отчета по технологической карте (рецепту) в текстовом формате.
-    Поддерживает также номенклатуру, единицу измерения и склад.
+    Класс построения отчета в текстовом формате.
+    Рендерит нейтральную таблицу (report_table_dto) из report_source_builder.
     """
-    __receipt: recipe_model = None
+
+    mimetype = "text/plain"
+    is_download = False
+    extension = "txt"
 
     def build(self, source) -> report_result_dto:
         """
-        Формирует текстовый отчет по переданной модели.
-        :param source: Модель рецепта (recipe_model) или иной сущности
+        Формирует текстовый отчет по переданной сущности.
+        :param source: Модель сущности (наследник entity)
         :return: report_result_dto с текстовым представлением
         """
-        # Отчет по сущности, отличной от рецепта (номенклатура, единица измерения, склад)
-        if not isinstance(source, recipe_model):
-            fields = extract_entity_fields(source)
-            text = "\n".join(f"{name}: {value}" for name, value in fields)
+        validator.validate(source, entity)
 
-            result = report_result_dto()
-            result.text = text
-            return result
+        table = report_source_builder.build(source)
 
-        validator.validate(source, recipe_model)
-        self.__receipt = source
+        lines = [" | ".join(title for _, title in table.columns)]
 
-        header = "Код | Наименование | Брутто | Нетто"
-        rows_data = []
-
-        for item in self.__receipt.items:
-            rows_data.append(f"{item.unique_code} | {item.name} | {item.brutto} | {item.netto}")
-
-        data = "\n".join(rows_data)
-        text = f"{header}\n{data}" if data else header
+        for row in table.rows:
+            lines.append(" | ".join(str(row[key]) for key in table.keys))
 
         result = report_result_dto()
-        result.text = text
+        result.text = "\n".join(lines)
 
         return result
 

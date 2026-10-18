@@ -1,56 +1,45 @@
 from Src.Core.abstract_report import abstract_report, AbstractReport
-from Src.Models.recipe_model import recipe_model
+from Src.Core.entity import entity
 from Src.Core.validator import validator
 from Src.Dtos.report_result_dto import report_result_dto
-from Src.Logics.entity_fields import extract_entity_fields
+from Src.Logics.report_source_builder import report_source_builder
 
 
 """
-Реализация Markdown представления отчета по рецепту
+Реализация Markdown представления отчета
 """
 class markdown_report(abstract_report):
     """
-    Класс построения отчета по технологической карте (рецепту) в Markdown формате.
-    Поддерживает также номенклатуру, единицу измерения и склад.
+    Класс построения отчета в Markdown формате.
+    Рендерит нейтральную таблицу (report_table_dto) из report_source_builder.
+    Результат формируется в виде бинарных данных (UTF-8).
     """
-    __receipt: recipe_model = None
+
+    mimetype = "text/markdown"
+    is_download = True
+    extension = "md"
 
     def build(self, source) -> report_result_dto:
         """
-        Формирует Markdown отчет по переданной модели.
-        :param source: Модель рецепта (recipe_model) или иной сущности
+        Формирует Markdown отчет по переданной сущности.
+        :param source: Модель сущности (наследник entity)
         :return: report_result_dto с Markdown представлением в бинарных данных (UTF-8)
         """
-        # Отчет по сущности, отличной от рецепта (номенклатура, единица измерения, склад)
-        if not isinstance(source, recipe_model):
-            lines = [
-                "| Поле | Значение |",
-                "|------|----------|"
-            ]
-            for name, value in extract_entity_fields(source):
-                lines.append(f"| {name} | {value} |")
+        validator.validate(source, entity)
 
-            result = report_result_dto()
-            result.binary = list("\n".join(lines).encode("utf-8"))
-            return result
+        table = report_source_builder.build(source)
 
-        validator.validate(source, recipe_model)
-        self.__receipt = source
+        header = "| " + " | ".join(title for _, title in table.columns) + " |"
+        separator = "|" + "-----|" * len(table.columns)
+        lines = [header, separator]
 
-        lines = [
-            "| Код | Наименование | Брутто | Нетто |",
-            "|-----|-------------|--------|-------|"
-        ]
-
-        for item in self.__receipt.items:
-            name = str(item.name).replace("|", "\\|")
-            lines.append(f"| {item.unique_code} | {name} | {item.brutto} | {item.netto} |")
-
-        text = "\n".join(lines)
+        for row in table.rows:
+            values = [str(row[key]).replace("|", "\\|") for key in table.keys]
+            lines.append("| " + " | ".join(values) + " |")
 
         # Markdown формируется в виде бинарных данных (UTF-8) для скачивания файла через API
         result = report_result_dto()
-        result.binary = list(text.encode("utf-8"))
+        result.binary = list("\n".join(lines).encode("utf-8"))
 
         return result
 

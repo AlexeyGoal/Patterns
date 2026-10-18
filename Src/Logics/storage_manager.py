@@ -16,6 +16,7 @@ class storage_manager(abstract_manager):
     _nomenclatures: dict = None
     _groups: dict = None
     _recipes: dict = None
+    _sources: dict = None
     __is_initialized: bool = False
 
     # Singleton
@@ -27,6 +28,11 @@ class storage_manager(abstract_manager):
             cls.instance._nomenclatures = {}
             cls.instance._groups = {}
             cls.instance._recipes = {}
+            cls.instance._sources = {
+                "recipe": lambda: cls.instance._recipes,
+                "nomenclature": lambda: cls.instance._nomenclatures,
+                "range": lambda: cls.instance._ranges,
+            }
             cls.instance.__is_initialized = False
         return cls.instance
 
@@ -178,6 +184,47 @@ class storage_manager(abstract_manager):
         self._recipes[item.id] = item
         return True
     
+
+    # Поиск сущности по типу и коду (UUID)
+    def find(self, entity_type: str, entity_code: str):
+        
+        source = self._sources.get(self._normalize(entity_type))
+        if source is None:
+            return None
+        
+        for item in source().values():
+            if str(item.id) == str(entity_code):
+                return item
+        
+        return None
+
+
+    # Все сущности указанного типа
+    def all(self, entity_type: str) -> list:
+        
+        source = self._sources.get(self._normalize(entity_type))
+        return list(source().values()) if source else []
+
+
+    # Поддерживается ли указанный тип сущности
+    def supports(self, entity_type: str) -> bool:
+        
+        return self._normalize(entity_type) in self._sources
+
+
+    # Список поддерживаемых типов сущностей
+    @property
+    def supported_types(self) -> list:
+        
+        return list(self._sources.keys())
+
+
+    # Нормализация строки типа сущности
+    @staticmethod
+    def _normalize(entity_type: str) -> str:
+        
+        return (entity_type or "").strip().lower()
+
 
     # Словарь складов
     @property

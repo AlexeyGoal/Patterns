@@ -1,67 +1,40 @@
 from Src.Core.abstract_report import abstract_report, AbstractReport
-from Src.Models.recipe_model import recipe_model
+from Src.Core.entity import entity
 from Src.Core.validator import validator
 from Src.Dtos.report_result_dto import report_result_dto
-from Src.Logics.entity_fields import extract_entity_fields
+from Src.Logics.report_source_builder import report_source_builder
 from xml.sax.saxutils import escape
 
 
 """
-Реализация HTML представления отчета по рецепту
+Реализация HTML представления отчета
 """
 class html_report(abstract_report):
     """
-    Класс построения отчета по технологической карте (рецепту) в HTML формате.
-    Поддерживает также номенклатуру, единицу измерения и склад.
+    Класс построения отчета в HTML формате.
+    Рендерит нейтральную таблицу (report_table_dto) из report_source_builder.
     """
-    __receipt: recipe_model = None
+
+    mimetype = "text/html"
+    is_download = False
+    extension = "html"
 
     def build(self, source) -> report_result_dto:
         """
-        Формирует HTML отчет по переданной модели.
-        :param source: Модель рецепта (recipe_model) или иной сущности
+        Формирует HTML отчет по переданной сущности.
+        :param source: Модель сущности (наследник entity)
         :return: report_result_dto с HTML представлением
         """
-        # Отчет по сущности, отличной от рецепта (номенклатура, единица измерения, склад)
-        if not isinstance(source, recipe_model):
-            lines = [
-                "<!DOCTYPE html>",
-                "<html>",
-                "<head>",
-                '  <meta charset="UTF-8">',
-                "  <title>Отчет по сущности</title>",
-                "  <style>",
-                "    table { border-collapse: collapse; width: 100%; }",
-                "    th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }",
-                "    th { background-color: #f2f2f2; }",
-                "  </style>",
-                "</head>",
-                "<body>",
-                "  <table>",
-                "    <tr><th>Поле</th><th>Значение</th></tr>"
-            ]
-            for name, value in extract_entity_fields(source):
-                lines.append(f"    <tr><td>{escape(str(name))}</td><td>{escape(str(value))}</td></tr>")
+        validator.validate(source, entity)
 
-            lines.extend([
-                "  </table>",
-                "</body>",
-                "</html>"
-            ])
-
-            result = report_result_dto()
-            result.text = "\n".join(lines)
-            return result
-
-        validator.validate(source, recipe_model)
-        self.__receipt = source
+        table = report_source_builder.build(source)
 
         lines = [
             "<!DOCTYPE html>",
             "<html>",
             "<head>",
             '  <meta charset="UTF-8">',
-            "  <title>Отчет по рецепту</title>",
+            "  <title>Отчет</title>",
             "  <style>",
             "    table { border-collapse: collapse; width: 100%; }",
             "    th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }",
@@ -69,17 +42,24 @@ class html_report(abstract_report):
             "  </style>",
             "</head>",
             "<body>",
-            "  <table>",
-            "    <tr><th>Код</th><th>Наименование</th><th>Брутто</th><th>Нетто</th></tr>"
         ]
 
-        for item in self.__receipt.items:
-            lines.append(
-                f"    <tr><td>{escape(str(item.unique_code))}</td>"
-                f"<td>{escape(str(item.name))}</td>"
-                f"<td>{item.brutto}</td>"
-                f"<td>{item.netto}</td></tr>"
-            )
+        # Заголовок и реквизиты сущности над таблицей
+        if table.title:
+            lines.append(f"  <h2>{escape(str(table.title))}</h2>")
+
+        for key, value in table.attributes.items():
+            lines.append(f"  <p><b>{escape(str(key))}</b>: {escape(str(value))}</p>")
+
+        lines.append("  <table>")
+        lines.append("    <tr>" + "".join(
+            f"<th>{escape(str(title))}</th>" for _, title in table.columns
+        ) + "</tr>")
+
+        for row in table.rows:
+            lines.append("    <tr>" + "".join(
+                f"<td>{escape(str(row[key]))}</td>" for key in table.keys
+            ) + "</tr>")
 
         lines.extend([
             "  </table>",
@@ -87,10 +67,8 @@ class html_report(abstract_report):
             "</html>"
         ])
 
-        text = "\n".join(lines)
-
         result = report_result_dto()
-        result.text = text
+        result.text = "\n".join(lines)
 
         return result
 
