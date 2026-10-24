@@ -107,3 +107,39 @@ def test_same_settings_manager_singleton_identity():
     m2 = settings_manager()
     assert m1.settings is m2.settings
     assert m1.settings.organization == m2.settings.organization
+
+
+# Проверяет маппинг response_format из JSON
+def test_success_settings_manager_convert_response_format():
+    
+    manager = settings_manager()
+    manager.load()
+
+    assert manager.settings.response_format == "TXT"
+
+
+# Проверяет, что response_format по умолчанию установлен в TXT
+def test_default_settings_model_response_format():
+    
+    model = settings_model()
+    assert model.response_format == "TXT"
+
+
+# Проверяет установку допустимых значений response_format
+def test_valid_settings_model_response_format():
+    
+    model = settings_model()
+    for fmt in ("CSV", "Markdown", "XML", "TXT", "HTML"):
+        model.response_format = fmt
+        assert model.response_format == fmt
+
+
+# Проверяет, что недопустимое значение response_format выбрасывает ValueError
+def test_invalid_settings_model_response_format():
+    
+    model = settings_model()
+    try:
+        model.response_format = "JSON"
+        assert False, "Ожидалась ошибка ValueError"
+    except ValueError:
+        assert True
