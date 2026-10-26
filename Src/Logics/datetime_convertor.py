@@ -25,7 +25,7 @@ class datetime_convertor(abstract_convertor):
     """
     Конвертировать значение типа DateTime в словарь полей.
     """
-    def Convert(self, source: object) -> dict:
+    def convert(self, source: object) -> dict:
 
         if not self.is_supported(source):
             raise arguments_exception("source", "datetime_convertor supports only DateTime type")

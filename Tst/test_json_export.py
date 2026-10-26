@@ -52,7 +52,7 @@ def exported() -> dict:
     basic = basic_convertor()
     basic_data = {}
     for sample in ("Мука пшеничная", 42, 3.14):
-        basic_data.update(basic.Convert(sample))
+        basic_data.update(basic.convert(sample))
 
     paths = {
         "basic": OUT_DIR / "basic.json",
@@ -61,8 +61,8 @@ def exported() -> dict:
     }
 
     save_json(paths["basic"], basic_data)
-    save_json(paths["datetime"], datetime_convertor().Convert(moment))
-    save_json(paths["reference"], reference_convertor().Convert(flour))
+    save_json(paths["datetime"], datetime_convertor().convert(moment))
+    save_json(paths["reference"], reference_convertor().convert(flour))
 
     return {"paths": paths, "moment": moment, "flour": flour}
 
@@ -81,7 +81,7 @@ def test_datetime_json_exported(exported):
     assert data == {"datetime": exported["moment"].isoformat()}
 
 
-"""Тест: reference.json выгружен - поля справочника, ссылки в виде строковых id"""
+"""Тест: reference.json выгружен - поля справочника, ссылки - вложенными словарями строковых id"""
 def test_reference_json_exported(exported):
     data = load_json(exported["paths"]["reference"])
     flour = exported["flour"]
@@ -89,8 +89,10 @@ def test_reference_json_exported(exported):
     assert data["name"] == "Мука пшеничная"
     assert data["full_name"] == "Мука пшеничная высший сорт"
     assert uuid.UUID(data["id"]) == flour.id
-    assert uuid.UUID(data["group"]) == flour.group.id
-    assert uuid.UUID(data["range"]) == flour.range.id
+    assert uuid.UUID(data["group"]["id"]) == flour.group.id
+    assert data["group"]["name"] == flour.group.name
+    assert uuid.UUID(data["range"]["id"]) == flour.range.id
+    assert data["range"]["base_range"]["name"] == flour.range.base_range.name
 
 
 """Тест: каждый файл лежит в корне проекта, валиден и без экранированной кириллицы"""

@@ -1,7 +1,20 @@
 {
   "full_name": "Мука пшеничная высший сорт",
-  "group": "c46da7d8-1796-4dcb-ba13-5d146eafaceb",
-  "id": "2848c7f9-7559-47ad-a139-2560b3e5cbfe",
+  "group": {
+    "id": "8d58cd11-4cd6-4f67-8be4-f6771c76be78",
+    "name": "Бакалея"
+  },
+  "id": "b0bfebe5-73ea-48bc-adbe-ad0c27439ed4",
   "name": "Мука пшеничная",
-  "range": "bd11299d-4e92-435e-9507-24c55b1fa801"
+  "range": {
+    "base_range": {
+      "base_range": null,
+      "conversion_factor": 1,
+      "id": "187050ca-cdd7-4043-9ab9-6ea342f3df82",
+      "name": "грамм"
+    },
+    "conversion_factor": 1000,
+    "id": "48ad0ac6-4c02-4deb-8cae-3884317a9336",
+    "name": "килограмм"
+  }
 }

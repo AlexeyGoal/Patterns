@@ -12,7 +12,7 @@ def test_convert_datetime_returns_dict_with_type_name():
     convertor = datetime_convertor()
     value = datetime.datetime(2026, 10, 24, 15, 30, 0)
 
-    result = convertor.Convert(value)
+    result = convertor.convert(value)
 
     assert isinstance(result, dict)
     assert result == {"datetime": value}
@@ -23,7 +23,7 @@ def test_convert_keeps_source_value():
     convertor = datetime_convertor()
     value = datetime.datetime(2026, 1, 1, 0, 0, 0)
 
-    result = convertor.Convert(value)
+    result = convertor.convert(value)
 
     assert result["datetime"] == value
 
@@ -33,7 +33,7 @@ def test_convert_date_not_supported():
     convertor = datetime_convertor()
 
     with pytest.raises(arguments_exception):
-        convertor.Convert(datetime.date(2026, 10, 24))
+        convertor.convert(datetime.date(2026, 10, 24))
 
 
 """Тест: время без даты (time) не поддерживается"""
@@ -41,7 +41,7 @@ def test_convert_time_not_supported():
     convertor = datetime_convertor()
 
     with pytest.raises(arguments_exception):
-        convertor.Convert(datetime.time(15, 30, 0))
+        convertor.convert(datetime.time(15, 30, 0))
 
 
 """Тест: простые типы не поддерживаются и вызывают исключение"""
@@ -50,7 +50,7 @@ def test_convert_unsupported_types_raises_exception(source):
     convertor = datetime_convertor()
 
     with pytest.raises(arguments_exception):
-        convertor.Convert(source)
+        convertor.convert(source)
 
 
 """Тест: is_supported возвращает True только для типа DateTime"""

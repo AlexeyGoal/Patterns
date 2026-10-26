@@ -9,7 +9,7 @@ from Src.Logics.basic_convertor import basic_convertor, BasicConvertor
 def test_convert_int_returns_dict_with_type_name():
     convertor = basic_convertor()
 
-    result = convertor.Convert(42)
+    result = convertor.convert(42)
 
     assert isinstance(result, dict)
     assert result == {"int": 42}
@@ -19,7 +19,7 @@ def test_convert_int_returns_dict_with_type_name():
 def test_convert_float_returns_dict_with_type_name():
     convertor = basic_convertor()
 
-    result = convertor.Convert(3.14)
+    result = convertor.convert(3.14)
 
     assert result == {"float": 3.14}
 
@@ -28,7 +28,7 @@ def test_convert_float_returns_dict_with_type_name():
 def test_convert_str_returns_dict_with_type_name():
     convertor = basic_convertor()
 
-    result = convertor.Convert("Мука")
+    result = convertor.convert("Мука")
 
     assert result == {"str": "Мука"}
 
@@ -37,7 +37,7 @@ def test_convert_str_returns_dict_with_type_name():
 def test_convert_keeps_source_value():
     convertor = basic_convertor()
 
-    result = convertor.Convert(0)
+    result = convertor.convert(0)
 
     assert result["int"] == 0
 
@@ -47,7 +47,7 @@ def test_convert_bool_raises_exception():
     convertor = basic_convertor()
 
     with pytest.raises(arguments_exception):
-        convertor.Convert(True)
+        convertor.convert(True)
 
 
 """Тест: составные типы не поддерживаются и вызывают исключение"""
@@ -56,7 +56,7 @@ def test_convert_unsupported_types_raises_exception(source):
     convertor = basic_convertor()
 
     with pytest.raises(arguments_exception):
-        convertor.Convert(source)
+        convertor.convert(source)
 
 
 """Тест: is_supported возвращает True только для простых типов"""

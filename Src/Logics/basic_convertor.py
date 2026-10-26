@@ -30,7 +30,7 @@ class basic_convertor(abstract_convertor):
     """
     Конвертировать простое значение в словарь полей.
     """
-    def Convert(self, source: object) -> dict:
+    def convert(self, source: object) -> dict:
 
         if not self.is_supported(source):
             raise arguments_exception("source", "basic_convertor supports only numeric and str types")

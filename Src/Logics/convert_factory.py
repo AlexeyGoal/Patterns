@@ -1,4 +1,4 @@
-from Src.Core.entity import entity
+from Src.Core.abstract_convertor import abstract_convertor, AbstractConvertor
 from Src.Logics.basic_convertor import basic_convertor, BasicConvertor
 from Src.Logics.datetime_convertor import datetime_convertor, DatetimeConvertor
 from Src.Logics.reference_convertor import reference_convertor, ReferenceConvertor
@@ -8,42 +8,33 @@ from Src.Logics.reference_convertor import reference_convertor, ReferenceConvert
 Фабрика конвертеров
 """
 class convert_factory:
-    """
-    Фабрика конвертеров: принимает любой объект любого типа.
-    """
+    """Фабрика конверторов: подбирает и создаёт конверторы под значение"""
 
-    """Конструктор фабрики - регистрация конвертеров в порядке приоритета подбора"""
+   
+    """Зарегистрированные классы конверторов"""
+    __convertor_types: list[type[AbstractConvertor]]
+
+
+    """Конструктор: регистрирует классы конверторов простых типов, дат и ссылок."""
     def __init__(self):
 
-        self.__convertors = [
-            reference_convertor(),
-            datetime_convertor(),
-            basic_convertor(),
+        self.__convertor_types = [
+            reference_convertor,
+            datetime_convertor,
+            basic_convertor,
         ]
 
 
     """
-    Превращает объект в словарь, список - в список словарей.
+    Возвращает список созданных конверторов, поддерживающих значение.
     """
-    def convert(self, source: object) -> dict | list:
+    def resolve(self, source: object) -> list[AbstractConvertor]:
 
-        
-        if isinstance(source, list):
-            return [self.convert(item) for item in source]
-
-        result = {}
-
-        for convertor in self.__convertors:
-            if convertor.is_supported(source):
-                for field, value in convertor.Convert(source).items():
-                    result[field] = value
-
-
-        for field, value in list(result.items()):
-            if isinstance(value, list):
-                result[field] = self.convert(value)
-
-        return result
+        return [
+            convertor_type()
+            for convertor_type in self.__convertor_types
+            if convertor_type.is_supported(source)
+        ]
 
 
 ConvertFactory = convert_factory
