@@ -7,7 +7,7 @@ import pytest
 
 from Src.Logics.basic_convertor import basic_convertor
 from Src.Logics.datetime_convertor import datetime_convertor
-from Src.Logics.reference_convertor import reference_convertor
+from Src.Logics.serialize_factory import serialize_factory
 from Src.Models.nomenclature_model import nomenclature_model
 
 
@@ -62,7 +62,7 @@ def exported() -> dict:
 
     save_json(paths["basic"], basic_data)
     save_json(paths["datetime"], datetime_convertor().convert(moment))
-    save_json(paths["reference"], reference_convertor().convert(flour))
+    save_json(paths["reference"], serialize_factory().convert(flour))
 
     return {"paths": paths, "moment": moment, "flour": flour}
 
@@ -86,11 +86,14 @@ def test_reference_json_exported(exported):
     data = load_json(exported["paths"]["reference"])
     flour = exported["flour"]
 
+    assert data["$type"] == "nomenclature_model"
     assert data["name"] == "Мука пшеничная"
     assert data["full_name"] == "Мука пшеничная высший сорт"
     assert uuid.UUID(data["id"]) == flour.id
+    assert data["group"]["$type"] == "nomenclature_group_model"
     assert uuid.UUID(data["group"]["id"]) == flour.group.id
     assert data["group"]["name"] == flour.group.name
+    assert data["range"]["$type"] == "range_model"
     assert uuid.UUID(data["range"]["id"]) == flour.range.id
     assert data["range"]["base_range"]["name"] == flour.range.base_range.name
 

@@ -2,8 +2,8 @@ import json
 
 import pytest
 
-from Src.Logics.convert_service import convert_service
-from Src.Logics.deserialize_service import deserialize_service
+from Src.Logics.deserialize_factory import deserialize_factory
+from Src.Logics.serialize_factory import serialize_factory
 from Src.Logics.storage_manager import storage_manager
 from Src.Models.nomenclature_group_model import nomenclature_group_model
 from Src.Models.nomenclature_model import nomenclature_model
@@ -32,16 +32,16 @@ def manager():
         del storage_manager.instance
 
 
-# Сериализовать модели и прогнать через текст JSON (UUID и даты становятся строками)
+# Сериализовать модели и прогнать через текст JSON
 def to_json_data(value):
-    serialized = convert_service().convert(value)
+    serialized = serialize_factory().convert(value)
     text = json.dumps(serialized, ensure_ascii=False, default=str)
     return json.loads(text)
 
 
 # Восстановить модели из JSON-совместимых данных
 def from_json_data(data):
-    return deserialize_service().deserialize(data)
+    return deserialize_factory().convert(data)
 
 
 # Сравнить единицы измерения с учётом рекурсивной базовой единицы

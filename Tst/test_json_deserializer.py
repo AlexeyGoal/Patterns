@@ -15,9 +15,11 @@ def test_load_json_file_returns_model(tmp_path):
     path = tmp_path / "range.json"
     path.write_text(
         json.dumps({
+            "$type": "range_model",
             "name": "килограмм",
             "conversion_factor": 1000,
             "base_range": {
+                "$type": "range_model",
                 "name": "грамм",
                 "conversion_factor": 1,
                 "base_range": None,
@@ -36,6 +38,7 @@ def test_load_json_file_returns_model(tmp_path):
 """Тест: JSON-строка загружается и превращается в модель"""
 def test_loads_json_text_returns_model():
     text = json.dumps({
+        "$type": "range_model",
         "name": "грамм",
         "conversion_factor": 1,
         "base_range": None,
@@ -50,8 +53,10 @@ def test_loads_json_text_returns_model():
 """Тест: настройки приложения восстанавливаются из JSON"""
 def test_loads_settings_from_json():
     text = json.dumps({
+        "$type": "settings_model",
         "is_first_start": True,
         "organization": {
+            "$type": "organization_model",
             "name": "Ромашка",
             "inn": "4444444444",
             "bik": "012345678",

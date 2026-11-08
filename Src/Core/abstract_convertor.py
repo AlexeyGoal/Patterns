@@ -5,9 +5,7 @@ from abc import ABC, abstractmethod
 Абстрактный класс для конвертации объекта в словарь полей
 """
 class abstract_convertor(ABC):
-    """
-    Базовый абстрактный класс конвертера.
-    """
+    
 
     @staticmethod
     @abstractmethod
@@ -19,7 +17,7 @@ class abstract_convertor(ABC):
         pass
 
     @abstractmethod
-    def convert(self, source: object) -> dict:
+    def convert(self, source: object) -> object:
         """
         Конвертировать переданный объект в словарь полей.
         """

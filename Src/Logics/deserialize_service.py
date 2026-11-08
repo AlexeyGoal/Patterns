@@ -1,10 +1,9 @@
-from Src.Logics.deserialize_factory import deserialize_factory, DeserializeFactory
+from Src.Logics.deserialize_factory import deserialize_factory
 
 
 class deserialize_service:
     """
-    Оркестратор десериализации: рекурсивно обходит списки и словари,
-    просит у фабрики подходящий десериализатор и восстанавливает модели.
+    Оркестратор десериализации: делегирует работу универсальной фабрике.
     """
 
 
@@ -17,29 +16,10 @@ class deserialize_service:
         self.__factory = factory if factory is not None else deserialize_factory()
 
 
-    """
-    Восстанавливает объект из словаря; списки и словари обходит рекурсивно.
-    """
+    """Восстановить объект из JSON-совместимых данных"""
     def deserialize(self, source: object):
 
-        if isinstance(source, list):
-            return [self.deserialize(item) for item in source]
-
-        if isinstance(source, dict):
-
-            for deserializer in self.__factory.resolve(source):
-
-                
-                if hasattr(deserializer, "bind"):
-                    deserializer.bind(self)
-
-                return deserializer.deserialize(source)
-
-           
-            return {key: self.deserialize(value) for key, value in source.items()}
-
-        
-        return source
+        return self.__factory.convert(source)
 
 
 DeserializeService = deserialize_service
