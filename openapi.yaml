@@ -1,0 +1,482 @@
+openapi: 3.0.3
+info:
+  title: API формирования отчетов «Ромашка»
+  description: |
+    HTTP API приложения: формирование отчетов по доменным сущностям,
+    получение списка форматов отчетов и CRUD-операции над доменными сущностями.
+
+    Дополнительные проверки:
+    * нельзя удалить сущность, на которую ссылаются другие доменные сущности;
+    * нельзя изменить код (UUID) сущности, на которую ссылаются другие доменные сущности;
+    * все ссылки в запросе должны указывать на существующие сущности;
+    * значения полей проверяются доменными моделями при десериализации.
+  version: "2.0"
+  contact:
+    name: ООО «Ромашка»
+
+servers:
+  - url: http://localhost:8080
+    description: Локальный сервер разработки
+
+tags:
+  - name: formats
+    description: Форматы построения отчетов
+  - name: entities
+    description: CRUD доменных сущностей
+  - name: reports
+    description: Формирование отчетов
+
+paths:
+
+  /api/formats:
+    get:
+      tags: [formats]
+      summary: Получить список всех форматов отчетов
+      description: Возвращает JSON-массив канонических имен форматов для построения отчетов.
+      operationId: getReportFormats
+      responses:
+        '200':
+          description: Список форматов отчетов
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                  enum: [txt, csv, markdown, xml, html]
+              example: ["txt", "csv", "markdown", "xml", "html"]
+
+  /api/get_formats:
+    get:
+      tags: [formats]
+      summary: Получить список форматов отчетов (алиас)
+      description: Синоним GET /api/formats.
+      operationId: getReportFormatsAlias
+      responses:
+        '200':
+          description: Список форматов отчетов
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                  enum: [txt, csv, markdown, xml, html]
+
+  /api/formats/details:
+    get:
+      tags: [formats]
+      summary: Получить подробное описание форматов отчетов
+      description: Возвращает MIME-тип, расширение файла и режим доставки для каждого формата.
+      operationId: getReportFormatsDetails
+      responses:
+        '200':
+          description: Подробное описание форматов
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FormatDetails'
+
+  /api/entities:
+    get:
+      tags: [entities]
+      summary: Получить все доменные сущности по категориям
+      description: Возвращает объект, где ключ — тип сущности, значение — список сущностей.
+      operationId: listAllEntities
+      responses:
+        '200':
+          description: Все сущности по категориям
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Entity'
+
+  /api/entities/{entity_type}:
+    parameters:
+      - $ref: '#/components/parameters/EntityType'
+    get:
+      tags: [entities]
+      summary: Получить список доменных сущностей
+      description: Возвращает все сущности указанного типа.
+      operationId: listEntities
+      responses:
+        '200':
+          description: Список сущностей
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Entity'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+    post:
+      tags: [entities]
+      summary: Создать доменную сущность
+      description: |
+        Создает сущность указанного типа. Ссылки на другие сущности передаются
+        их кодом (UUID) в строке или в объекте с полем `id`.
+
+        Примеры тел запросов:
+        * group: `{"name": "Новая группа"}`
+        * storage: `{"name": "Склад", "address": "ул. Складская, 1"}`
+        * range: `{"name": "килограмм", "conversion_factor": 1000, "base_range": "<uuid грамма>"}`
+        * nomenclature: `{"name": "Мука", "full_name": "Мука пшеничная", "group": "<uuid группы>", "range": "<uuid единицы>"}`
+        * recipe: `{"name": "Суп", "description": "Описание", "items": [{"name": "Мука", "weight": 100, "range": "<uuid единицы>", "type": "ingredient"}]}`
+      operationId: createEntity
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EntityPayload'
+      responses:
+        '200':
+          description: Созданная сущность
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Entity'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+  /api/entities/{entity_type}/{entity_code}:
+    parameters:
+      - $ref: '#/components/parameters/EntityType'
+      - $ref: '#/components/parameters/EntityCode'
+    get:
+      tags: [entities]
+      summary: Получить доменную сущность по коду
+      operationId: getEntity
+      responses:
+        '200':
+          description: Найденная сущность
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Entity'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      tags: [entities]
+      summary: Изменить доменную сущность
+      description: |
+        Полностью или частично изменяет сущность. Если сущность связана с другими
+        доменными сущностями, менять ее код (UUID) запрещено.
+      operationId: updateEntity
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EntityPayload'
+      responses:
+        '200':
+          description: Измененная сущность
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Entity'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+    patch:
+      tags: [entities]
+      summary: Частично изменить доменную сущность
+      description: Синоним PUT для частичного изменения полей.
+      operationId: patchEntity
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EntityPayload'
+      responses:
+        '200':
+          description: Измененная сущность
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Entity'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+    delete:
+      tags: [entities]
+      summary: Удалить доменную сущность
+      description: |
+        Удаляет сущность, если на нее не ссылаются другие доменные сущности.
+        Иначе возвращается ошибка 400.
+      operationId: deleteEntity
+      responses:
+        '200':
+          description: Удаленная сущность
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/Entity'
+                  - type: object
+                    properties:
+                      deleted:
+                        type: boolean
+                        example: true
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+  /api/report/{entity_type}/{entity_code}:
+    get:
+      tags: [reports]
+      summary: Сформировать отчет в формате TXT
+      description: Формирует отчет по сущности в текстовом формате по умолчанию.
+      operationId: getEntityReportDefault
+      parameters:
+        - $ref: '#/components/parameters/ReportEntityType'
+        - $ref: '#/components/parameters/EntityCode'
+      responses:
+        '200':
+          description: Текст отчета
+          content:
+            text/plain:
+              schema:
+                type: string
+        '400':
+          $ref: '#/components/responses/BadRequestText'
+        '404':
+          $ref: '#/components/responses/NotFoundText'
+
+  /api/report/{entity_type}/{entity_code}/{report_format}:
+    get:
+      tags: [reports]
+      summary: Сформировать отчет в выбранном формате
+      description: |
+        Форматы csv и markdown возвращаются файлом (Content-Disposition: attachment),
+        остальные форматы — структурированным текстом.
+      operationId: getEntityReport
+      parameters:
+        - $ref: '#/components/parameters/ReportEntityType'
+        - $ref: '#/components/parameters/EntityCode'
+        - name: report_format
+          in: path
+          required: true
+          description: Формат отчета
+          schema:
+            type: string
+            enum: [txt, csv, markdown, xml, html]
+      responses:
+        '200':
+          description: Результат формирования отчета
+          content:
+            text/plain:
+              schema:
+                type: string
+            text/csv:
+              schema:
+                type: string
+                format: binary
+            text/markdown:
+              schema:
+                type: string
+                format: binary
+            application/xml:
+              schema:
+                type: string
+            text/html:
+              schema:
+                type: string
+        '400':
+          $ref: '#/components/responses/BadRequestText'
+        '404':
+          $ref: '#/components/responses/NotFoundText'
+
+  /api/report_default/{entity_type}/{entity_code}:
+    get:
+      tags: [reports]
+      summary: Сформировать отчет в формате из настроек
+      description: Формат определяется полем response_format в settings.json.
+      operationId: getEntityReportBySettings
+      parameters:
+        - $ref: '#/components/parameters/ReportEntityType'
+        - $ref: '#/components/parameters/EntityCode'
+      responses:
+        '200':
+          description: Результат формирования отчета
+          content:
+            text/plain:
+              schema:
+                type: string
+            text/csv:
+              schema:
+                type: string
+                format: binary
+            text/markdown:
+              schema:
+                type: string
+                format: binary
+            application/xml:
+              schema:
+                type: string
+            text/html:
+              schema:
+                type: string
+        '400':
+          $ref: '#/components/responses/BadRequestText'
+        '404':
+          $ref: '#/components/responses/NotFoundText'
+
+  /api/get_report:
+    get:
+      tags: [reports]
+      summary: Сформировать отчет по первому рецепту
+      operationId: getFirstRecipeReport
+      responses:
+        '200':
+          description: Текст отчета
+          content:
+            text/plain:
+              schema:
+                type: string
+        '404':
+          $ref: '#/components/responses/NotFoundText'
+
+components:
+
+  parameters:
+    EntityType:
+      name: entity_type
+      in: path
+      required: true
+      description: Тип доменной сущности
+      schema:
+        type: string
+        enum: [recipe, nomenclature, range, group, storage]
+    ReportEntityType:
+      name: entity_type
+      in: path
+      required: true
+      description: Тип сущности для отчета
+      schema:
+        type: string
+        enum: [recipe, nomenclature, range]
+    EntityCode:
+      name: entity_code
+      in: path
+      required: true
+      description: Код (UUID) сущности
+      schema:
+        type: string
+        format: uuid
+
+  schemas:
+    Entity:
+      type: object
+      description: Доменная сущность в JSON-представлении
+      required: ['$type', id, name]
+      properties:
+        '$type':
+          type: string
+          description: Имя класса доменной модели
+          example: nomenclature_model
+        id:
+          type: string
+          format: uuid
+          description: Уникальный код сущности
+        name:
+          type: string
+          description: Наименование сущности
+      additionalProperties: true
+
+    EntityPayload:
+      type: object
+      description: |
+        Поля создаваемой или изменяемой сущности. Набор полей зависит от entity_type.
+        Ссылки на существующие сущности можно передавать строкой UUID или объектом {"id": "<uuid>"}.
+      additionalProperties: true
+      example:
+        name: Мука пшеничная
+        full_name: Мука пшеничная высший сорт
+        group: 6d58d1e0-4c17-448f-9522-781dd7d38762
+        range: 3ee882c6-7854-422c-9282-b01935c8a84f
+
+    FormatDetails:
+      type: object
+      required: [name, mimetype, extension, download]
+      properties:
+        name:
+          type: string
+          example: csv
+        mimetype:
+          type: string
+          example: text/csv
+        extension:
+          type: string
+          example: csv
+        download:
+          type: boolean
+          description: true — отчет отдается скачиванием файла
+          example: true
+
+    Error:
+      type: object
+      required: [error]
+      properties:
+        error:
+          type: string
+          description: Текст ошибки
+          example: "Запрещено удалять сущность, так как она связана с другими доменными сущностями"
+        detail:
+          type: string
+          description: Дубликат текста ошибки для совместимости
+          example: "Запрещено удалять сущность, так как она связана с другими доменными сущностями"
+
+  responses:
+    BadRequest:
+      description: Некорректный запрос или нарушение связей между сущностями
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Сущность не найдена
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    InternalError:
+      description: Внутренняя ошибка сервера
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequestText:
+      description: Ошибка в параметрах запроса
+      content:
+        text/plain:
+          schema:
+            type: string
+    NotFoundText:
+      description: Сущность не найдена
+      content:
+        text/plain:
+          schema:
+            type: string
