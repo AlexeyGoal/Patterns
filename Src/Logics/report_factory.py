@@ -60,6 +60,31 @@ class report_factory(abstract_report_factory):
         """
         return list(self._names.keys())
 
+    @property
+    def formats(self) -> list:
+        """
+        Канонический список форматов для построения отчетов.
+        """
+        return ["txt", "csv", "markdown", "xml", "html"]
+
+    def format_details(self) -> list:
+        """
+        Подробное описание каждого формата отчета.
+        :return: Список словарей с именем, MIME-типом, расширением и режимом доставки
+        """
+        details = []
+
+        for name in self.formats:
+            report = self.create_by_name(name)
+            details.append({
+                "name": name,
+                "mimetype": report.mimetype,
+                "extension": report.extension,
+                "download": report.is_download,
+            })
+
+        return details
+
     def create(self, report_type: report_type_dto) -> abstract_report:
         """
         Создает экземпляр отчета по переданному типу.
