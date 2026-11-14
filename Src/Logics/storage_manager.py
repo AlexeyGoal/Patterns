@@ -1,6 +1,7 @@
 from Src.Core.abstract_manager import abstract_manager
-from Src.Core.validator import validator
+from Src.Core.validator import validator, operation_exception
 from Src.Logics.settings_manager import settings_manager
+from Src.Logics.json_deserializer import json_deserializer
 from Src.Models.storage_model import storage_model
 from Src.Models.range_model import range_model
 from Src.Models.nomenclature_model import nomenclature_model
@@ -58,6 +59,77 @@ class storage_manager(abstract_manager):
         except Exception:
             return False
 
+
+    # Загрузка доменных моделей из JSON-файла
+    def load(self, file_name: str = "") -> None:
+
+        file_name = str(file_name).strip()
+        if file_name == "":
+            raise operation_exception("Не указано имя файла для загрузки данных")
+
+        try:
+            data = json_deserializer().load(file_name)
+            self._load_deserialized_data(data)
+            self.__is_initialized = True
+
+        except operation_exception:
+            raise
+
+        except Exception as ex:
+            raise operation_exception(
+                f"Ошибка при загрузке моделей из файла {file_name}: {ex}"
+            ) from ex
+
+
+    # Рекурсивно обойти загруженные данные и добавить модели в хранилище
+    def _load_deserialized_data(self, data: object) -> None:
+
+        if self.__is_model(data):
+            self.__register_model(data)
+            return
+
+        if isinstance(data, list):
+            for item in data:
+                self._load_deserialized_data(item)
+            return
+
+        if isinstance(data, dict):
+            for value in data.values():
+                self._load_deserialized_data(value)
+
+
+    # Проверить, что объект является доменной моделью хранилища
+    @staticmethod
+    def __is_model(item: object) -> bool:
+
+        return isinstance(item, (
+            storage_model,
+            range_model,
+            nomenclature_model,
+            nomenclature_group_model,
+            recipe_model,
+        ))
+
+
+    # Добавить загруженную модель в соответствующую коллекцию
+    def __register_model(self, item: object) -> bool:
+
+        if isinstance(item, storage_model):
+            return self.add_storage(item)
+
+        if isinstance(item, range_model):
+            return self.add_range(item)
+
+        if isinstance(item, nomenclature_model):
+            return self.add_nomenclature(item)
+
+        if isinstance(item, nomenclature_group_model):
+            return self.add_group(item)
+
+        if isinstance(item, recipe_model):
+            return self.add_recipe(item)
+
+        return False
 
     # Инициализация первичных данных 
     def _initialize_primary_data(self) -> None:
@@ -266,7 +338,8 @@ class storage_manager(abstract_manager):
             "storages": self._storages,
             "ranges": self._ranges,
             "nomenclatures": self._nomenclatures,
-            "groups": self._groups
+            "groups": self._groups,
+            "recipes": self._recipes
         }
 
 
