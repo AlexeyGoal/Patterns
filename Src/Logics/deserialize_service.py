@@ -16,6 +16,13 @@ class deserialize_service:
         self.__factory = factory if factory is not None else deserialize_factory()
 
 
+    """Типы моделей, доступные общему механизму десериализации"""
+    @property
+    def model_types(self) -> list:
+
+        return self.__factory.model_types
+
+
     """Восстановить объект из JSON-совместимых данных"""
     def deserialize(self, source: object):
 

@@ -4,6 +4,8 @@ from Src.Core.exception import arguments_exception
 """Модель единицы измерения"""
 class range_model(entity):
 
+    ENTITY_TYPE = "range"
+
     """Конструктор единицы измерения"""
     def __init__(self, name="", conversion_factor=1, base_range=None):
 
@@ -34,13 +36,13 @@ class range_model(entity):
 
     """Геттер базовой единицы измерения"""
     @property
-    def base_range(self):
+    def base_range(self) -> "range_model | None":
         return self.__base_range
 
 
     """Сеттер базовой единицы"""
     @base_range.setter
-    def base_range(self, value):
+    def base_range(self, value: "range_model | None"):
 
         if value is not None and not isinstance(value, range_model):
             raise arguments_exception("base_range", "base_range should be of the type range_model")

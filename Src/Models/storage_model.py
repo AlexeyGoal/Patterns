@@ -5,6 +5,8 @@ from Src.Core.exception import arguments_exception
 """Модель склада"""
 class storage_model(entity):
 
+    ENTITY_TYPE = "storage"
+
     """Конструктор склада"""
     def __init__(self, name="", address=""):
 
