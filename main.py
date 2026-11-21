@@ -6,6 +6,8 @@ from Src.Logics.entity_service import entity_service
 from Src.Logics.settings_manager import settings_manager
 from Src.Logics.storage_manager import storage_manager
 from Src.Logics.report_factory import report_factory
+from Src.Core.filter_type import filter_type
+from Src.Dtos.filter_dto import filter_dto
 from Src.Dtos.report_type_dto import report_type_dto
 
 try:
@@ -156,6 +158,37 @@ def _request_payload() -> dict:
     return payload
 
 
+def _filter_dto_from_payload(entity_type: str, payload: dict) -> filter_dto:
+    """
+    Создаёт DTO фильтрации из JSON-тела запроса.
+
+    Тип доменной модели берётся из route, поэтому в теле его передавать не нужно.
+    """
+
+    if not isinstance(payload, dict):
+        raise arguments_exception("payload", "Тело запроса должно быть JSON-объектом")
+
+    field_name = payload.get("field_name") or payload.get("field")
+    value = payload.get("value")
+    mode = payload.get("filter_type") or filter_type.EQUALS.name
+    normalized_mode = str(mode).strip().upper()
+    parsed_mode = filter_type.__members__.get(normalized_mode)
+
+    if parsed_mode is None:
+        raise arguments_exception(
+            "filter_type",
+            f"Неподдерживаемый вариант фильтрации: '{mode}'. "
+            f"Допустимые значения: {', '.join(filter_type.__members__)}",
+        )
+
+    return filter_dto(
+        entity_type=entity_type,
+        field_name=field_name,
+        value=value,
+        filter_type=parsed_mode,
+    )
+
+
 @app.route("/api/entities", methods=["GET"])
 def list_all_entities():
     """
@@ -182,6 +215,32 @@ def list_entities(entity_type: str):
         )
 
     return jsonify(entities.list_entities(entity_type))
+
+
+@app.route("/api/filter/<entity_type>", methods=["POST"])
+def filter_entities(entity_type: str):
+    """
+    HTTP POST endpoint фильтрации доменных сущностей.
+
+    Тип доменной модели передаётся в route, а в теле запроса — DTO фильтрации:
+    field_name, value и filter_type (EQUALS или LIKE).
+    """
+    if not entities.supports(entity_type):
+        return _make_json_error(
+            f"Неподдерживаемый тип сущности: '{entity_type}'. "
+            f"Допустимые значения: {', '.join(entities.supported_types)}",
+            status=400,
+        )
+
+    try:
+        query = _filter_dto_from_payload(entity_type, _request_payload())
+        result = entities.filter_entities(entity_type, query)
+    except (arguments_exception, operation_exception) as ex:
+        return _make_json_error(str(ex), status=400)
+    except Exception as ex:
+        return _make_json_error(f"Ошибка при фильтрации сущностей: {ex}", status=500)
+
+    return jsonify(result), 200
 
 
 @app.route("/api/entities/<entity_type>", methods=["POST"])

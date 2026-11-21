@@ -1,11 +1,13 @@
 from Src.Core.entity import entity
 from Src.Core.exception import arguments_exception
 from Src.Core.validator import operation_exception
+from Src.Dtos.filter_dto import filter_dto
 from Src.Logics.deserialize_service import deserialize_service
 from Src.Logics.entity_mapper import entity_mapper
 from Src.Logics.entity_references import entity_references
 from Src.Logics.entity_registry import entity_metadata_registry
 from Src.Logics.entity_store import entity_store
+from Src.Logics.filter_prototype import filter_prototype
 from Src.Logics.serialize_factory import serialize_factory
 from Src.Logics.storage_manager import storage_manager
 
@@ -28,6 +30,7 @@ class entity_service:
             self.__store.find,
         )
         self.__references = entity_references(self.__registry, self.__store)
+        self.__prototype = filter_prototype()
 
 
     # Поддерживаемые сервисом типы сущностей
@@ -47,6 +50,37 @@ class entity_service:
         return [
             self.__mapper.to_dto(item)
             for item in self.__store.values(normalized_type)
+        ]
+
+
+    # Отфильтровать сущности указанного типа по DTO фильтрации
+    def filter_entities(
+        self,
+        entity_type: str,
+        query: filter_dto,
+    ) -> list[dict]:
+
+        normalized_type = self.__require_type(entity_type)
+
+        if not isinstance(query, filter_dto):
+            raise arguments_exception("query", "Ожидался DTO фильтрации")
+
+        if query.entity_type != normalized_type:
+            raise arguments_exception(
+                "entity_type",
+                f"DTO фильтрации относится к типу '{query.entity_type}', "
+                f"а запрошен тип '{normalized_type}'",
+            )
+
+        metadata = self.__registry.get(normalized_type)
+        self.__prototype.resolve_field(metadata.model, query.field_name)
+
+        items = self.__store.values(normalized_type)
+        prototype = self.__prototype.clone(query)
+
+        return [
+            self.__mapper.to_dto(item)
+            for item in prototype.filter(items)
         ]
 
 

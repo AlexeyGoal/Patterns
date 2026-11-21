@@ -23,6 +23,8 @@ tags:
     description: Форматы построения отчетов
   - name: entities
     description: CRUD доменных сущностей
+  - name: filters
+    description: Фильтрация доменных сущностей
   - name: reports
     description: Формирование отчетов
 
@@ -78,6 +80,43 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/FormatDetails'
+
+  /api/filter/{entity_type}:
+    parameters:
+      - $ref: '#/components/parameters/EntityType'
+    post:
+      tags: [filters]
+      summary: Отфильтровать доменные сущности
+      description: |
+        Тип доменной модели передаётся в route, а в теле запроса — DTO фильтрации.
+
+        Поиск выполняется по указанному полю, а также рекурсивно по вложенным
+        доменным сущностям: базовым единицам измерения, родительским группам,
+        позициям и вложенным рецептам.
+      operationId: filterEntities
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FilterRequest'
+            example:
+              field_name: name
+              value: Мука
+              filter_type: LIKE
+      responses:
+        '200':
+          description: Отфильтрованный список сущностей
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Entity'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalError'
 
   /api/entities:
     get:
@@ -435,6 +474,36 @@ components:
           type: boolean
           description: true — отчет отдается скачиванием файла
           example: true
+
+    FilterType:
+      type: string
+      description: |
+        Вариант сравнения значения поля:
+        * EQUALS — полное совпадение;
+        * LIKE — вхождение строки.
+      enum: [EQUALS, LIKE]
+      default: EQUALS
+      example: LIKE
+
+    FilterRequest:
+      type: object
+      description: DTO фильтрации доменной сущности.
+      required: [field_name, value]
+      properties:
+        field_name:
+          type: string
+          description: Имя поля доменной модели
+          example: name
+        field:
+          type: string
+          description: Псевдоним field_name
+          example: name
+        value:
+          type: string
+          description: Значение для сравнения
+          example: Мука
+        filter_type:
+          $ref: '#/components/schemas/FilterType'
 
     Error:
       type: object
