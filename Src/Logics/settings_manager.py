@@ -1,9 +1,10 @@
 from Src.Core.abstract_manager import abstract_manager
 from Src.Core.validator import validator, operation_exception
+from Src.Logics.deserialize_service import deserialize_service
+from Src.Logics.json_deserializer import json_deserializer
 from Src.Models.settings_model import settings_model
 from Src.Models.organization_model import organization_model
 from Src.Models.range_model import range_model
-import json
 
 
 # менеджер настроек
@@ -26,17 +27,19 @@ class settings_manager(abstract_manager):
             cls.instance = super(settings_manager, cls).__new__(cls)
         return cls.instance
 
-    # Загружает данные настроек из JSON файла.
+    # Загружает данные настроек из JSON файла через общий механизм десериализации.
     def load(self, file_name: str = "") -> None:
        
         file_name = file_name.strip() or self.__default_file_name
         validator.validate(file_name, str)
 
         try:
-            with open(file_name, "r", encoding="utf-8") as file:
-                self.__data = json.load(file)
-
+            # Общий механизм десериализации: json_deserializer -> deserialize_service
+            self.__data = json_deserializer().load(file_name)
             self.__is_loaded = self.convert()
+
+        except operation_exception:
+            raise
 
         except Exception as ex:
             raise operation_exception(
@@ -44,35 +47,44 @@ class settings_manager(abstract_manager):
             ) from ex
 
 
-    # Преобразует сырые данные JSON в объект settings_model.
+    # Преобразует данные JSON в объект settings_model общим механизмом десериализации.
     def convert(self) -> bool:
         
+        if isinstance(self.__data, settings_model):
+            self._settings = self.__data
+            return True
+
         if not isinstance(self.__data, dict):
             return False
 
         try:
-            if self._settings is None:
-                self._settings = settings_model()
+            prepared = self.__prepare_data(self.__data)
+            restored = deserialize_service().deserialize(prepared)
 
-            org = self.__data.get("organization")
-            if isinstance(org, dict) and org.get("name") and org.get("inn"):
-                self._settings.organization = organization_model(**org)
+            if not isinstance(restored, settings_model):
+                return False
 
-            for key in ("boss_name", "account_name"):
-                value = self.__data.get(key)
-                if value and str(value).strip():
-                    setattr(self._settings, key, str(value).strip())
-
-            if "is_first_start" in self.__data:
-                self._settings.is_first_start = bool(self.__data.get("is_first_start"))
-
-            if "response_format" in self.__data:
-                self._settings.response_format = str(self.__data.get("response_format"))
-
+            self._settings = restored
             return True
 
         except Exception:
             return False
+
+
+    # Добавляет служебные маркеры $type для файлов настроек без явной типизации.
+    @staticmethod
+    def __prepare_data(data: dict) -> dict:
+        
+        prepared = dict(data)
+        prepared.setdefault("$type", settings_model.__name__)
+
+        organization = prepared.get("organization")
+        if isinstance(organization, dict):
+            organization_data = dict(organization)
+            organization_data.setdefault("$type", organization_model.__name__)
+            prepared["organization"] = organization_data
+
+        return prepared
 
     # Флаг успешности загрузки настроек
     @property

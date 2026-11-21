@@ -1,7 +1,9 @@
 {
+  "$type": "settings_model",
   "is_first_start": true,
   "organization": {
-   "name": "Ромашка",
+    "$type": "organization_model",
+    "name": "Ромашка",
     "inn": "4444444444",
     "bik": "012345678",
     "account": "12345678901234567890",

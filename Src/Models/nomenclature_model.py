@@ -5,7 +5,15 @@ from Src.Models.nomenclature_group_model import nomenclature_group_model
 
 """Модель номенклатуры"""
 class nomenclature_model(entity):
-    
+
+    ENTITY_TYPE = "nomenclature"
+
+    # Псевдонимы полей, специфичные для номенклатуры
+    FIELD_ALIASES = {
+        "unit": "range",
+        "unit_id": "range",
+    }
+
     """Максимальная длина полного наименования"""
     __max_full_name_length = 255
 
@@ -40,12 +48,12 @@ class nomenclature_model(entity):
 
     """Геттер группы номенклатуры"""
     @property
-    def group(self):
+    def group(self) -> nomenclature_group_model:
         return self.__group
 
     """Сеттер группы номенклатуры"""
     @group.setter
-    def group(self, value):
+    def group(self, value: nomenclature_group_model):
         if not isinstance(value, nomenclature_group_model):
             raise arguments_exception("group", "group should be of the type nomenclature_group_model")
 
@@ -53,12 +61,12 @@ class nomenclature_model(entity):
 
     """Геттер единицы измерения номенклатуры"""
     @property
-    def range(self):
+    def range(self) -> range_model:
         return self.__range
 
     """Cеттер единицы измерения номенклатуры"""
     @range.setter
-    def range(self, value):
+    def range(self, value: range_model):
     
         if not isinstance(value, range_model):
             raise arguments_exception("range", "range should be of the type range_model")

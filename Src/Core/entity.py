@@ -6,6 +6,16 @@ from Src.Core.exception import arguments_exception, max_length_exception
 """Абстрактный класс для имени и id объекта"""
 class entity(ABC):
 
+    # Тип самостоятельной сущности в API.
+    # None означает, что модель используется только как встроенная или служебная.
+    ENTITY_TYPE: str | None = None
+
+    # Псевдонимы полей JSON, общие для всех доменных моделей
+    FIELD_ALIASES: dict[str, str] = {
+        "code": "id",
+        "unique_code": "id",
+    }
+
     __max_name_length = 50
     
     """Конструктор класса"""

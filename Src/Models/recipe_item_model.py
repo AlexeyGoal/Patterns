@@ -13,6 +13,11 @@ class recipe_item_type:
 """Модель позиции рецепта (ингредиент, полуфабрикат или упаковка)"""
 class recipe_item_model(entity):
 
+    # Псевдонимы полей, специфичные для позиции рецепта
+    FIELD_ALIASES = {
+        "item_type": "type",
+    }
+
     """Конструктор позиции рецепта"""
     def __init__(self, name="", weight=0.0, range=None, item_type=recipe_item_type.INGREDIENT):
 
@@ -45,13 +50,13 @@ class recipe_item_model(entity):
 
     """Геттер единицы измерения"""
     @property
-    def range(self):
+    def range(self) -> "range_model | None":
         return self.__range
 
 
     """Сеттер единицы измерения"""
     @range.setter
-    def range(self, value):
+    def range(self, value: "range_model | None"):
 
         if value is not None and not isinstance(value, range_model):
             raise arguments_exception("range", "range should be of the type range_model")
@@ -79,12 +84,12 @@ class recipe_item_model(entity):
 
     """Геттер списка вложенных позиций"""
     @property
-    def items(self):
+    def items(self) -> list["recipe_item_model"]:
         return list(self.__items)
 
 
     """Добавление вложенной позиции"""
-    def add_item(self, item):
+    def add_item(self, item: "recipe_item_model"):
 
         if not isinstance(item, recipe_item_model):
             raise arguments_exception("item", "item should be of the type recipe_item_model")

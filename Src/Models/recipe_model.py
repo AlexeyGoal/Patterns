@@ -7,6 +7,8 @@ from Src.Models.range_model import range_model
 """Модель технологической карты (рецепта)"""
 class recipe_model(entity):
 
+    ENTITY_TYPE = "recipe"
+
     """Конструктор рецепта"""
     def __init__(self, name="", description=""):
 
@@ -35,7 +37,7 @@ class recipe_model(entity):
 
     """Геттер списка позиций рецепта"""
     @property
-    def items(self):
+    def items(self) -> list[recipe_item_model]:
         return list(self.__items)
 
 
@@ -53,7 +55,7 @@ class recipe_model(entity):
 
     """Геттер упаковки рецепта"""
     @property
-    def packaging(self):
+    def packaging(self) -> "recipe_item_model | None":
         for item in self.__items:
             if item.type == recipe_item_type.PACKAGING:
                 return item
@@ -62,7 +64,7 @@ class recipe_model(entity):
 
     """Сеттер упаковки рецепта"""
     @packaging.setter
-    def packaging(self, value):
+    def packaging(self, value: "recipe_item_model | None"):
 
         if value is not None and not isinstance(value, recipe_item_model):
             raise arguments_exception("packaging", "packaging should be of the type recipe_item_model")
@@ -81,7 +83,7 @@ class recipe_model(entity):
 
     """Геттер списка вложенных рецептов"""
     @property
-    def sub_recipes(self):
+    def sub_recipes(self) -> list["recipe_model"]:
         return list(self.__sub_recipes)
 
 
@@ -92,7 +94,7 @@ class recipe_model(entity):
 
 
     """Добавление позиции в рецепт"""
-    def add_item(self, item):
+    def add_item(self, item: recipe_item_model):
 
         if not isinstance(item, recipe_item_model):
             raise arguments_exception("item", "item should be of the type recipe_item_model")
@@ -108,7 +110,7 @@ class recipe_model(entity):
 
 
     """Добавление вложенного рецепта (блюдо в блюде)"""
-    def add_sub_recipe(self, recipe):
+    def add_sub_recipe(self, recipe: "recipe_model"):
 
         if not isinstance(recipe, recipe_model):
             raise arguments_exception("recipe", "recipe should be of the type recipe_model")

@@ -5,7 +5,7 @@
   "group": {
     "$type": "nomenclature_group_model",
     "name": "Бакалея",
-    "id": "6d58d1e0-4c17-448f-9522-781dd7d38762"
+    "id": "261ef942-b686-44fc-b10a-c4619f24f1d6"
   },
   "range": {
     "$type": "range_model",
@@ -16,9 +16,9 @@
       "name": "грамм",
       "conversion_factor": 1,
       "base_range": null,
-      "id": "657ab19a-a1ab-40d0-84e6-ee1ce940e73e"
+      "id": "657dbe76-8dd7-4838-af58-b2d33fafaf50"
     },
-    "id": "3ee882c6-7854-422c-9282-b01935c8a84f"
+    "id": "fd4728b8-8b95-446f-a5e1-2e7f6158f2ff"
   },
-  "id": "6d5b649f-38ce-48b7-8237-5b22e6781d93"
+  "id": "820e3048-6651-4574-a9ca-7ea6ce6b75cb"
 }
