@@ -25,6 +25,8 @@ tags:
     description: CRUD доменных сущностей
   - name: filters
     description: Фильтрация доменных сущностей
+  - name: osv
+    description: Оборотно-сальдовая ведомость
   - name: reports
     description: Формирование отчетов
 
@@ -113,6 +115,70 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Entity'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+  /api/osv:
+    post:
+      tags: [osv]
+      summary: Сформировать оборотно-сальдовую ведомость
+      description: |
+        В теле запроса передаётся DTO фильтрации. Тип доменной модели по умолчанию —
+        `nomenclature`. Дополнительно можно передать `start_date` — дату начала периода.
+
+        Сервис получает исходные данные из менеджера, рассчитывает начальные остатки,
+        применяет универсальный прототип фильтрации, затем рассчитывает приход и расход
+        за период и возвращает сериализованные DTO строк ОСВ.
+      operationId: buildOsv
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OsvRequest'
+            example:
+              entity_type: nomenclature
+              field_name: name
+              value: Мука
+              filter_type: LIKE
+              start_date: '2026-01-01'
+      responses:
+        '200':
+          description: Строки оборотно-сальдовой ведомости
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OsvRow'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+  /api/report/osv:
+    post:
+      tags: [osv]
+      summary: Сформировать ОСВ (алиас)
+      description: Синоним POST /api/osv.
+      operationId: buildOsvAlias
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OsvRequest'
+      responses:
+        '200':
+          description: Строки оборотно-сальдовой ведомости
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OsvRow'
         '400':
           $ref: '#/components/responses/BadRequest'
         '500':
@@ -504,6 +570,80 @@ components:
           example: Мука
         filter_type:
           $ref: '#/components/schemas/FilterType'
+
+    OsvRequest:
+      type: object
+      description: DTO фильтрации для формирования ОСВ.
+      required: [field_name, value]
+      properties:
+        entity_type:
+          type: string
+          description: Тип доменной модели, по которой строится ОСВ
+          enum: [nomenclature]
+          default: nomenclature
+          example: nomenclature
+        field_name:
+          type: string
+          description: Имя поля номенклатуры для фильтрации
+          example: name
+        field:
+          type: string
+          description: Псевдоним field_name
+          example: name
+        value:
+          type: string
+          description: Значение для сравнения
+          example: Мука
+        filter_type:
+          $ref: '#/components/schemas/FilterType'
+        start_date:
+          type: string
+          format: date
+          description: |
+            Дата начала периода в формате YYYY-MM-DD. Если не указана,
+            используется первый день текущего месяца.
+          example: '2026-01-01'
+
+    OsvRow:
+      type: object
+      description: Строка оборотно-сальдовой ведомости по позиции номенклатуры.
+      required:
+        - code
+        - name
+        - unit
+        - opening_balance
+        - income
+        - outcome
+        - closing_balance
+      properties:
+        code:
+          type: string
+          description: Код позиции номенклатуры
+          example: 6d58d1e0-4c17-448f-9522-781dd7d38762
+        name:
+          type: string
+          description: Наименование позиции
+          example: Мука пшеничная
+        unit:
+          type: string
+          description: Единица измерения
+          example: килограмм
+        opening_balance:
+          type: number
+          description: Начальный остаток
+          example: 0
+        income:
+          type: number
+          description: Приход за период
+          example: 0
+        outcome:
+          type: number
+          description: Расход за период
+          example: 200
+        closing_balance:
+          type: number
+          description: Конечный остаток
+          example: -200
 
     Error:
       type: object

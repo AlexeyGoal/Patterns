@@ -8,6 +8,7 @@ from Src.Logics.entity_references import entity_references
 from Src.Logics.entity_registry import entity_metadata_registry
 from Src.Logics.entity_store import entity_store
 from Src.Logics.filter_prototype import filter_prototype
+from Src.Logics.osv_service import osv_service
 from Src.Logics.serialize_factory import serialize_factory
 from Src.Logics.storage_manager import storage_manager
 
@@ -19,7 +20,8 @@ class entity_service:
 
     def __init__(self, manager: storage_manager = None):
 
-        self.__store = entity_store(manager)
+        self.__manager = manager if manager is not None else storage_manager()
+        self.__store = entity_store(self.__manager)
         self.__serializer = serialize_factory()
         self.__deserializer = deserialize_service()
         self.__registry = entity_metadata_registry(self.__deserializer.model_types)
@@ -31,6 +33,7 @@ class entity_service:
         )
         self.__references = entity_references(self.__registry, self.__store)
         self.__prototype = filter_prototype()
+        self.__osv = osv_service(self.__manager, self.__prototype)
 
 
     # Поддерживаемые сервисом типы сущностей
@@ -82,6 +85,28 @@ class entity_service:
             self.__mapper.to_dto(item)
             for item in prototype.filter(items)
         ]
+
+
+    # Сформировать оборотно-сальдовую ведомость с учетом фильтрации
+    def build_osv(
+        self,
+        query: filter_dto,
+        start_date: object = None,
+    ) -> list[dict]:
+
+        if not isinstance(query, filter_dto):
+            raise arguments_exception("query", "Ожидался DTO фильтрации")
+
+        normalized_type = self.__require_type(query.entity_type)
+
+        if normalized_type != osv_service.ENTITY_TYPE:
+            raise arguments_exception(
+                "entity_type",
+                f"ОСВ формируется только по типу '{osv_service.ENTITY_TYPE}', "
+                f"а передан тип '{normalized_type}'",
+            )
+
+        return self.__osv.build_serialized(query, start_date)
 
 
     # Одна сущность по коду в JSON-совместимом виде
