@@ -5,6 +5,7 @@ from Src.Core.exception import arguments_exception
 from Src.Core.filter_type import filter_type
 from Src.Dtos.filter_dto import filter_dto
 from Src.Logics.entity_filter import entity_filter
+from Src.Logics.filter_dto_deserializer import filter_dto_deserializer
 from Src.Logics.filter_prototype import filter_prototype
 from Src.Models.nomenclature_group_model import nomenclature_group_model
 from Src.Models.nomenclature_model import nomenclature_model
@@ -152,12 +153,69 @@ class TestEntityFilter:
             )
 
 
+class TestFilterDtoDeserializer:
+    """Тесты восстановления DTO фильтрации механизмом десериализации."""
+
+    def test_deserializes_dict_to_filter_dto(self):
+        """Словарь восстанавливается в готовый объект filter_dto."""
+        query = filter_dto_deserializer().deserialize({
+            "entity_type": "nomenclature",
+            "field_name": "name",
+            "value": "Мука",
+            "filter_type": "LIKE",
+        })
+
+        assert isinstance(query, filter_dto)
+        assert query.entity_type == "nomenclature"
+        assert query.field_name == "name"
+        assert query.value == "Мука"
+        assert query.filter_type is filter_type.LIKE
+
+    def test_deserializes_field_aliases(self):
+        """Псевдонимы field и entity приводятся к каноническим именам."""
+        query = filter_dto_deserializer().deserialize({
+            "entity": "nomenclature",
+            "field": "name",
+            "value": "Мука",
+        })
+
+        assert query.entity_type == "nomenclature"
+        assert query.field_name == "name"
+        assert query.filter_type is filter_type.EQUALS
+
+    def test_entity_type_from_route_overrides_body(self):
+        """Тип модели из route имеет приоритет над телом запроса."""
+        query = filter_dto_deserializer().deserialize(
+            {
+                "entity_type": "range",
+                "field_name": "name",
+                "value": "грамм",
+            },
+            entity_type="nomenclature",
+        )
+
+        assert query.entity_type == "nomenclature"
+
+    def test_invalid_filter_type_raises_error(self):
+        """Неизвестный вариант фильтрации приводит к ошибке."""
+        with pytest.raises(arguments_exception):
+            filter_dto_deserializer().deserialize({
+                "entity_type": "nomenclature",
+                "field_name": "name",
+                "value": "Мука",
+                "filter_type": "UNKNOWN",
+            })
+
+
 class TestFilterPrototype:
     """Тесты шаблона «Прототип»."""
 
-    def test_clone_creates_independent_configured_copy(self):
-        """clone() создаёт копию прототипа с нужным DTO."""
-        prototype = filter_prototype()
+    def test_clone_contains_filtered_items(self):
+        """Клон прототипа сразу содержит отфильтрованный список."""
+        prototype = filter_prototype(items=[
+            nomenclature_model.create_flour(),
+            nomenclature_model.create_milk(),
+        ])
         query = filter_dto("nomenclature", "name", "Мука", filter_type.LIKE)
 
         clone = prototype.clone(query)
@@ -165,22 +223,28 @@ class TestFilterPrototype:
         assert clone is not prototype
         assert prototype.query is None
         assert clone.query is query
+        assert [item.name for item in clone.items] == ["Мука пшеничная"]
+        assert len(prototype.items) == 2
 
     def test_one_prototype_filters_different_domain_models(self):
         """Один прототип используется для разных доменных моделей."""
-        prototype = filter_prototype()
+        source = {
+            "nomenclature": [
+                nomenclature_model.create_flour(),
+                nomenclature_model.create_milk(),
+            ],
+            "range": [
+                range_model.create_gram(),
+                range_model.create_liter(),
+            ],
+        }
+        prototype = filter_prototype(source=lambda entity_type: source[entity_type])
 
         nomenclature_query = filter_dto("nomenclature", "name", "Мука", filter_type.LIKE)
         range_query = filter_dto("range", "name", "грамм", filter_type.EQUALS)
 
-        nomenclatures = prototype.clone(nomenclature_query).filter([
-            nomenclature_model.create_flour(),
-            nomenclature_model.create_milk(),
-        ])
-        ranges = prototype.clone(range_query).filter([
-            range_model.create_gram(),
-            range_model.create_liter(),
-        ])
+        nomenclatures = prototype.clone(nomenclature_query).items
+        ranges = prototype.clone(range_query).items
 
         assert [item.name for item in nomenclatures] == ["Мука пшеничная"]
         assert [item.name for item in ranges] == ["грамм"]
@@ -188,7 +252,7 @@ class TestFilterPrototype:
     def test_unconfigured_prototype_requires_dto(self):
         """Не настроенный прототип не выполняет фильтрацию."""
         with pytest.raises(arguments_exception):
-            filter_prototype().filter([nomenclature_model.create_flour()])
+            filter_prototype(items=[nomenclature_model.create_flour()]).clone()
 
 
 class TestEntityServiceFilter:

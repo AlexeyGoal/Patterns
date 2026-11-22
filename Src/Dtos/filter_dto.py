@@ -1,3 +1,4 @@
+from Src.Core.entity import entity
 from Src.Core.exception import arguments_exception
 from Src.Core.filter_type import filter_type as filter_type_enum
 
@@ -5,7 +6,13 @@ from Src.Core.filter_type import filter_type as filter_type_enum
 """
 DTO-модель с параметрами фильтрации доменной сущности.
 """
-class filter_dto:
+class filter_dto(entity):
+
+    """Псевдонимы полей DTO фильтрации."""
+    FIELD_ALIASES = {
+        "entity": "entity_type",
+        "field": "field_name",
+    }
 
     """Конструктор DTO фильтрации."""
     def __init__(
@@ -16,6 +23,7 @@ class filter_dto:
         filter_type: object = None,
     ):
 
+        super().__init__()
         self.__entity_type = str(entity_type or "").strip().lower()
         self.__field_name = str(field_name or "").strip()
         self.__value = "" if value is None else str(value).strip()

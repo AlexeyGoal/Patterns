@@ -25,7 +25,11 @@ class osv_service:
     ):
 
         self.__manager = manager if manager is not None else storage_manager()
-        self.__prototype = prototype if prototype is not None else filter_prototype()
+        self.__prototype = (
+            prototype
+            if prototype is not None
+            else filter_prototype(source=self.__manager.all)
+        )
 
         if today is None:
             self.__today = datetime.date.today
@@ -64,7 +68,8 @@ class osv_service:
         opening_balances = self.__opening_balances(nomenclatures, movements, period_start)
 
         # 4. Универсальный прототип с фильтром
-        filtered = self.__prototype.clone(query).filter(nomenclatures)
+        prototype = self.__prototype.clone(query)
+        filtered = prototype.items
 
         # 5. Движения по отфильтрованным позициям
         turnovers = self.__period_turnovers(filtered, movements, period_start, end_date)
@@ -111,6 +116,11 @@ class osv_service:
     """Исходная номенклатура из менеджера"""
     def __nomenclatures(self) -> list:
 
+        all_method = getattr(self.__manager, "all", None)
+
+        if callable(all_method):
+            return list(all_method("nomenclature") or [])
+
         collection = getattr(self.__manager, "nomenclatures", {})
 
         if isinstance(collection, dict):
@@ -120,6 +130,11 @@ class osv_service:
 
     """Исходные технологические карты из менеджера"""
     def __recipes(self) -> list:
+
+        all_method = getattr(self.__manager, "all", None)
+
+        if callable(all_method):
+            return list(all_method("recipe") or [])
 
         collection = getattr(self.__manager, "recipes", {})
 

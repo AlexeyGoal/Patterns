@@ -7,6 +7,7 @@ from Src.Core.exception import arguments_exception
 from Src.Core.filter_type import filter_type
 from Src.Dtos.filter_dto import filter_dto
 from Src.Dtos.osv_dto import osv_dto
+from Src.Logics.entity_filter import entity_filter
 from Src.Logics.osv_service import osv_service
 from Src.Models.nomenclature_model import nomenclature_model
 from Src.Models.range_model import range_model
@@ -21,21 +22,27 @@ class fake_manager:
         self.nomenclatures = {item.id: item for item in nomenclatures}
         self.recipes = {item.id: item for item in (recipes or [])}
 
+    def all(self, entity_type: str) -> list:
+        """Отдать исходные данные по типу доменной модели."""
+        collections = {
+            "nomenclature": self.nomenclatures,
+            "recipe": self.recipes,
+        }
+
+        return list(collections.get(entity_type, {}).values())
+
 
 class spy_prototype:
-    """Прототип-шпион: проверяет, что сервис использует универсальный прототип."""
+    """Прототип-шпион: проверяет, что сервис получает готовый отфильтрованный список."""
 
-    def __init__(self):
+    def __init__(self, items: list = None):
         self.query = None
-        self.items = None
+        self.items = list(items or [])
+        self.__filter = entity_filter()
 
     def clone(self, query):
         self.query = query
-        return self
-
-    def filter(self, items):
-        self.items = list(items)
-        return self.items[:1]
+        return spy_prototype(self.__filter.apply(self.items, query))
 
 
 @pytest.fixture
@@ -108,7 +115,7 @@ class TestOsvService:
     def test_service_uses_universal_filter_prototype(self, flour_recipe):
         """Сервис получает отфильтрованные данные через универсальный прототип."""
         flour, dish, _recipe = flour_recipe
-        prototype = spy_prototype()
+        prototype = spy_prototype([flour, dish])
         service = osv_service(
             fake_manager([flour, dish]),
             prototype=prototype,

@@ -32,7 +32,7 @@ class entity_service:
             self.__store.find,
         )
         self.__references = entity_references(self.__registry, self.__store)
-        self.__prototype = filter_prototype()
+        self.__prototype = filter_prototype(source=self.__store.values)
         self.__osv = osv_service(self.__manager, self.__prototype)
 
 
@@ -78,12 +78,11 @@ class entity_service:
         metadata = self.__registry.get(normalized_type)
         self.__prototype.resolve_field(metadata.model, query.field_name)
 
-        items = self.__store.values(normalized_type)
         prototype = self.__prototype.clone(query)
 
         return [
             self.__mapper.to_dto(item)
-            for item in prototype.filter(items)
+            for item in prototype.items
         ]
 
 

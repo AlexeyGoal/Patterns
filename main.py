@@ -7,7 +7,7 @@ from Src.Logics.entity_service import entity_service
 from Src.Logics.settings_manager import settings_manager
 from Src.Logics.storage_manager import storage_manager
 from Src.Logics.report_factory import report_factory
-from Src.Core.filter_type import filter_type
+from Src.Logics.filter_dto_deserializer import filter_dto_deserializer
 from Src.Dtos.filter_dto import filter_dto
 from Src.Dtos.report_type_dto import report_type_dto
 
@@ -35,6 +35,7 @@ storage.convert()
 
 factory = report_factory()
 entities = entity_service(storage)
+filter_deserializer = filter_dto_deserializer()
 
 
 SWAGGER_URL = "/api/docs"
@@ -162,32 +163,9 @@ def _request_payload() -> dict:
 def _filter_dto_from_payload(entity_type: str, payload: dict) -> filter_dto:
     """
     Создаёт DTO фильтрации из JSON-тела запроса.
-
-    Тип доменной модели берётся из route, поэтому в теле его передавать не нужно.
     """
 
-    if not isinstance(payload, dict):
-        raise arguments_exception("payload", "Тело запроса должно быть JSON-объектом")
-
-    field_name = payload.get("field_name") or payload.get("field")
-    value = payload.get("value")
-    mode = payload.get("filter_type") or filter_type.EQUALS.name
-    normalized_mode = str(mode).strip().upper()
-    parsed_mode = filter_type.__members__.get(normalized_mode)
-
-    if parsed_mode is None:
-        raise arguments_exception(
-            "filter_type",
-            f"Неподдерживаемый вариант фильтрации: '{mode}'. "
-            f"Допустимые значения: {', '.join(filter_type.__members__)}",
-        )
-
-    return filter_dto(
-        entity_type=entity_type,
-        field_name=field_name,
-        value=value,
-        filter_type=parsed_mode,
-    )
+    return filter_deserializer.deserialize(payload, entity_type=entity_type)
 
 
 def _filter_dto_from_body(payload: dict) -> filter_dto:
