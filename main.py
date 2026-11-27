@@ -1,3 +1,4 @@
+import datetime
 import os
 from flask import Flask, Response, jsonify, redirect, request, send_from_directory
 from Src.Core.exception import arguments_exception
@@ -6,6 +7,8 @@ from Src.Logics.entity_service import entity_service
 from Src.Logics.settings_manager import settings_manager
 from Src.Logics.storage_manager import storage_manager
 from Src.Logics.report_factory import report_factory
+from Src.Logics.filter_dto_deserializer import filter_dto_deserializer
+from Src.Dtos.filter_dto import filter_dto
 from Src.Dtos.report_type_dto import report_type_dto
 
 try:
@@ -32,6 +35,7 @@ storage.convert()
 
 factory = report_factory()
 entities = entity_service(storage)
+filter_deserializer = filter_dto_deserializer()
 
 
 SWAGGER_URL = "/api/docs"
@@ -156,6 +160,59 @@ def _request_payload() -> dict:
     return payload
 
 
+def _filter_dto_from_payload(entity_type: str, payload: dict) -> filter_dto:
+    """
+    Создаёт DTO фильтрации из JSON-тела запроса.
+    """
+
+    return filter_deserializer.deserialize(payload, entity_type=entity_type)
+
+
+def _filter_dto_from_body(payload: dict) -> filter_dto:
+    """
+    Создаёт DTO фильтрации из тела запроса, включая тип доменной модели.
+
+    Тип модели можно передать в поле entity_type. Для ОСВ по умолчанию
+    используется номенклатура.
+    """
+
+    if not isinstance(payload, dict):
+        raise arguments_exception("payload", "Тело запроса должно быть JSON-объектом")
+
+    entity_type = (
+        payload.get("entity_type")
+        or payload.get("entity")
+        or "nomenclature"
+    )
+
+    return _filter_dto_from_payload(entity_type, payload)
+
+
+def _start_date_from_payload(payload: dict):
+    """
+    Извлекает дату начала периода ОСВ из тела запроса.
+    """
+
+    value = payload.get("start_date")
+
+    if value is None or (isinstance(value, str) and value.strip() == ""):
+        return None
+
+    if isinstance(value, datetime.datetime):
+        return value.date()
+
+    if isinstance(value, datetime.date):
+        return value
+
+    try:
+        return datetime.date.fromisoformat(str(value).strip())
+    except ValueError as error:
+        raise arguments_exception(
+            "start_date",
+            f"Дата начала периода должна быть в формате YYYY-MM-DD: {error}",
+        ) from error
+
+
 @app.route("/api/entities", methods=["GET"])
 def list_all_entities():
     """
@@ -182,6 +239,54 @@ def list_entities(entity_type: str):
         )
 
     return jsonify(entities.list_entities(entity_type))
+
+
+@app.route("/api/filter/<entity_type>", methods=["POST"])
+def filter_entities(entity_type: str):
+    """
+    HTTP POST endpoint фильтрации доменных сущностей.
+
+    Тип доменной модели передаётся в route, а в теле запроса — DTO фильтрации:
+    field_name, value и filter_type (EQUALS или LIKE).
+    """
+    if not entities.supports(entity_type):
+        return _make_json_error(
+            f"Неподдерживаемый тип сущности: '{entity_type}'. "
+            f"Допустимые значения: {', '.join(entities.supported_types)}",
+            status=400,
+        )
+
+    try:
+        query = _filter_dto_from_payload(entity_type, _request_payload())
+        result = entities.filter_entities(entity_type, query)
+    except (arguments_exception, operation_exception) as ex:
+        return _make_json_error(str(ex), status=400)
+    except Exception as ex:
+        return _make_json_error(f"Ошибка при фильтрации сущностей: {ex}", status=500)
+
+    return jsonify(result), 200
+
+
+@app.route("/api/osv", methods=["POST"])
+@app.route("/api/report/osv", methods=["POST"])
+def build_osv():
+    """
+    HTTP POST endpoint формирования оборотно-сальдовой ведомости (ОСВ).
+
+    В теле запроса передаётся DTO фильтрации. Тип доменной модели по умолчанию
+    — nomenclature. Возвращается список строк ОСВ, отобранных по фильтру.
+    """
+    try:
+        payload = _request_payload()
+        query = _filter_dto_from_body(payload)
+        start_date = _start_date_from_payload(payload)
+        result = entities.build_osv(query, start_date)
+    except (arguments_exception, operation_exception) as ex:
+        return _make_json_error(str(ex), status=400)
+    except Exception as ex:
+        return _make_json_error(f"Ошибка при формировании ОСВ: {ex}", status=500)
+
+    return jsonify(result), 200
 
 
 @app.route("/api/entities/<entity_type>", methods=["POST"])

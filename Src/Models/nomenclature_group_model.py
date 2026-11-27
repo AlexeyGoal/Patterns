@@ -4,12 +4,24 @@ class nomenclature_group_model(entity):
 
     ENTITY_TYPE = "group"
 
+    # Псевдонимы поля родительской (владеющей) группы
+    FIELD_ALIASES = {
+        "owner": "parent",
+        "parent_group": "parent",
+    }
+
     """Конструктор группы номенклатуры"""
     
-    def __init__(self, name=""):
+    def __init__(self, name="", **aliases):
     
         super().__init__()
         self.name = name
+
+        parent = aliases.get("parent", aliases.get("owner"))
+
+        if parent is not None:
+            self.parent = parent
+            self.owner = parent
 
 
     @staticmethod
