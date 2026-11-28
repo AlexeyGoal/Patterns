@@ -29,8 +29,111 @@ tags:
     description: Оборотно-сальдовая ведомость
   - name: reports
     description: Формирование отчетов
+  - name: logging
+    description: Журнал аудита (шаблон «Наблюдатель»)
+  - name: settings
+    description: Параметры настроек приложения
 
 paths:
+
+  /api/logs:
+    get:
+      tags: [logging]
+      summary: Получить последние события журнала аудита
+      description: |
+        Возвращает события, сохраненные наблюдателем журнала в памяти.
+        Журнал фиксирует CRUD-операции, складские операции, вызовы Web-методов
+        и изменения параметров настроек.
+      operationId: getAuditLogs
+      parameters:
+        - name: category
+          in: query
+          required: false
+          description: Категория событий
+          schema:
+            type: string
+            enum: [CRUD, WAREHOUSE, WEB, SETTINGS]
+        - name: status
+          in: query
+          required: false
+          description: Результат операции
+          schema:
+            type: string
+            enum: [SUCCESS, FAILURE]
+        - name: limit
+          in: query
+          required: false
+          description: Количество последних событий (по умолчанию 100)
+          schema:
+            type: integer
+            minimum: 0
+            default: 100
+      responses:
+        '200':
+          description: События журнала аудита
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LogEvent'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /api/settings:
+    get:
+      tags: [settings]
+      summary: Получить текущие параметры настроек
+      operationId: getSettings
+      responses:
+        '200':
+          description: Параметры настроек
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Settings'
+    patch:
+      tags: [settings]
+      summary: Изменить параметры настроек
+      description: |
+        Изменяет переданные параметры настроек. Изменение фиксируется в журнале
+        аудита категорией SETTINGS.
+      operationId: updateSettings
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SettingsPayload'
+      responses:
+        '200':
+          description: Обновленные параметры настроек
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Settings'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+    put:
+      tags: [settings]
+      summary: Изменить параметры настроек (алиас)
+      description: Синоним PATCH /api/settings.
+      operationId: updateSettingsPut
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SettingsPayload'
+      responses:
+        '200':
+          description: Обновленные параметры настроек
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Settings'
+        '400':
+          $ref: '#/components/responses/BadRequest'
 
   /api/formats:
     get:
@@ -522,6 +625,105 @@ components:
         full_name: Мука пшеничная высший сорт
         group: 6d58d1e0-4c17-448f-9522-781dd7d38762
         range: 3ee882c6-7854-422c-9282-b01935c8a84f
+
+    LogEvent:
+      type: object
+      description: Событие журнала аудита
+      required: [timestamp, category, operation, status]
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+          description: Дата и время события
+          example: '2026-11-27T12:00:00'
+        category:
+          type: string
+          description: Категория события
+          enum: [CRUD, WAREHOUSE, WEB, SETTINGS]
+          example: CRUD
+        operation:
+          type: string
+          description: Выполненная операция
+          enum: [CREATE, READ, UPDATE, DELETE, REPORT, CALL, LOAD]
+          example: CREATE
+        status:
+          type: string
+          description: Результат операции
+          enum: [SUCCESS, FAILURE]
+          example: SUCCESS
+        entity_type:
+          type: string
+          description: Тип доменной сущности
+          example: storage
+        entity_code:
+          type: string
+          description: Код доменной сущности
+          example: 6d58d1e0-4c17-448f-9522-781dd7d38762
+        message:
+          type: string
+          description: Краткое описание события
+          example: Создана сущность типа 'storage'
+        source:
+          type: string
+          description: Источник события
+          example: entity_service
+        details:
+          type: object
+          additionalProperties: true
+          description: Дополнительные структурированные данные
+
+    Settings:
+      type: object
+      description: Параметры настроек приложения
+      properties:
+        '$type':
+          type: string
+          example: settings_model
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        organization:
+          type: object
+          description: Карточка организации
+          additionalProperties: true
+        boss_name:
+          type: string
+          example: Иванов Иван Иванович
+        account_name:
+          type: string
+          example: Петрова Анна Сергеевна
+        is_first_start:
+          type: boolean
+          example: true
+        response_format:
+          type: string
+          enum: [CSV, Markdown, XML, TXT, HTML]
+          example: TXT
+
+    SettingsPayload:
+      type: object
+      description: |
+        Изменяемые параметры настроек. Можно передать любое подмножество полей
+        boss_name, account_name, is_first_start, response_format и organization.
+      additionalProperties: false
+      properties:
+        organization:
+          type: object
+          additionalProperties: true
+          example:
+            name: Ромашка
+            inn: '4444444444'
+        boss_name:
+          type: string
+        account_name:
+          type: string
+        is_first_start:
+          type: boolean
+        response_format:
+          type: string
+          enum: [CSV, Markdown, XML, TXT, HTML]
 
     FormatDetails:
       type: object
