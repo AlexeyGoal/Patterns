@@ -1,7 +1,6 @@
 import os
 
 from Src.Core.abstract_subject import abstract_subject
-from Src.Core.log_type import log_category, log_operation, log_status
 from Src.Dtos.log_event_dto import log_event_dto
 from Src.Logics.file_log_observer import file_log_observer
 from Src.Logics.memory_log_observer import memory_log_observer
@@ -41,28 +40,10 @@ class logging_service(abstract_subject):
 
 
     """Записать событие в журнал и разослать его наблюдателям"""
-    def log(
-        self,
-        category: object = log_category.CRUD,
-        operation: object = log_operation.READ,
-        status: object = log_status.SUCCESS,
-        entity_type: str = "",
-        entity_code: str = "",
-        message: str = "",
-        details: dict = None,
-        source: str = "",
-    ) -> log_event_dto:
+    def log(self, event: log_event_dto) -> log_event_dto:
 
-        event = log_event_dto(
-            category=category,
-            operation=operation,
-            status=status,
-            entity_type=entity_type,
-            entity_code=entity_code,
-            message=message,
-            details=details,
-            source=source,
-        )
+        if not isinstance(event, log_event_dto):
+            raise TypeError("Ожидалось событие log_event_dto")
 
         self.notify(event)
         return event

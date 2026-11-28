@@ -90,21 +90,21 @@ class TestObserverPattern:
         spy = spy_observer()
 
         service.attach(spy)
-        service.log(
+        service.log(log_event_dto(
             category=log_category.CRUD,
             operation=log_operation.READ,
             message="тестовое событие",
-        )
+        ))
 
         assert len(spy.events) == 1
         assert spy.events[0].message == "тестовое событие"
 
         service.detach(spy)
-        service.log(
+        service.log(log_event_dto(
             category=log_category.CRUD,
             operation=log_operation.READ,
             message="событие после отписки",
-        )
+        ))
 
         assert len(spy.events) == 1
 
@@ -120,7 +120,7 @@ class TestObserverPattern:
         service.attach(spy)
 
         try:
-            service.log(message="событие при сбое наблюдателя")
+            service.log(log_event_dto(message="событие при сбое наблюдателя"))
         finally:
             service.detach(service.observers[-2])
 
@@ -312,7 +312,9 @@ class TestSettingsLogging:
             ]
 
             assert settings_events
-            assert "response_format" in settings_events[-1].details["changes"]
+            details = settings_events[-1].details
+            assert details["before"]["response_format"] == previous_format
+            assert details["after"]["response_format"] == "CSV"
         finally:
             manager.settings.response_format = previous_format
 

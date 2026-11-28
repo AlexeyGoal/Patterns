@@ -12,6 +12,7 @@ from Src.Logics.storage_manager import storage_manager
 from Src.Logics.report_factory import report_factory
 from Src.Logics.filter_dto_deserializer import filter_dto_deserializer
 from Src.Dtos.filter_dto import filter_dto
+from Src.Dtos.log_event_dto import log_event_dto
 from Src.Dtos.report_type_dto import report_type_dto
 
 try:
@@ -65,7 +66,7 @@ def _log_web_request(response):
     )
 
     try:
-        audit_log.log(
+        event = log_event_dto(
             category=log_category.WEB,
             operation=log_operation.CALL,
             status=(
@@ -85,6 +86,7 @@ def _log_web_request(response):
             },
             source="web",
         )
+        audit_log.log(event)
     except Exception:
         # Сбой журналирования не должен ломать HTTP-ответ.
         pass

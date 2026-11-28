@@ -2,6 +2,7 @@ from Src.Core.abstract_manager import abstract_manager
 from Src.Core.exception import arguments_exception
 from Src.Core.log_type import log_category, log_operation, log_status
 from Src.Core.validator import validator, operation_exception
+from Src.Dtos.log_event_dto import log_event_dto
 from Src.Logics.deserialize_service import deserialize_service
 from Src.Logics.json_deserializer import json_deserializer
 from Src.Logics.logging_service import logging_service
@@ -151,30 +152,22 @@ class settings_manager(abstract_manager):
         if self._settings is None:
             raise operation_exception("Настройки не загружены")
 
-        service_fields = {"$type", "id", "code", "unique_code", "name"}
-        writable = {
-            name
-            for name in dir(type(self._settings))
-            if not name.startswith("_")
-            and isinstance(getattr(type(self._settings), name, None), property)
-            and getattr(type(self._settings), name).fset is not None
-        }
+        before = self.to_dict()
 
-        # Готовим новое состояние целиком, чтобы ошибка в одном параметре
-        # не оставила настройки частично измененными.
-        data = self.to_dict()
+        writable = self.__writable_parameters()
+        data = dict(before)
 
         for field, value in payload.items():
-
-            if field in service_fields:
-                continue
 
             if field not in writable:
                 raise arguments_exception(
                     field, f"Неизвестный параметр настроек: '{field}'"
                 )
 
-            self.__validate_parameter(field, value)
+            if isinstance(value, str) and value.strip() == "":
+                raise arguments_exception(
+                    field, f"Параметр '{field}' должен быть непустой строкой"
+                )
 
             if field == "organization":
                 data["organization"] = self.__merge_organization(
@@ -184,35 +177,36 @@ class settings_manager(abstract_manager):
             else:
                 data[field] = value
 
+        
         prepared = self.__prepare_data(data)
         restored = deserialize_service().deserialize(prepared)
 
         if not isinstance(restored, settings_model):
             raise operation_exception("Не удалось изменить параметры настроек")
 
-        before = self.to_dict()
         after = serialize_factory().convert(restored)
-        changes = {
-            field: {
-                "before": before.get(field),
-                "after": after.get(field),
-            }
-            for field in sorted(set(before) | set(after))
-            if before.get(field) != after.get(field)
-        }
 
         self._settings = restored
         self.__is_loaded = True
 
-        if changes:
-            self.__log_settings(
-                log_operation.UPDATE,
-                log_status.SUCCESS,
-                message="Изменены параметры настроек",
-                details={"changes": changes},
-            )
+        self.__log_settings(
+            log_operation.UPDATE,
+            log_status.SUCCESS,
+            message="Изменены параметры настроек",
+            details={"before": before, "after": after},
+        )
 
         return self._settings
+
+
+    # Параметры настроек, доступные для изменения (свойства модели с сеттером)
+    def __writable_parameters(self) -> set[str]:
+
+        return {
+            name
+            for name, value in vars(type(self._settings)).items()
+            if isinstance(value, property) and value.fset is not None
+        }
 
 
     # Сериализовать настройки в JSON-совместимый словарь
@@ -222,23 +216,6 @@ class settings_manager(abstract_manager):
             return {}
 
         return serialize_factory().convert(self._settings)
-
-
-    # Проверить тип и заполненность изменяемого параметра
-    @staticmethod
-    def __validate_parameter(field: str, value: object) -> None:
-
-        if field in ("boss_name", "account_name", "response_format"):
-            if not isinstance(value, str) or value.strip() == "":
-                raise arguments_exception(
-                    field, f"Параметр '{field}' должен быть непустой строкой"
-                )
-            return
-
-        if field == "is_first_start" and not isinstance(value, bool):
-            raise arguments_exception(
-                field, f"Параметр '{field}' должен быть логическим значением"
-            )
 
 
     # Наложить изменения на карточку организации
@@ -270,7 +247,7 @@ class settings_manager(abstract_manager):
     ) -> None:
 
         try:
-            logging_service().log(
+            event = log_event_dto(
                 category=log_category.SETTINGS,
                 operation=operation,
                 status=status,
@@ -279,6 +256,7 @@ class settings_manager(abstract_manager):
                 details=details,
                 source="settings_manager",
             )
+            logging_service().log(event)
         except Exception:
             # Сбой журналирования не должен прерывать изменение настроек.
             pass

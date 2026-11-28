@@ -1,6 +1,6 @@
 [
   {
-    "timestamp": "2026-11-28T14:12:37",
+    "timestamp": "2026-11-28T22:02:46",
     "category": "SETTINGS",
     "operation": "LOAD",
     "status": "SUCCESS",
@@ -14,7 +14,7 @@
     }
   },
   {
-    "timestamp": "2026-11-28T14:12:37",
+    "timestamp": "2026-11-28T22:02:46",
     "category": "SETTINGS",
     "operation": "LOAD",
     "status": "SUCCESS",
@@ -28,7 +28,588 @@
     }
   },
   {
-    "timestamp": "2026-11-28T14:12:37",
+    "timestamp": "2026-11-28T22:02:46",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "SUCCESS",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "GET /api/formats -> 200",
+    "source": "web",
+    "details": {
+      "method": "GET",
+      "path": "/api/formats",
+      "endpoint": "get_report_formats",
+      "status_code": 200,
+      "duration_ms": 0.22,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:02:46",
+    "category": "CRUD",
+    "operation": "CREATE",
+    "status": "SUCCESS",
+    "entity_type": "group",
+    "entity_code": "3c6e7f88-a02a-463d-8e35-9125e36c468b",
+    "message": "Создана сущность типа 'group'",
+    "source": "entity_service",
+    "details": {
+      "name": "Группа аудита"
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:02:46",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "SUCCESS",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "POST /api/entities/group -> 200",
+    "source": "web",
+    "details": {
+      "method": "POST",
+      "path": "/api/entities/group",
+      "endpoint": "create_entity",
+      "status_code": 200,
+      "duration_ms": 1.93,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:02:46",
+    "category": "CRUD",
+    "operation": "READ",
+    "status": "SUCCESS",
+    "entity_type": "group",
+    "entity_code": "3c6e7f88-a02a-463d-8e35-9125e36c468b",
+    "message": "Получена сущность типа 'group'",
+    "source": "entity_service",
+    "details": {}
+  },
+  {
+    "timestamp": "2026-11-28T22:02:46",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "SUCCESS",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "GET /api/entities/group/3c6e7f88-a02a-463d-8e35-9125e36c468b -> 200",
+    "source": "web",
+    "details": {
+      "method": "GET",
+      "path": "/api/entities/group/3c6e7f88-a02a-463d-8e35-9125e36c468b",
+      "endpoint": "get_entity",
+      "status_code": 200,
+      "duration_ms": 0.92,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:02:46",
+    "category": "CRUD",
+    "operation": "READ",
+    "status": "SUCCESS",
+    "entity_type": "group",
+    "entity_code": "3c6e7f88-a02a-463d-8e35-9125e36c468b",
+    "message": "Получена сущность типа 'group'",
+    "source": "entity_service",
+    "details": {}
+  },
+  {
+    "timestamp": "2026-11-28T22:02:46",
+    "category": "CRUD",
+    "operation": "UPDATE",
+    "status": "SUCCESS",
+    "entity_type": "group",
+    "entity_code": "3c6e7f88-a02a-463d-8e35-9125e36c468b",
+    "message": "Изменена сущность типа 'group'",
+    "source": "entity_service",
+    "details": {
+      "name": "Группа аудита (изменена)",
+      "changes": {
+        "name": {
+          "before": "Группа аудита",
+          "after": "Группа аудита (изменена)"
+        }
+      }
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:02:46",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "SUCCESS",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "PUT /api/entities/group/3c6e7f88-a02a-463d-8e35-9125e36c468b -> 200",
+    "source": "web",
+    "details": {
+      "method": "PUT",
+      "path": "/api/entities/group/3c6e7f88-a02a-463d-8e35-9125e36c468b",
+      "endpoint": "update_entity",
+      "status_code": 200,
+      "duration_ms": 2.15,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:02:46",
+    "category": "CRUD",
+    "operation": "READ",
+    "status": "SUCCESS",
+    "entity_type": "group",
+    "entity_code": "3c6e7f88-a02a-463d-8e35-9125e36c468b",
+    "message": "Получена сущность типа 'group'",
+    "source": "entity_service",
+    "details": {}
+  },
+  {
+    "timestamp": "2026-11-28T22:02:46",
+    "category": "CRUD",
+    "operation": "DELETE",
+    "status": "SUCCESS",
+    "entity_type": "group",
+    "entity_code": "3c6e7f88-a02a-463d-8e35-9125e36c468b",
+    "message": "Удалена сущность типа 'group'",
+    "source": "entity_service",
+    "details": {
+      "name": "Группа аудита (изменена)"
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:02:46",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "SUCCESS",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "DELETE /api/entities/group/3c6e7f88-a02a-463d-8e35-9125e36c468b -> 200",
+    "source": "web",
+    "details": {
+      "method": "DELETE",
+      "path": "/api/entities/group/3c6e7f88-a02a-463d-8e35-9125e36c468b",
+      "endpoint": "delete_entity",
+      "status_code": 200,
+      "duration_ms": 2.32,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:02:46",
+    "category": "CRUD",
+    "operation": "CREATE",
+    "status": "FAILURE",
+    "entity_type": "group",
+    "entity_code": "",
+    "message": "Ошибка создания сущности: Error: Inccorect argument! name\nname must not be empty",
+    "source": "entity_service",
+    "details": {
+      "payload": {
+        "name": ""
+      }
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:02:46",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "FAILURE",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "POST /api/entities/group -> 400",
+    "source": "web",
+    "details": {
+      "method": "POST",
+      "path": "/api/entities/group",
+      "endpoint": "create_entity",
+      "status_code": 400,
+      "duration_ms": 1.22,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:02:46",
+    "category": "WAREHOUSE",
+    "operation": "CREATE",
+    "status": "SUCCESS",
+    "entity_type": "storage",
+    "entity_code": "3bca5832-a429-4417-ad90-42983bb47132",
+    "message": "Создана сущность типа 'storage'",
+    "source": "entity_service",
+    "details": {
+      "name": "Склад аудита"
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:02:46",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "SUCCESS",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "POST /api/entities/storage -> 200",
+    "source": "web",
+    "details": {
+      "method": "POST",
+      "path": "/api/entities/storage",
+      "endpoint": "create_entity",
+      "status_code": 200,
+      "duration_ms": 1.68,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:02:46",
+    "category": "WAREHOUSE",
+    "operation": "READ",
+    "status": "SUCCESS",
+    "entity_type": "storage",
+    "entity_code": "3bca5832-a429-4417-ad90-42983bb47132",
+    "message": "Получена сущность типа 'storage'",
+    "source": "entity_service",
+    "details": {}
+  },
+  {
+    "timestamp": "2026-11-28T22:02:46",
+    "category": "WAREHOUSE",
+    "operation": "UPDATE",
+    "status": "SUCCESS",
+    "entity_type": "storage",
+    "entity_code": "3bca5832-a429-4417-ad90-42983bb47132",
+    "message": "Изменена сущность типа 'storage'",
+    "source": "entity_service",
+    "details": {
+      "name": "Склад аудита",
+      "changes": {
+        "address": {
+          "before": "ул. Аудитная, 1",
+          "after": "ул. Аудитная, 2"
+        }
+      }
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:02:46",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "SUCCESS",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "PATCH /api/entities/storage/3bca5832-a429-4417-ad90-42983bb47132 -> 200",
+    "source": "web",
+    "details": {
+      "method": "PATCH",
+      "path": "/api/entities/storage/3bca5832-a429-4417-ad90-42983bb47132",
+      "endpoint": "update_entity",
+      "status_code": 200,
+      "duration_ms": 2.79,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:02:46",
+    "category": "WAREHOUSE",
+    "operation": "READ",
+    "status": "SUCCESS",
+    "entity_type": "storage",
+    "entity_code": "3bca5832-a429-4417-ad90-42983bb47132",
+    "message": "Получена сущность типа 'storage'",
+    "source": "entity_service",
+    "details": {}
+  },
+  {
+    "timestamp": "2026-11-28T22:02:46",
+    "category": "WAREHOUSE",
+    "operation": "DELETE",
+    "status": "SUCCESS",
+    "entity_type": "storage",
+    "entity_code": "3bca5832-a429-4417-ad90-42983bb47132",
+    "message": "Удалена сущность типа 'storage'",
+    "source": "entity_service",
+    "details": {
+      "name": "Склад аудита"
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:02:46",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "SUCCESS",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "DELETE /api/entities/storage/3bca5832-a429-4417-ad90-42983bb47132 -> 200",
+    "source": "web",
+    "details": {
+      "method": "DELETE",
+      "path": "/api/entities/storage/3bca5832-a429-4417-ad90-42983bb47132",
+      "endpoint": "delete_entity",
+      "status_code": 200,
+      "duration_ms": 2.72,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:02:46",
+    "category": "WAREHOUSE",
+    "operation": "REPORT",
+    "status": "SUCCESS",
+    "entity_type": "nomenclature",
+    "entity_code": "",
+    "message": "Сформирована оборотно-сальдовая ведомость",
+    "source": "entity_service",
+    "details": {
+      "count": 1,
+      "start_date": null,
+      "field_name": "name",
+      "value": "Мука"
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:02:46",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "SUCCESS",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "POST /api/osv -> 200",
+    "source": "web",
+    "details": {
+      "method": "POST",
+      "path": "/api/osv",
+      "endpoint": "build_osv",
+      "status_code": 200,
+      "duration_ms": 3.0,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:02:46",
+    "category": "SETTINGS",
+    "operation": "UPDATE",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Изменены параметры настроек",
+    "source": "settings_manager",
+    "details": {
+      "before": {
+        "$type": "settings_model",
+        "account_name": "Петрова Анна Сергеевна",
+        "boss_name": "Иванов Иван Иванович",
+        "id": "97d02b06-8edf-4f4a-a977-180c46f7ad22",
+        "is_first_start": true,
+        "name": "",
+        "organization": {
+          "$type": "organization_model",
+          "name": "Ромашка",
+          "inn": "4444444444",
+          "bik": "012345678",
+          "account": "12345678901234567890",
+          "ownership_form": "ООО",
+          "id": "d6cbe158-9d5d-455b-8e41-9accf013067a"
+        },
+        "response_format": "TXT"
+      },
+      "after": {
+        "$type": "settings_model",
+        "account_name": "Петрова Анна Сергеевна",
+        "boss_name": "Иванов Иван Иванович",
+        "id": "97d02b06-8edf-4f4a-a977-180c46f7ad22",
+        "is_first_start": true,
+        "name": "",
+        "organization": {
+          "$type": "organization_model",
+          "name": "Ромашка",
+          "inn": "4444444444",
+          "bik": "012345678",
+          "account": "12345678901234567890",
+          "ownership_form": "ООО",
+          "id": "d6cbe158-9d5d-455b-8e41-9accf013067a"
+        },
+        "response_format": "CSV"
+      }
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:02:46",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "SUCCESS",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "PATCH /api/settings -> 200",
+    "source": "web",
+    "details": {
+      "method": "PATCH",
+      "path": "/api/settings",
+      "endpoint": "update_settings",
+      "status_code": 200,
+      "duration_ms": 1.85,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:02:46",
+    "category": "SETTINGS",
+    "operation": "UPDATE",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Изменены параметры настроек",
+    "source": "settings_manager",
+    "details": {
+      "before": {
+        "$type": "settings_model",
+        "account_name": "Петрова Анна Сергеевна",
+        "boss_name": "Иванов Иван Иванович",
+        "id": "97d02b06-8edf-4f4a-a977-180c46f7ad22",
+        "is_first_start": true,
+        "name": "",
+        "organization": {
+          "$type": "organization_model",
+          "name": "Ромашка",
+          "inn": "4444444444",
+          "bik": "012345678",
+          "account": "12345678901234567890",
+          "ownership_form": "ООО",
+          "id": "d6cbe158-9d5d-455b-8e41-9accf013067a"
+        },
+        "response_format": "CSV"
+      },
+      "after": {
+        "$type": "settings_model",
+        "account_name": "Петрова Анна Сергеевна",
+        "boss_name": "Иванов Иван Иванович",
+        "id": "97d02b06-8edf-4f4a-a977-180c46f7ad22",
+        "is_first_start": true,
+        "name": "",
+        "organization": {
+          "$type": "organization_model",
+          "name": "Ромашка",
+          "inn": "4444444444",
+          "bik": "012345678",
+          "account": "12345678901234567890",
+          "ownership_form": "ООО",
+          "id": "d6cbe158-9d5d-455b-8e41-9accf013067a"
+        },
+        "response_format": "TXT"
+      }
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:02:46",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "SUCCESS",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "PATCH /api/settings -> 200",
+    "source": "web",
+    "details": {
+      "method": "PATCH",
+      "path": "/api/settings",
+      "endpoint": "update_settings",
+      "status_code": 200,
+      "duration_ms": 2.55,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:02:46",
+    "category": "SETTINGS",
+    "operation": "UPDATE",
+    "status": "FAILURE",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Ошибка изменения настроек: Недопустимый формат ответа: 'JSON'. Допустимые значения: CSV, Markdown, XML, TXT, HTML",
+    "source": "settings_manager",
+    "details": {
+      "payload": {
+        "response_format": "JSON"
+      }
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:02:46",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "FAILURE",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "PATCH /api/settings -> 400",
+    "source": "web",
+    "details": {
+      "method": "PATCH",
+      "path": "/api/settings",
+      "endpoint": "update_settings",
+      "status_code": 400,
+      "duration_ms": 1.66,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:02:46",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "SUCCESS",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "GET /api/logs -> 200",
+    "source": "web",
+    "details": {
+      "method": "GET",
+      "path": "/api/logs",
+      "endpoint": "get_audit_logs",
+      "status_code": 200,
+      "duration_ms": 0.16,
+      "remote_addr": "127.0.0.1",
+      "query": "limit=10"
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла settings.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "settings.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла settings.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "settings.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
     "category": "WEB",
     "operation": "CALL",
     "status": "SUCCESS",
@@ -47,20 +628,58 @@
     }
   },
   {
-    "timestamp": "2026-11-28T14:12:37",
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "SUCCESS",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "GET /api/get_formats -> 200",
+    "source": "web",
+    "details": {
+      "method": "GET",
+      "path": "/api/get_formats",
+      "endpoint": "get_report_formats",
+      "status_code": 200,
+      "duration_ms": 0.08,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "SUCCESS",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "GET /api/formats/details -> 200",
+    "source": "web",
+    "details": {
+      "method": "GET",
+      "path": "/api/formats/details",
+      "endpoint": "get_report_formats_details",
+      "status_code": 200,
+      "duration_ms": 0.12,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
     "category": "CRUD",
     "operation": "CREATE",
     "status": "SUCCESS",
     "entity_type": "group",
-    "entity_code": "a42a8344-c2c1-434a-84ad-40fdd01a55b8",
+    "entity_code": "16fdbc1b-cdcd-4523-a4b4-69854c5f06a3",
     "message": "Создана сущность типа 'group'",
     "source": "entity_service",
     "details": {
-      "name": "Группа аудита"
+      "name": "Тестовая группа"
     }
   },
   {
-    "timestamp": "2026-11-28T14:12:37",
+    "timestamp": "2026-11-28T22:14:16",
     "category": "WEB",
     "operation": "CALL",
     "status": "SUCCESS",
@@ -73,135 +692,2268 @@
       "path": "/api/entities/group",
       "endpoint": "create_entity",
       "status_code": 200,
-      "duration_ms": 2.61,
+      "duration_ms": 3.99,
       "remote_addr": "127.0.0.1",
       "query": ""
     }
   },
   {
-    "timestamp": "2026-11-28T14:12:37",
+    "timestamp": "2026-11-28T22:14:16",
     "category": "CRUD",
     "operation": "READ",
     "status": "SUCCESS",
     "entity_type": "group",
-    "entity_code": "a42a8344-c2c1-434a-84ad-40fdd01a55b8",
+    "entity_code": "16fdbc1b-cdcd-4523-a4b4-69854c5f06a3",
     "message": "Получена сущность типа 'group'",
     "source": "entity_service",
     "details": {}
   },
   {
-    "timestamp": "2026-11-28T14:12:37",
+    "timestamp": "2026-11-28T22:14:16",
     "category": "WEB",
     "operation": "CALL",
     "status": "SUCCESS",
     "entity_type": "",
     "entity_code": "",
-    "message": "GET /api/entities/group/a42a8344-c2c1-434a-84ad-40fdd01a55b8 -> 200",
+    "message": "GET /api/entities/group/16fdbc1b-cdcd-4523-a4b4-69854c5f06a3 -> 200",
     "source": "web",
     "details": {
       "method": "GET",
-      "path": "/api/entities/group/a42a8344-c2c1-434a-84ad-40fdd01a55b8",
+      "path": "/api/entities/group/16fdbc1b-cdcd-4523-a4b4-69854c5f06a3",
       "endpoint": "get_entity",
       "status_code": 200,
-      "duration_ms": 1.19,
+      "duration_ms": 1.83,
       "remote_addr": "127.0.0.1",
       "query": ""
     }
   },
   {
-    "timestamp": "2026-11-28T14:12:37",
+    "timestamp": "2026-11-28T22:14:16",
     "category": "CRUD",
     "operation": "READ",
     "status": "SUCCESS",
     "entity_type": "group",
-    "entity_code": "a42a8344-c2c1-434a-84ad-40fdd01a55b8",
+    "entity_code": "16fdbc1b-cdcd-4523-a4b4-69854c5f06a3",
     "message": "Получена сущность типа 'group'",
     "source": "entity_service",
     "details": {}
   },
   {
-    "timestamp": "2026-11-28T14:12:37",
+    "timestamp": "2026-11-28T22:14:16",
     "category": "CRUD",
     "operation": "UPDATE",
     "status": "SUCCESS",
     "entity_type": "group",
-    "entity_code": "a42a8344-c2c1-434a-84ad-40fdd01a55b8",
+    "entity_code": "16fdbc1b-cdcd-4523-a4b4-69854c5f06a3",
     "message": "Изменена сущность типа 'group'",
     "source": "entity_service",
     "details": {
-      "name": "Группа аудита (изменена)",
+      "name": "Измененная группа",
       "changes": {
         "name": {
-          "before": "Группа аудита",
-          "after": "Группа аудита (изменена)"
+          "before": "Тестовая группа",
+          "after": "Измененная группа"
         }
       }
     }
   },
   {
-    "timestamp": "2026-11-28T14:12:37",
+    "timestamp": "2026-11-28T22:14:16",
     "category": "WEB",
     "operation": "CALL",
     "status": "SUCCESS",
     "entity_type": "",
     "entity_code": "",
-    "message": "PUT /api/entities/group/a42a8344-c2c1-434a-84ad-40fdd01a55b8 -> 200",
+    "message": "PUT /api/entities/group/16fdbc1b-cdcd-4523-a4b4-69854c5f06a3 -> 200",
     "source": "web",
     "details": {
       "method": "PUT",
-      "path": "/api/entities/group/a42a8344-c2c1-434a-84ad-40fdd01a55b8",
+      "path": "/api/entities/group/16fdbc1b-cdcd-4523-a4b4-69854c5f06a3",
       "endpoint": "update_entity",
       "status_code": 200,
-      "duration_ms": 2.8,
+      "duration_ms": 4.78,
       "remote_addr": "127.0.0.1",
       "query": ""
     }
   },
   {
-    "timestamp": "2026-11-28T14:12:37",
+    "timestamp": "2026-11-28T22:14:16",
     "category": "CRUD",
     "operation": "READ",
     "status": "SUCCESS",
     "entity_type": "group",
-    "entity_code": "a42a8344-c2c1-434a-84ad-40fdd01a55b8",
+    "entity_code": "",
+    "message": "Получен список сущностей типа 'group'",
+    "source": "entity_service",
+    "details": {
+      "count": 8
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "SUCCESS",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "GET /api/entities/group -> 200",
+    "source": "web",
+    "details": {
+      "method": "GET",
+      "path": "/api/entities/group",
+      "endpoint": "list_entities",
+      "status_code": 200,
+      "duration_ms": 2.46,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "CRUD",
+    "operation": "READ",
+    "status": "SUCCESS",
+    "entity_type": "group",
+    "entity_code": "16fdbc1b-cdcd-4523-a4b4-69854c5f06a3",
     "message": "Получена сущность типа 'group'",
     "source": "entity_service",
     "details": {}
   },
   {
-    "timestamp": "2026-11-28T14:12:37",
+    "timestamp": "2026-11-28T22:14:16",
     "category": "CRUD",
     "operation": "DELETE",
     "status": "SUCCESS",
     "entity_type": "group",
-    "entity_code": "a42a8344-c2c1-434a-84ad-40fdd01a55b8",
+    "entity_code": "16fdbc1b-cdcd-4523-a4b4-69854c5f06a3",
     "message": "Удалена сущность типа 'group'",
     "source": "entity_service",
     "details": {
-      "name": "Группа аудита (изменена)"
+      "name": "Измененная группа"
     }
   },
   {
-    "timestamp": "2026-11-28T14:12:37",
+    "timestamp": "2026-11-28T22:14:16",
     "category": "WEB",
     "operation": "CALL",
     "status": "SUCCESS",
     "entity_type": "",
     "entity_code": "",
-    "message": "DELETE /api/entities/group/a42a8344-c2c1-434a-84ad-40fdd01a55b8 -> 200",
+    "message": "DELETE /api/entities/group/16fdbc1b-cdcd-4523-a4b4-69854c5f06a3 -> 200",
     "source": "web",
     "details": {
       "method": "DELETE",
-      "path": "/api/entities/group/a42a8344-c2c1-434a-84ad-40fdd01a55b8",
+      "path": "/api/entities/group/16fdbc1b-cdcd-4523-a4b4-69854c5f06a3",
       "endpoint": "delete_entity",
       "status_code": 200,
-      "duration_ms": 5.43,
+      "duration_ms": 4.82,
       "remote_addr": "127.0.0.1",
       "query": ""
     }
   },
   {
-    "timestamp": "2026-11-28T14:12:37",
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "CRUD",
+    "operation": "READ",
+    "status": "FAILURE",
+    "entity_type": "group",
+    "entity_code": "16fdbc1b-cdcd-4523-a4b4-69854c5f06a3",
+    "message": "Сущность типа 'group' с кодом '16fdbc1b-cdcd-4523-a4b4-69854c5f06a3' не найдена",
+    "source": "entity_service",
+    "details": {}
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "FAILURE",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "GET /api/entities/group/16fdbc1b-cdcd-4523-a4b4-69854c5f06a3 -> 404",
+    "source": "web",
+    "details": {
+      "method": "GET",
+      "path": "/api/entities/group/16fdbc1b-cdcd-4523-a4b4-69854c5f06a3",
+      "endpoint": "get_entity",
+      "status_code": 404,
+      "duration_ms": 3.53,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "WAREHOUSE",
+    "operation": "CREATE",
+    "status": "SUCCESS",
+    "entity_type": "storage",
+    "entity_code": "7166e70d-33a0-4cb7-83c0-3cc647479e44",
+    "message": "Создана сущность типа 'storage'",
+    "source": "entity_service",
+    "details": {
+      "name": "Тестовый склад"
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "SUCCESS",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "POST /api/entities/storage -> 200",
+    "source": "web",
+    "details": {
+      "method": "POST",
+      "path": "/api/entities/storage",
+      "endpoint": "create_entity",
+      "status_code": 200,
+      "duration_ms": 3.17,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "WAREHOUSE",
+    "operation": "READ",
+    "status": "SUCCESS",
+    "entity_type": "storage",
+    "entity_code": "7166e70d-33a0-4cb7-83c0-3cc647479e44",
+    "message": "Получена сущность типа 'storage'",
+    "source": "entity_service",
+    "details": {}
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "WAREHOUSE",
+    "operation": "UPDATE",
+    "status": "SUCCESS",
+    "entity_type": "storage",
+    "entity_code": "7166e70d-33a0-4cb7-83c0-3cc647479e44",
+    "message": "Изменена сущность типа 'storage'",
+    "source": "entity_service",
+    "details": {
+      "name": "Тестовый склад",
+      "changes": {
+        "address": {
+          "before": "ул. Тестовая, 1",
+          "after": "ул. Новая, 2"
+        }
+      }
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "SUCCESS",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "PATCH /api/entities/storage/7166e70d-33a0-4cb7-83c0-3cc647479e44 -> 200",
+    "source": "web",
+    "details": {
+      "method": "PATCH",
+      "path": "/api/entities/storage/7166e70d-33a0-4cb7-83c0-3cc647479e44",
+      "endpoint": "update_entity",
+      "status_code": 200,
+      "duration_ms": 4.31,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "WAREHOUSE",
+    "operation": "READ",
+    "status": "SUCCESS",
+    "entity_type": "storage",
+    "entity_code": "7166e70d-33a0-4cb7-83c0-3cc647479e44",
+    "message": "Получена сущность типа 'storage'",
+    "source": "entity_service",
+    "details": {}
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "WAREHOUSE",
+    "operation": "DELETE",
+    "status": "SUCCESS",
+    "entity_type": "storage",
+    "entity_code": "7166e70d-33a0-4cb7-83c0-3cc647479e44",
+    "message": "Удалена сущность типа 'storage'",
+    "source": "entity_service",
+    "details": {
+      "name": "Тестовый склад"
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "SUCCESS",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "DELETE /api/entities/storage/7166e70d-33a0-4cb7-83c0-3cc647479e44 -> 200",
+    "source": "web",
+    "details": {
+      "method": "DELETE",
+      "path": "/api/entities/storage/7166e70d-33a0-4cb7-83c0-3cc647479e44",
+      "endpoint": "delete_entity",
+      "status_code": 200,
+      "duration_ms": 3.13,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "CRUD",
+    "operation": "CREATE",
+    "status": "SUCCESS",
+    "entity_type": "nomenclature",
+    "entity_code": "7b0889f4-85f3-4065-a9d1-baa21fd2e496",
+    "message": "Создана сущность типа 'nomenclature'",
+    "source": "entity_service",
+    "details": {
+      "name": "Тестовая номенклатура"
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "SUCCESS",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "POST /api/entities/nomenclature -> 200",
+    "source": "web",
+    "details": {
+      "method": "POST",
+      "path": "/api/entities/nomenclature",
+      "endpoint": "create_entity",
+      "status_code": 200,
+      "duration_ms": 5.1,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "CRUD",
+    "operation": "READ",
+    "status": "SUCCESS",
+    "entity_type": "nomenclature",
+    "entity_code": "7b0889f4-85f3-4065-a9d1-baa21fd2e496",
+    "message": "Получена сущность типа 'nomenclature'",
+    "source": "entity_service",
+    "details": {}
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "CRUD",
+    "operation": "UPDATE",
+    "status": "SUCCESS",
+    "entity_type": "nomenclature",
+    "entity_code": "7b0889f4-85f3-4065-a9d1-baa21fd2e496",
+    "message": "Изменена сущность типа 'nomenclature'",
+    "source": "entity_service",
+    "details": {
+      "name": "Тестовая номенклатура",
+      "changes": {
+        "full_name": {
+          "before": "Тестовая номенклатура полное наименование",
+          "after": "Новое полное наименование"
+        }
+      }
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "SUCCESS",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "PUT /api/entities/nomenclature/7b0889f4-85f3-4065-a9d1-baa21fd2e496 -> 200",
+    "source": "web",
+    "details": {
+      "method": "PUT",
+      "path": "/api/entities/nomenclature/7b0889f4-85f3-4065-a9d1-baa21fd2e496",
+      "endpoint": "update_entity",
+      "status_code": 200,
+      "duration_ms": 5.56,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "CRUD",
+    "operation": "READ",
+    "status": "SUCCESS",
+    "entity_type": "nomenclature",
+    "entity_code": "7b0889f4-85f3-4065-a9d1-baa21fd2e496",
+    "message": "Получена сущность типа 'nomenclature'",
+    "source": "entity_service",
+    "details": {}
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "CRUD",
+    "operation": "DELETE",
+    "status": "SUCCESS",
+    "entity_type": "nomenclature",
+    "entity_code": "7b0889f4-85f3-4065-a9d1-baa21fd2e496",
+    "message": "Удалена сущность типа 'nomenclature'",
+    "source": "entity_service",
+    "details": {
+      "name": "Тестовая номенклатура"
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "SUCCESS",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "DELETE /api/entities/nomenclature/7b0889f4-85f3-4065-a9d1-baa21fd2e496 -> 200",
+    "source": "web",
+    "details": {
+      "method": "DELETE",
+      "path": "/api/entities/nomenclature/7b0889f4-85f3-4065-a9d1-baa21fd2e496",
+      "endpoint": "delete_entity",
+      "status_code": 200,
+      "duration_ms": 4.66,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "CRUD",
+    "operation": "CREATE",
+    "status": "SUCCESS",
+    "entity_type": "recipe",
+    "entity_code": "41925380-711e-44b3-b825-4d11a5492fb1",
+    "message": "Создана сущность типа 'recipe'",
+    "source": "entity_service",
+    "details": {
+      "name": "Тестовый рецепт"
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "SUCCESS",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "POST /api/entities/recipe -> 200",
+    "source": "web",
+    "details": {
+      "method": "POST",
+      "path": "/api/entities/recipe",
+      "endpoint": "create_entity",
+      "status_code": 200,
+      "duration_ms": 2.95,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "CRUD",
+    "operation": "READ",
+    "status": "SUCCESS",
+    "entity_type": "recipe",
+    "entity_code": "41925380-711e-44b3-b825-4d11a5492fb1",
+    "message": "Получена сущность типа 'recipe'",
+    "source": "entity_service",
+    "details": {}
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "CRUD",
+    "operation": "UPDATE",
+    "status": "SUCCESS",
+    "entity_type": "recipe",
+    "entity_code": "41925380-711e-44b3-b825-4d11a5492fb1",
+    "message": "Изменена сущность типа 'recipe'",
+    "source": "entity_service",
+    "details": {
+      "name": "Тестовый рецепт",
+      "changes": {
+        "description": {
+          "before": "Описание тестового рецепта",
+          "after": "Новое описание"
+        }
+      }
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "SUCCESS",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "PUT /api/entities/recipe/41925380-711e-44b3-b825-4d11a5492fb1 -> 200",
+    "source": "web",
+    "details": {
+      "method": "PUT",
+      "path": "/api/entities/recipe/41925380-711e-44b3-b825-4d11a5492fb1",
+      "endpoint": "update_entity",
+      "status_code": 200,
+      "duration_ms": 5.38,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "CRUD",
+    "operation": "READ",
+    "status": "SUCCESS",
+    "entity_type": "recipe",
+    "entity_code": "41925380-711e-44b3-b825-4d11a5492fb1",
+    "message": "Получена сущность типа 'recipe'",
+    "source": "entity_service",
+    "details": {}
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "CRUD",
+    "operation": "DELETE",
+    "status": "SUCCESS",
+    "entity_type": "recipe",
+    "entity_code": "41925380-711e-44b3-b825-4d11a5492fb1",
+    "message": "Удалена сущность типа 'recipe'",
+    "source": "entity_service",
+    "details": {
+      "name": "Тестовый рецепт"
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "SUCCESS",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "DELETE /api/entities/recipe/41925380-711e-44b3-b825-4d11a5492fb1 -> 200",
+    "source": "web",
+    "details": {
+      "method": "DELETE",
+      "path": "/api/entities/recipe/41925380-711e-44b3-b825-4d11a5492fb1",
+      "endpoint": "delete_entity",
+      "status_code": 200,
+      "duration_ms": 5.66,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "CRUD",
+    "operation": "CREATE",
+    "status": "SUCCESS",
+    "entity_type": "group",
+    "entity_code": "8a0f32bc-4605-4107-8601-d198fe13f496",
+    "message": "Создана сущность типа 'group'",
+    "source": "entity_service",
+    "details": {
+      "name": "Связанная группа"
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "SUCCESS",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "POST /api/entities/group -> 200",
+    "source": "web",
+    "details": {
+      "method": "POST",
+      "path": "/api/entities/group",
+      "endpoint": "create_entity",
+      "status_code": 200,
+      "duration_ms": 2.11,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "CRUD",
+    "operation": "CREATE",
+    "status": "SUCCESS",
+    "entity_type": "range",
+    "entity_code": "de6d331d-62ef-4640-ad02-97f563adab50",
+    "message": "Создана сущность типа 'range'",
+    "source": "entity_service",
+    "details": {
+      "name": "связанная единица"
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "SUCCESS",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "POST /api/entities/range -> 200",
+    "source": "web",
+    "details": {
+      "method": "POST",
+      "path": "/api/entities/range",
+      "endpoint": "create_entity",
+      "status_code": 200,
+      "duration_ms": 2.81,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "CRUD",
+    "operation": "CREATE",
+    "status": "SUCCESS",
+    "entity_type": "nomenclature",
+    "entity_code": "f2c255be-49a5-459b-896c-be296f3c491f",
+    "message": "Создана сущность типа 'nomenclature'",
+    "source": "entity_service",
+    "details": {
+      "name": "Связанная номенклатура"
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "SUCCESS",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "POST /api/entities/nomenclature -> 200",
+    "source": "web",
+    "details": {
+      "method": "POST",
+      "path": "/api/entities/nomenclature",
+      "endpoint": "create_entity",
+      "status_code": 200,
+      "duration_ms": 2.58,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "CRUD",
+    "operation": "READ",
+    "status": "SUCCESS",
+    "entity_type": "group",
+    "entity_code": "8a0f32bc-4605-4107-8601-d198fe13f496",
+    "message": "Получена сущность типа 'group'",
+    "source": "entity_service",
+    "details": {}
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "CRUD",
+    "operation": "DELETE",
+    "status": "FAILURE",
+    "entity_type": "group",
+    "entity_code": "8a0f32bc-4605-4107-8601-d198fe13f496",
+    "message": "Ошибка удаления сущности: Запрещено удалять сущность, так как она связана с другими доменными сущностями: nomenclature:Связанная номенклатура (f2c255be-49a5-459b-896c-be296f3c491f)",
+    "source": "entity_service",
+    "details": {}
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "FAILURE",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "DELETE /api/entities/group/8a0f32bc-4605-4107-8601-d198fe13f496 -> 400",
+    "source": "web",
+    "details": {
+      "method": "DELETE",
+      "path": "/api/entities/group/8a0f32bc-4605-4107-8601-d198fe13f496",
+      "endpoint": "delete_entity",
+      "status_code": 400,
+      "duration_ms": 3.81,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "CRUD",
+    "operation": "READ",
+    "status": "SUCCESS",
+    "entity_type": "range",
+    "entity_code": "de6d331d-62ef-4640-ad02-97f563adab50",
+    "message": "Получена сущность типа 'range'",
+    "source": "entity_service",
+    "details": {}
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "CRUD",
+    "operation": "DELETE",
+    "status": "FAILURE",
+    "entity_type": "range",
+    "entity_code": "de6d331d-62ef-4640-ad02-97f563adab50",
+    "message": "Ошибка удаления сущности: Запрещено удалять сущность, так как она связана с другими доменными сущностями: nomenclature:Связанная номенклатура (f2c255be-49a5-459b-896c-be296f3c491f)",
+    "source": "entity_service",
+    "details": {}
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "FAILURE",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "DELETE /api/entities/range/de6d331d-62ef-4640-ad02-97f563adab50 -> 400",
+    "source": "web",
+    "details": {
+      "method": "DELETE",
+      "path": "/api/entities/range/de6d331d-62ef-4640-ad02-97f563adab50",
+      "endpoint": "delete_entity",
+      "status_code": 400,
+      "duration_ms": 3.92,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "CRUD",
+    "operation": "READ",
+    "status": "SUCCESS",
+    "entity_type": "nomenclature",
+    "entity_code": "f2c255be-49a5-459b-896c-be296f3c491f",
+    "message": "Получена сущность типа 'nomenclature'",
+    "source": "entity_service",
+    "details": {}
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "CRUD",
+    "operation": "DELETE",
+    "status": "SUCCESS",
+    "entity_type": "nomenclature",
+    "entity_code": "f2c255be-49a5-459b-896c-be296f3c491f",
+    "message": "Удалена сущность типа 'nomenclature'",
+    "source": "entity_service",
+    "details": {
+      "name": "Связанная номенклатура"
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "SUCCESS",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "DELETE /api/entities/nomenclature/f2c255be-49a5-459b-896c-be296f3c491f -> 200",
+    "source": "web",
+    "details": {
+      "method": "DELETE",
+      "path": "/api/entities/nomenclature/f2c255be-49a5-459b-896c-be296f3c491f",
+      "endpoint": "delete_entity",
+      "status_code": 200,
+      "duration_ms": 4.38,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "CRUD",
+    "operation": "READ",
+    "status": "SUCCESS",
+    "entity_type": "group",
+    "entity_code": "8a0f32bc-4605-4107-8601-d198fe13f496",
+    "message": "Получена сущность типа 'group'",
+    "source": "entity_service",
+    "details": {}
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "CRUD",
+    "operation": "DELETE",
+    "status": "SUCCESS",
+    "entity_type": "group",
+    "entity_code": "8a0f32bc-4605-4107-8601-d198fe13f496",
+    "message": "Удалена сущность типа 'group'",
+    "source": "entity_service",
+    "details": {
+      "name": "Связанная группа"
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "SUCCESS",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "DELETE /api/entities/group/8a0f32bc-4605-4107-8601-d198fe13f496 -> 200",
+    "source": "web",
+    "details": {
+      "method": "DELETE",
+      "path": "/api/entities/group/8a0f32bc-4605-4107-8601-d198fe13f496",
+      "endpoint": "delete_entity",
+      "status_code": 200,
+      "duration_ms": 5.56,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "CRUD",
+    "operation": "READ",
+    "status": "SUCCESS",
+    "entity_type": "range",
+    "entity_code": "de6d331d-62ef-4640-ad02-97f563adab50",
+    "message": "Получена сущность типа 'range'",
+    "source": "entity_service",
+    "details": {}
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "CRUD",
+    "operation": "DELETE",
+    "status": "SUCCESS",
+    "entity_type": "range",
+    "entity_code": "de6d331d-62ef-4640-ad02-97f563adab50",
+    "message": "Удалена сущность типа 'range'",
+    "source": "entity_service",
+    "details": {
+      "name": "связанная единица"
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "SUCCESS",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "DELETE /api/entities/range/de6d331d-62ef-4640-ad02-97f563adab50 -> 200",
+    "source": "web",
+    "details": {
+      "method": "DELETE",
+      "path": "/api/entities/range/de6d331d-62ef-4640-ad02-97f563adab50",
+      "endpoint": "delete_entity",
+      "status_code": 200,
+      "duration_ms": 4.74,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "CRUD",
+    "operation": "CREATE",
+    "status": "SUCCESS",
+    "entity_type": "group",
+    "entity_code": "f3db4b05-16af-4737-9eef-5cca7ad1b2d7",
+    "message": "Создана сущность типа 'group'",
+    "source": "entity_service",
+    "details": {
+      "name": "Группа с кодом"
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "SUCCESS",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "POST /api/entities/group -> 200",
+    "source": "web",
+    "details": {
+      "method": "POST",
+      "path": "/api/entities/group",
+      "endpoint": "create_entity",
+      "status_code": 200,
+      "duration_ms": 2.58,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "CRUD",
+    "operation": "CREATE",
+    "status": "SUCCESS",
+    "entity_type": "range",
+    "entity_code": "d3c10507-14fc-43b2-8a3e-7855d14dbbc8",
+    "message": "Создана сущность типа 'range'",
+    "source": "entity_service",
+    "details": {
+      "name": "единица с кодом"
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "SUCCESS",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "POST /api/entities/range -> 200",
+    "source": "web",
+    "details": {
+      "method": "POST",
+      "path": "/api/entities/range",
+      "endpoint": "create_entity",
+      "status_code": 200,
+      "duration_ms": 2.52,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "CRUD",
+    "operation": "CREATE",
+    "status": "SUCCESS",
+    "entity_type": "nomenclature",
+    "entity_code": "50f33621-1c52-4f83-979e-c29bee58e771",
+    "message": "Создана сущность типа 'nomenclature'",
+    "source": "entity_service",
+    "details": {
+      "name": "Номенклатура с кодом"
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "SUCCESS",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "POST /api/entities/nomenclature -> 200",
+    "source": "web",
+    "details": {
+      "method": "POST",
+      "path": "/api/entities/nomenclature",
+      "endpoint": "create_entity",
+      "status_code": 200,
+      "duration_ms": 3.05,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "CRUD",
+    "operation": "READ",
+    "status": "SUCCESS",
+    "entity_type": "group",
+    "entity_code": "f3db4b05-16af-4737-9eef-5cca7ad1b2d7",
+    "message": "Получена сущность типа 'group'",
+    "source": "entity_service",
+    "details": {}
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "CRUD",
+    "operation": "UPDATE",
+    "status": "FAILURE",
+    "entity_type": "group",
+    "entity_code": "f3db4b05-16af-4737-9eef-5cca7ad1b2d7",
+    "message": "Ошибка изменения сущности: Запрещено изменять код сущности, так как она связана с другими доменными сущностями: nomenclature:Номенклатура с кодом (50f33621-1c52-4f83-979e-c29bee58e771)",
+    "source": "entity_service",
+    "details": {
+      "payload": {
+        "id": "b75513d9-8a23-4a95-a2e5-aac64fb04e11"
+      }
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "FAILURE",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "PUT /api/entities/group/f3db4b05-16af-4737-9eef-5cca7ad1b2d7 -> 400",
+    "source": "web",
+    "details": {
+      "method": "PUT",
+      "path": "/api/entities/group/f3db4b05-16af-4737-9eef-5cca7ad1b2d7",
+      "endpoint": "update_entity",
+      "status_code": 400,
+      "duration_ms": 10.5,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "CRUD",
+    "operation": "CREATE",
+    "status": "SUCCESS",
+    "entity_type": "group",
+    "entity_code": "d05931db-99f0-428a-8045-0448237efd24",
+    "message": "Создана сущность типа 'group'",
+    "source": "entity_service",
+    "details": {
+      "name": "Группа для переименования"
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "SUCCESS",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "POST /api/entities/group -> 200",
+    "source": "web",
+    "details": {
+      "method": "POST",
+      "path": "/api/entities/group",
+      "endpoint": "create_entity",
+      "status_code": 200,
+      "duration_ms": 3.76,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "CRUD",
+    "operation": "CREATE",
+    "status": "SUCCESS",
+    "entity_type": "nomenclature",
+    "entity_code": "fa342ebc-89cf-4193-92f7-b5c5e46a631b",
+    "message": "Создана сущность типа 'nomenclature'",
+    "source": "entity_service",
+    "details": {
+      "name": "Номенклатура для переименования"
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "SUCCESS",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "POST /api/entities/nomenclature -> 200",
+    "source": "web",
+    "details": {
+      "method": "POST",
+      "path": "/api/entities/nomenclature",
+      "endpoint": "create_entity",
+      "status_code": 200,
+      "duration_ms": 5.11,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "CRUD",
+    "operation": "READ",
+    "status": "SUCCESS",
+    "entity_type": "group",
+    "entity_code": "d05931db-99f0-428a-8045-0448237efd24",
+    "message": "Получена сущность типа 'group'",
+    "source": "entity_service",
+    "details": {}
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "CRUD",
+    "operation": "UPDATE",
+    "status": "SUCCESS",
+    "entity_type": "group",
+    "entity_code": "d05931db-99f0-428a-8045-0448237efd24",
+    "message": "Изменена сущность типа 'group'",
+    "source": "entity_service",
+    "details": {
+      "name": "Переименованная группа",
+      "changes": {
+        "name": {
+          "before": "Группа для переименования",
+          "after": "Переименованная группа"
+        }
+      }
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "SUCCESS",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "PATCH /api/entities/group/d05931db-99f0-428a-8045-0448237efd24 -> 200",
+    "source": "web",
+    "details": {
+      "method": "PATCH",
+      "path": "/api/entities/group/d05931db-99f0-428a-8045-0448237efd24",
+      "endpoint": "update_entity",
+      "status_code": 200,
+      "duration_ms": 11.36,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "CRUD",
+    "operation": "CREATE",
+    "status": "SUCCESS",
+    "entity_type": "range",
+    "entity_code": "64568f62-e2d2-4345-80c8-541a97a9b4e9",
+    "message": "Создана сущность типа 'range'",
+    "source": "entity_service",
+    "details": {
+      "name": "базовая единица"
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "SUCCESS",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "POST /api/entities/range -> 200",
+    "source": "web",
+    "details": {
+      "method": "POST",
+      "path": "/api/entities/range",
+      "endpoint": "create_entity",
+      "status_code": 200,
+      "duration_ms": 4.09,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "CRUD",
+    "operation": "CREATE",
+    "status": "SUCCESS",
+    "entity_type": "range",
+    "entity_code": "b0be8c9f-2c2f-4c31-b24c-99a488ba755d",
+    "message": "Создана сущность типа 'range'",
+    "source": "entity_service",
+    "details": {
+      "name": "производная единица"
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "SUCCESS",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "POST /api/entities/range -> 200",
+    "source": "web",
+    "details": {
+      "method": "POST",
+      "path": "/api/entities/range",
+      "endpoint": "create_entity",
+      "status_code": 200,
+      "duration_ms": 3.29,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "CRUD",
+    "operation": "READ",
+    "status": "SUCCESS",
+    "entity_type": "range",
+    "entity_code": "64568f62-e2d2-4345-80c8-541a97a9b4e9",
+    "message": "Получена сущность типа 'range'",
+    "source": "entity_service",
+    "details": {}
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "CRUD",
+    "operation": "DELETE",
+    "status": "FAILURE",
+    "entity_type": "range",
+    "entity_code": "64568f62-e2d2-4345-80c8-541a97a9b4e9",
+    "message": "Ошибка удаления сущности: Запрещено удалять сущность, так как она связана с другими доменными сущностями: range:производная единица (b0be8c9f-2c2f-4c31-b24c-99a488ba755d)",
+    "source": "entity_service",
+    "details": {}
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "FAILURE",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "DELETE /api/entities/range/64568f62-e2d2-4345-80c8-541a97a9b4e9 -> 400",
+    "source": "web",
+    "details": {
+      "method": "DELETE",
+      "path": "/api/entities/range/64568f62-e2d2-4345-80c8-541a97a9b4e9",
+      "endpoint": "delete_entity",
+      "status_code": 400,
+      "duration_ms": 12.99,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "CRUD",
+    "operation": "READ",
+    "status": "SUCCESS",
+    "entity_type": "range",
+    "entity_code": "b0be8c9f-2c2f-4c31-b24c-99a488ba755d",
+    "message": "Получена сущность типа 'range'",
+    "source": "entity_service",
+    "details": {}
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "CRUD",
+    "operation": "DELETE",
+    "status": "SUCCESS",
+    "entity_type": "range",
+    "entity_code": "b0be8c9f-2c2f-4c31-b24c-99a488ba755d",
+    "message": "Удалена сущность типа 'range'",
+    "source": "entity_service",
+    "details": {
+      "name": "производная единица"
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "SUCCESS",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "DELETE /api/entities/range/b0be8c9f-2c2f-4c31-b24c-99a488ba755d -> 200",
+    "source": "web",
+    "details": {
+      "method": "DELETE",
+      "path": "/api/entities/range/b0be8c9f-2c2f-4c31-b24c-99a488ba755d",
+      "endpoint": "delete_entity",
+      "status_code": 200,
+      "duration_ms": 8.66,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "CRUD",
+    "operation": "READ",
+    "status": "SUCCESS",
+    "entity_type": "range",
+    "entity_code": "64568f62-e2d2-4345-80c8-541a97a9b4e9",
+    "message": "Получена сущность типа 'range'",
+    "source": "entity_service",
+    "details": {}
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "CRUD",
+    "operation": "DELETE",
+    "status": "SUCCESS",
+    "entity_type": "range",
+    "entity_code": "64568f62-e2d2-4345-80c8-541a97a9b4e9",
+    "message": "Удалена сущность типа 'range'",
+    "source": "entity_service",
+    "details": {
+      "name": "базовая единица"
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "SUCCESS",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "DELETE /api/entities/range/64568f62-e2d2-4345-80c8-541a97a9b4e9 -> 200",
+    "source": "web",
+    "details": {
+      "method": "DELETE",
+      "path": "/api/entities/range/64568f62-e2d2-4345-80c8-541a97a9b4e9",
+      "endpoint": "delete_entity",
+      "status_code": 200,
+      "duration_ms": 6.05,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "CRUD",
+    "operation": "CREATE",
+    "status": "SUCCESS",
+    "entity_type": "range",
+    "entity_code": "7d9c2655-b53f-4bea-83bb-ae907f44f279",
+    "message": "Создана сущность типа 'range'",
+    "source": "entity_service",
+    "details": {
+      "name": "первая единица"
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "SUCCESS",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "POST /api/entities/range -> 200",
+    "source": "web",
+    "details": {
+      "method": "POST",
+      "path": "/api/entities/range",
+      "endpoint": "create_entity",
+      "status_code": 200,
+      "duration_ms": 2.65,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "CRUD",
+    "operation": "CREATE",
+    "status": "SUCCESS",
+    "entity_type": "range",
+    "entity_code": "b8411385-007d-4672-a428-082ab8d0c439",
+    "message": "Создана сущность типа 'range'",
+    "source": "entity_service",
+    "details": {
+      "name": "вторая единица"
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "SUCCESS",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "POST /api/entities/range -> 200",
+    "source": "web",
+    "details": {
+      "method": "POST",
+      "path": "/api/entities/range",
+      "endpoint": "create_entity",
+      "status_code": 200,
+      "duration_ms": 4.24,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "CRUD",
+    "operation": "READ",
+    "status": "SUCCESS",
+    "entity_type": "range",
+    "entity_code": "7d9c2655-b53f-4bea-83bb-ae907f44f279",
+    "message": "Получена сущность типа 'range'",
+    "source": "entity_service",
+    "details": {}
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "CRUD",
+    "operation": "UPDATE",
+    "status": "FAILURE",
+    "entity_type": "range",
+    "entity_code": "7d9c2655-b53f-4bea-83bb-ae907f44f279",
+    "message": "Ошибка изменения сущности: Error: Inccorect argument! base_range\nОбнаружена циклическая ссылка в поле 'base_range'",
+    "source": "entity_service",
+    "details": {
+      "payload": {
+        "base_range": "b8411385-007d-4672-a428-082ab8d0c439"
+      }
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "FAILURE",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "PUT /api/entities/range/7d9c2655-b53f-4bea-83bb-ae907f44f279 -> 400",
+    "source": "web",
+    "details": {
+      "method": "PUT",
+      "path": "/api/entities/range/7d9c2655-b53f-4bea-83bb-ae907f44f279",
+      "endpoint": "update_entity",
+      "status_code": 400,
+      "duration_ms": 6.78,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "FAILURE",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "GET /api/entities/ingredient -> 400",
+    "source": "web",
+    "details": {
+      "method": "GET",
+      "path": "/api/entities/ingredient",
+      "endpoint": "list_entities",
+      "status_code": 400,
+      "duration_ms": 0.08,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "CRUD",
+    "operation": "READ",
+    "status": "FAILURE",
+    "entity_type": "group",
+    "entity_code": "3a8ffd56-b746-4801-894e-2a191460ff1a",
+    "message": "Сущность типа 'group' с кодом '3a8ffd56-b746-4801-894e-2a191460ff1a' не найдена",
+    "source": "entity_service",
+    "details": {}
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "FAILURE",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "GET /api/entities/group/3a8ffd56-b746-4801-894e-2a191460ff1a -> 404",
+    "source": "web",
+    "details": {
+      "method": "GET",
+      "path": "/api/entities/group/3a8ffd56-b746-4801-894e-2a191460ff1a",
+      "endpoint": "get_entity",
+      "status_code": 404,
+      "duration_ms": 3.96,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "CRUD",
+    "operation": "READ",
+    "status": "FAILURE",
+    "entity_type": "group",
+    "entity_code": "3a8ffd56-b746-4801-894e-2a191460ff1a",
+    "message": "Сущность типа 'group' с кодом '3a8ffd56-b746-4801-894e-2a191460ff1a' не найдена",
+    "source": "entity_service",
+    "details": {}
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "FAILURE",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "PUT /api/entities/group/3a8ffd56-b746-4801-894e-2a191460ff1a -> 404",
+    "source": "web",
+    "details": {
+      "method": "PUT",
+      "path": "/api/entities/group/3a8ffd56-b746-4801-894e-2a191460ff1a",
+      "endpoint": "update_entity",
+      "status_code": 404,
+      "duration_ms": 2.83,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "CRUD",
+    "operation": "READ",
+    "status": "FAILURE",
+    "entity_type": "group",
+    "entity_code": "3a8ffd56-b746-4801-894e-2a191460ff1a",
+    "message": "Сущность типа 'group' с кодом '3a8ffd56-b746-4801-894e-2a191460ff1a' не найдена",
+    "source": "entity_service",
+    "details": {}
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "FAILURE",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "DELETE /api/entities/group/3a8ffd56-b746-4801-894e-2a191460ff1a -> 404",
+    "source": "web",
+    "details": {
+      "method": "DELETE",
+      "path": "/api/entities/group/3a8ffd56-b746-4801-894e-2a191460ff1a",
+      "endpoint": "delete_entity",
+      "status_code": 404,
+      "duration_ms": 3.18,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "CRUD",
+    "operation": "CREATE",
+    "status": "FAILURE",
+    "entity_type": "nomenclature",
+    "entity_code": "",
+    "message": "Ошибка создания сущности: Error: Inccorect argument! full_name\nfull_name must not be empty",
+    "source": "entity_service",
+    "details": {
+      "payload": {
+        "name": "Без полного имени",
+        "range": "00e3c8ff-0b0e-4884-9c5e-3a7eb726fa76"
+      }
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "FAILURE",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "POST /api/entities/nomenclature -> 400",
+    "source": "web",
+    "details": {
+      "method": "POST",
+      "path": "/api/entities/nomenclature",
+      "endpoint": "create_entity",
+      "status_code": 400,
+      "duration_ms": 6.25,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "CRUD",
+    "operation": "CREATE",
+    "status": "FAILURE",
+    "entity_type": "nomenclature",
+    "entity_code": "",
+    "message": "Ошибка создания сущности: Error: Inccorect argument! group\ngroup should be of the type nomenclature_group_model",
+    "source": "entity_service",
+    "details": {
+      "payload": {
+        "full_name": "Без группы полное",
+        "name": "Без группы",
+        "range": "00e3c8ff-0b0e-4884-9c5e-3a7eb726fa76"
+      }
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "FAILURE",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "POST /api/entities/nomenclature -> 400",
+    "source": "web",
+    "details": {
+      "method": "POST",
+      "path": "/api/entities/nomenclature",
+      "endpoint": "create_entity",
+      "status_code": 400,
+      "duration_ms": 3.85,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "CRUD",
+    "operation": "CREATE",
+    "status": "FAILURE",
+    "entity_type": "nomenclature",
+    "entity_code": "",
+    "message": "Ошибка создания сущности: Error: Inccorect argument! group\nСвязанная сущность типа 'group' не найдена",
+    "source": "entity_service",
+    "details": {
+      "payload": {
+        "full_name": "Несуществующая группа полное",
+        "group": "ea23a1bd-d33b-421c-861f-ea1415abc3fe",
+        "name": "Несуществующая группа",
+        "range": "00e3c8ff-0b0e-4884-9c5e-3a7eb726fa76"
+      }
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "FAILURE",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "POST /api/entities/nomenclature -> 400",
+    "source": "web",
+    "details": {
+      "method": "POST",
+      "path": "/api/entities/nomenclature",
+      "endpoint": "create_entity",
+      "status_code": 400,
+      "duration_ms": 3.57,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "FAILURE",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "POST /api/entities/group -> 400",
+    "source": "web",
+    "details": {
+      "method": "POST",
+      "path": "/api/entities/group",
+      "endpoint": "create_entity",
+      "status_code": 400,
+      "duration_ms": 0.1,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:16",
+    "category": "CRUD",
+    "operation": "CREATE",
+    "status": "SUCCESS",
+    "entity_type": "group",
+    "entity_code": "6b358461-7920-449b-8c00-b553b6236d19",
+    "message": "Создана сущность типа 'group'",
+    "source": "entity_service",
+    "details": {
+      "name": "Первая группа"
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "SUCCESS",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "POST /api/entities/group -> 200",
+    "source": "web",
+    "details": {
+      "method": "POST",
+      "path": "/api/entities/group",
+      "endpoint": "create_entity",
+      "status_code": 200,
+      "duration_ms": 3.82,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "CRUD",
+    "operation": "CREATE",
+    "status": "FAILURE",
+    "entity_type": "group",
+    "entity_code": "",
+    "message": "Ошибка создания сущности: Сущность типа 'group' с кодом '6b358461-7920-449b-8c00-b553b6236d19' уже существует",
+    "source": "entity_service",
+    "details": {
+      "payload": {
+        "id": "6b358461-7920-449b-8c00-b553b6236d19",
+        "name": "Вторая группа"
+      }
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "FAILURE",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "POST /api/entities/group -> 400",
+    "source": "web",
+    "details": {
+      "method": "POST",
+      "path": "/api/entities/group",
+      "endpoint": "create_entity",
+      "status_code": 400,
+      "duration_ms": 4.27,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "SUCCESS",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "GET /openapi.yaml -> 200",
+    "source": "web",
+    "details": {
+      "method": "GET",
+      "path": "/openapi.yaml",
+      "endpoint": "openapi_spec",
+      "status_code": 200,
+      "duration_ms": 0.49,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "SUCCESS",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "GET /api/openapi.yaml -> 200",
+    "source": "web",
+    "details": {
+      "method": "GET",
+      "path": "/api/openapi.yaml",
+      "endpoint": "openapi_spec",
+      "status_code": 200,
+      "duration_ms": 0.39,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "SUCCESS",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "GET /api/docs/ -> 200",
+    "source": "web",
+    "details": {
+      "method": "GET",
+      "path": "/api/docs/",
+      "endpoint": "swagger_ui",
+      "status_code": 200,
+      "duration_ms": 0.04,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла settings.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "settings.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла settings.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "settings.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла settings.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "settings.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла settings.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "settings.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла settings.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "settings.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла settings.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "settings.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла settings.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "settings.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла settings.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "settings.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла settings.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "settings.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла settings.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "settings.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла settings.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "settings.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "CRUD",
+    "operation": "READ",
+    "status": "SUCCESS",
+    "entity_type": "nomenclature",
+    "entity_code": "",
+    "message": "Отфильтрованы сущности типа 'nomenclature'",
+    "source": "entity_service",
+    "details": {
+      "count": 1,
+      "field_name": "name",
+      "value": "Мука",
+      "filter_type": "like"
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "CRUD",
+    "operation": "READ",
+    "status": "FAILURE",
+    "entity_type": "unknown",
+    "entity_code": "",
+    "message": "Ошибка фильтрации сущностей: Error: Inccorect argument! entity_type\nНеподдерживаемый тип сущности: 'unknown'. Допустимые значения: group, nomenclature, range, recipe, storage",
+    "source": "entity_service",
+    "details": {
+      "field_name": "name"
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "CRUD",
+    "operation": "READ",
+    "status": "SUCCESS",
+    "entity_type": "nomenclature",
+    "entity_code": "",
+    "message": "Отфильтрованы сущности типа 'nomenclature'",
+    "source": "entity_service",
+    "details": {
+      "count": 1,
+      "field_name": "name",
+      "value": "Мука",
+      "filter_type": "like"
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "SUCCESS",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "POST /api/filter/nomenclature -> 200",
+    "source": "web",
+    "details": {
+      "method": "POST",
+      "path": "/api/filter/nomenclature",
+      "endpoint": "filter_entities",
+      "status_code": 200,
+      "duration_ms": 5.75,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "CRUD",
+    "operation": "READ",
+    "status": "SUCCESS",
+    "entity_type": "range",
+    "entity_code": "",
+    "message": "Отфильтрованы сущности типа 'range'",
+    "source": "entity_service",
+    "details": {
+      "count": 2,
+      "field_name": "name",
+      "value": "грамм",
+      "filter_type": "equals"
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "SUCCESS",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "POST /api/filter/range -> 200",
+    "source": "web",
+    "details": {
+      "method": "POST",
+      "path": "/api/filter/range",
+      "endpoint": "filter_entities",
+      "status_code": 200,
+      "duration_ms": 3.9,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "FAILURE",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "POST /api/filter/unknown -> 400",
+    "source": "web",
+    "details": {
+      "method": "POST",
+      "path": "/api/filter/unknown",
+      "endpoint": "filter_entities",
+      "status_code": 400,
+      "duration_ms": 0.07,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "FAILURE",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "POST /api/filter/nomenclature -> 400",
+    "source": "web",
+    "details": {
+      "method": "POST",
+      "path": "/api/filter/nomenclature",
+      "endpoint": "filter_entities",
+      "status_code": 400,
+      "duration_ms": 0.18,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "CRUD",
+    "operation": "READ",
+    "status": "SUCCESS",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "тестовое событие",
+    "source": "",
+    "details": {}
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "CRUD",
+    "operation": "READ",
+    "status": "SUCCESS",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "событие после отписки",
+    "source": "",
+    "details": {}
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "CRUD",
+    "operation": "READ",
+    "status": "SUCCESS",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "событие при сбое наблюдателя",
+    "source": "",
+    "details": {}
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "CRUD",
+    "operation": "CREATE",
+    "status": "SUCCESS",
+    "entity_type": "group",
+    "entity_code": "55badfb0-7e99-4152-a698-8c56eb295857",
+    "message": "Создана сущность типа 'group'",
+    "source": "entity_service",
+    "details": {
+      "name": "Группа для журнала"
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "SUCCESS",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "POST /api/entities/group -> 200",
+    "source": "web",
+    "details": {
+      "method": "POST",
+      "path": "/api/entities/group",
+      "endpoint": "create_entity",
+      "status_code": 200,
+      "duration_ms": 4.21,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "CRUD",
+    "operation": "READ",
+    "status": "SUCCESS",
+    "entity_type": "group",
+    "entity_code": "55badfb0-7e99-4152-a698-8c56eb295857",
+    "message": "Получена сущность типа 'group'",
+    "source": "entity_service",
+    "details": {}
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "SUCCESS",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "GET /api/entities/group/55badfb0-7e99-4152-a698-8c56eb295857 -> 200",
+    "source": "web",
+    "details": {
+      "method": "GET",
+      "path": "/api/entities/group/55badfb0-7e99-4152-a698-8c56eb295857",
+      "endpoint": "get_entity",
+      "status_code": 200,
+      "duration_ms": 3.58,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "CRUD",
+    "operation": "READ",
+    "status": "SUCCESS",
+    "entity_type": "group",
+    "entity_code": "55badfb0-7e99-4152-a698-8c56eb295857",
+    "message": "Получена сущность типа 'group'",
+    "source": "entity_service",
+    "details": {}
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "CRUD",
+    "operation": "UPDATE",
+    "status": "SUCCESS",
+    "entity_type": "group",
+    "entity_code": "55badfb0-7e99-4152-a698-8c56eb295857",
+    "message": "Изменена сущность типа 'group'",
+    "source": "entity_service",
+    "details": {
+      "name": "Группа для журнала 2",
+      "changes": {
+        "name": {
+          "before": "Группа для журнала",
+          "after": "Группа для журнала 2"
+        }
+      }
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "SUCCESS",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "PUT /api/entities/group/55badfb0-7e99-4152-a698-8c56eb295857 -> 200",
+    "source": "web",
+    "details": {
+      "method": "PUT",
+      "path": "/api/entities/group/55badfb0-7e99-4152-a698-8c56eb295857",
+      "endpoint": "update_entity",
+      "status_code": 200,
+      "duration_ms": 7.88,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "CRUD",
+    "operation": "READ",
+    "status": "SUCCESS",
+    "entity_type": "group",
+    "entity_code": "55badfb0-7e99-4152-a698-8c56eb295857",
+    "message": "Получена сущность типа 'group'",
+    "source": "entity_service",
+    "details": {}
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "CRUD",
+    "operation": "DELETE",
+    "status": "SUCCESS",
+    "entity_type": "group",
+    "entity_code": "55badfb0-7e99-4152-a698-8c56eb295857",
+    "message": "Удалена сущность типа 'group'",
+    "source": "entity_service",
+    "details": {
+      "name": "Группа для журнала 2"
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "SUCCESS",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "DELETE /api/entities/group/55badfb0-7e99-4152-a698-8c56eb295857 -> 200",
+    "source": "web",
+    "details": {
+      "method": "DELETE",
+      "path": "/api/entities/group/55badfb0-7e99-4152-a698-8c56eb295857",
+      "endpoint": "delete_entity",
+      "status_code": 200,
+      "duration_ms": 7.0,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
     "category": "CRUD",
     "operation": "CREATE",
     "status": "FAILURE",
@@ -216,7 +2968,7 @@
     }
   },
   {
-    "timestamp": "2026-11-28T14:12:37",
+    "timestamp": "2026-11-28T22:14:17",
     "category": "WEB",
     "operation": "CALL",
     "status": "FAILURE",
@@ -229,26 +2981,26 @@
       "path": "/api/entities/group",
       "endpoint": "create_entity",
       "status_code": 400,
-      "duration_ms": 1.5,
+      "duration_ms": 3.17,
       "remote_addr": "127.0.0.1",
       "query": ""
     }
   },
   {
-    "timestamp": "2026-11-28T14:12:37",
+    "timestamp": "2026-11-28T22:14:17",
     "category": "WAREHOUSE",
     "operation": "CREATE",
     "status": "SUCCESS",
     "entity_type": "storage",
-    "entity_code": "1f039af7-75b8-4cbe-9ea9-8d8a23f01030",
+    "entity_code": "127a1c04-7100-4ee7-9b73-d097c63e9e8f",
     "message": "Создана сущность типа 'storage'",
     "source": "entity_service",
     "details": {
-      "name": "Склад аудита"
+      "name": "Склад для журнала"
     }
   },
   {
-    "timestamp": "2026-11-28T14:12:37",
+    "timestamp": "2026-11-28T22:14:17",
     "category": "WEB",
     "operation": "CALL",
     "status": "SUCCESS",
@@ -261,105 +3013,56 @@
       "path": "/api/entities/storage",
       "endpoint": "create_entity",
       "status_code": 200,
-      "duration_ms": 1.24,
+      "duration_ms": 6.41,
       "remote_addr": "127.0.0.1",
       "query": ""
     }
   },
   {
-    "timestamp": "2026-11-28T14:12:37",
+    "timestamp": "2026-11-28T22:14:17",
     "category": "WAREHOUSE",
     "operation": "READ",
     "status": "SUCCESS",
     "entity_type": "storage",
-    "entity_code": "1f039af7-75b8-4cbe-9ea9-8d8a23f01030",
+    "entity_code": "127a1c04-7100-4ee7-9b73-d097c63e9e8f",
     "message": "Получена сущность типа 'storage'",
     "source": "entity_service",
     "details": {}
   },
   {
-    "timestamp": "2026-11-28T14:12:37",
-    "category": "WAREHOUSE",
-    "operation": "UPDATE",
-    "status": "SUCCESS",
-    "entity_type": "storage",
-    "entity_code": "1f039af7-75b8-4cbe-9ea9-8d8a23f01030",
-    "message": "Изменена сущность типа 'storage'",
-    "source": "entity_service",
-    "details": {
-      "name": "Склад аудита",
-      "changes": {
-        "address": {
-          "before": "ул. Аудитная, 1",
-          "after": "ул. Аудитная, 2"
-        }
-      }
-    }
-  },
-  {
-    "timestamp": "2026-11-28T14:12:37",
-    "category": "WEB",
-    "operation": "CALL",
-    "status": "SUCCESS",
-    "entity_type": "",
-    "entity_code": "",
-    "message": "PATCH /api/entities/storage/1f039af7-75b8-4cbe-9ea9-8d8a23f01030 -> 200",
-    "source": "web",
-    "details": {
-      "method": "PATCH",
-      "path": "/api/entities/storage/1f039af7-75b8-4cbe-9ea9-8d8a23f01030",
-      "endpoint": "update_entity",
-      "status_code": 200,
-      "duration_ms": 3.25,
-      "remote_addr": "127.0.0.1",
-      "query": ""
-    }
-  },
-  {
-    "timestamp": "2026-11-28T14:12:37",
-    "category": "WAREHOUSE",
-    "operation": "READ",
-    "status": "SUCCESS",
-    "entity_type": "storage",
-    "entity_code": "1f039af7-75b8-4cbe-9ea9-8d8a23f01030",
-    "message": "Получена сущность типа 'storage'",
-    "source": "entity_service",
-    "details": {}
-  },
-  {
-    "timestamp": "2026-11-28T14:12:37",
+    "timestamp": "2026-11-28T22:14:17",
     "category": "WAREHOUSE",
     "operation": "DELETE",
     "status": "SUCCESS",
     "entity_type": "storage",
-    "entity_code": "1f039af7-75b8-4cbe-9ea9-8d8a23f01030",
+    "entity_code": "127a1c04-7100-4ee7-9b73-d097c63e9e8f",
     "message": "Удалена сущность типа 'storage'",
     "source": "entity_service",
     "details": {
-      "name": "Склад аудита"
+      "name": "Склад для журнала"
     }
   },
   {
-    "timestamp": "2026-11-28T14:12:37",
+    "timestamp": "2026-11-28T22:14:17",
     "category": "WEB",
     "operation": "CALL",
     "status": "SUCCESS",
     "entity_type": "",
     "entity_code": "",
-    "message": "DELETE /api/entities/storage/1f039af7-75b8-4cbe-9ea9-8d8a23f01030 -> 200",
+    "message": "DELETE /api/entities/storage/127a1c04-7100-4ee7-9b73-d097c63e9e8f -> 200",
     "source": "web",
     "details": {
       "method": "DELETE",
-      "path": "/api/entities/storage/1f039af7-75b8-4cbe-9ea9-8d8a23f01030",
+      "path": "/api/entities/storage/127a1c04-7100-4ee7-9b73-d097c63e9e8f",
       "endpoint": "delete_entity",
       "status_code": 200,
-      "duration_ms": 4.76,
+      "duration_ms": 10.04,
       "remote_addr": "127.0.0.1",
       "query": ""
     }
   },
   {
-    "timestamp": "2026-11-28T14:12:37",
+    "timestamp": "2026-11-28T22:14:17",
     "category": "WAREHOUSE",
     "operation": "REPORT",
     "status": "SUCCESS",
@@ -375,7 +3078,7 @@
     }
   },
   {
-    "timestamp": "2026-11-28T14:12:37",
+    "timestamp": "2026-11-28T22:14:17",
     "category": "WEB",
     "operation": "CALL",
     "status": "SUCCESS",
@@ -388,13 +3091,46 @@
       "path": "/api/osv",
       "endpoint": "build_osv",
       "status_code": 200,
-      "duration_ms": 3.23,
+      "duration_ms": 4.82,
       "remote_addr": "127.0.0.1",
       "query": ""
     }
   },
   {
-    "timestamp": "2026-11-28T14:12:37",
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "SUCCESS",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "GET /api/formats -> 200",
+    "source": "web",
+    "details": {
+      "method": "GET",
+      "path": "/api/formats",
+      "endpoint": "get_report_formats",
+      "status_code": 200,
+      "duration_ms": 0.07,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла settings.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "settings.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
     "category": "SETTINGS",
     "operation": "UPDATE",
     "status": "SUCCESS",
@@ -403,16 +3139,46 @@
     "message": "Изменены параметры настроек",
     "source": "settings_manager",
     "details": {
-      "changes": {
-        "response_format": {
-          "before": "TXT",
-          "after": "CSV"
-        }
+      "before": {
+        "$type": "settings_model",
+        "account_name": "Петрова Анна Сергеевна",
+        "boss_name": "Иванов Иван Иванович",
+        "id": "98b96047-6f18-4768-995a-0c15be2343d2",
+        "is_first_start": true,
+        "name": "",
+        "organization": {
+          "$type": "organization_model",
+          "name": "Ромашка",
+          "inn": "4444444444",
+          "bik": "012345678",
+          "account": "12345678901234567890",
+          "ownership_form": "ООО",
+          "id": "562d6ec1-312b-4566-9909-5df980867734"
+        },
+        "response_format": "TXT"
+      },
+      "after": {
+        "$type": "settings_model",
+        "account_name": "Петрова Анна Сергеевна",
+        "boss_name": "Иванов Иван Иванович",
+        "id": "98b96047-6f18-4768-995a-0c15be2343d2",
+        "is_first_start": true,
+        "name": "",
+        "organization": {
+          "$type": "organization_model",
+          "name": "Ромашка",
+          "inn": "4444444444",
+          "bik": "012345678",
+          "account": "12345678901234567890",
+          "ownership_form": "ООО",
+          "id": "562d6ec1-312b-4566-9909-5df980867734"
+        },
+        "response_format": "CSV"
       }
     }
   },
   {
-    "timestamp": "2026-11-28T14:12:37",
+    "timestamp": "2026-11-28T22:14:17",
     "category": "WEB",
     "operation": "CALL",
     "status": "SUCCESS",
@@ -425,50 +3191,13 @@
       "path": "/api/settings",
       "endpoint": "update_settings",
       "status_code": 200,
-      "duration_ms": 4.09,
+      "duration_ms": 5.41,
       "remote_addr": "127.0.0.1",
       "query": ""
     }
   },
   {
-    "timestamp": "2026-11-28T14:12:37",
-    "category": "SETTINGS",
-    "operation": "UPDATE",
-    "status": "SUCCESS",
-    "entity_type": "settings",
-    "entity_code": "",
-    "message": "Изменены параметры настроек",
-    "source": "settings_manager",
-    "details": {
-      "changes": {
-        "response_format": {
-          "before": "CSV",
-          "after": "TXT"
-        }
-      }
-    }
-  },
-  {
-    "timestamp": "2026-11-28T14:12:37",
-    "category": "WEB",
-    "operation": "CALL",
-    "status": "SUCCESS",
-    "entity_type": "",
-    "entity_code": "",
-    "message": "PATCH /api/settings -> 200",
-    "source": "web",
-    "details": {
-      "method": "PATCH",
-      "path": "/api/settings",
-      "endpoint": "update_settings",
-      "status_code": 200,
-      "duration_ms": 5.62,
-      "remote_addr": "127.0.0.1",
-      "query": ""
-    }
-  },
-  {
-    "timestamp": "2026-11-28T14:12:37",
+    "timestamp": "2026-11-28T22:14:17",
     "category": "SETTINGS",
     "operation": "UPDATE",
     "status": "FAILURE",
@@ -483,7 +3212,7 @@
     }
   },
   {
-    "timestamp": "2026-11-28T14:12:37",
+    "timestamp": "2026-11-28T22:14:17",
     "category": "WEB",
     "operation": "CALL",
     "status": "FAILURE",
@@ -496,13 +3225,66 @@
       "path": "/api/settings",
       "endpoint": "update_settings",
       "status_code": 400,
-      "duration_ms": 2.85,
+      "duration_ms": 4.83,
       "remote_addr": "127.0.0.1",
       "query": ""
     }
   },
   {
-    "timestamp": "2026-11-28T14:12:37",
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "SETTINGS",
+    "operation": "UPDATE",
+    "status": "FAILURE",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Ошибка изменения настроек: Error: Inccorect argument! unknown_parameter\nНеизвестный параметр настроек: 'unknown_parameter'",
+    "source": "settings_manager",
+    "details": {
+      "payload": {
+        "unknown_parameter": 1
+      }
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "FAILURE",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "PATCH /api/settings -> 400",
+    "source": "web",
+    "details": {
+      "method": "PATCH",
+      "path": "/api/settings",
+      "endpoint": "update_settings",
+      "status_code": 400,
+      "duration_ms": 5.17,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "SUCCESS",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "GET /api/formats -> 200",
+    "source": "web",
+    "details": {
+      "method": "GET",
+      "path": "/api/formats",
+      "endpoint": "get_report_formats",
+      "status_code": 200,
+      "duration_ms": 0.11,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
     "category": "WEB",
     "operation": "CALL",
     "status": "SUCCESS",
@@ -515,75 +3297,1557 @@
       "path": "/api/logs",
       "endpoint": "get_audit_logs",
       "status_code": 200,
-      "duration_ms": 0.37,
+      "duration_ms": 0.29,
       "remote_addr": "127.0.0.1",
-      "query": "limit=10"
+      "query": "category=WEB&limit=10"
     }
   },
   {
-    "timestamp": "2026-11-28T18:03:58",
-    "category": "SETTINGS",
-    "operation": "LOAD",
-    "status": "SUCCESS",
-    "entity_type": "settings",
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "FAILURE",
+    "entity_type": "",
     "entity_code": "",
-    "message": "Настройки загружены из файла settings.json",
-    "source": "settings_manager",
+    "message": "GET /api/logs -> 400",
+    "source": "web",
     "details": {
-      "file": "settings.json",
-      "loaded": true
+      "method": "GET",
+      "path": "/api/logs",
+      "endpoint": "get_audit_logs",
+      "status_code": 400,
+      "duration_ms": 0.09,
+      "remote_addr": "127.0.0.1",
+      "query": "limit=abc"
     }
   },
   {
-    "timestamp": "2026-11-28T18:03:58",
-    "category": "SETTINGS",
-    "operation": "LOAD",
-    "status": "SUCCESS",
-    "entity_type": "settings",
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "FAILURE",
+    "entity_type": "",
     "entity_code": "",
-    "message": "Настройки загружены из файла settings.json",
-    "source": "settings_manager",
+    "message": "GET /api/logs -> 400",
+    "source": "web",
     "details": {
-      "file": "settings.json",
-      "loaded": true
+      "method": "GET",
+      "path": "/api/logs",
+      "endpoint": "get_audit_logs",
+      "status_code": 400,
+      "duration_ms": 0.12,
+      "remote_addr": "127.0.0.1",
+      "query": "limit=-1"
     }
   },
   {
-    "timestamp": "2026-11-28T18:04:16",
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "WAREHOUSE",
+    "operation": "REPORT",
+    "status": "SUCCESS",
+    "entity_type": "nomenclature",
+    "entity_code": "",
+    "message": "Сформирована оборотно-сальдовая ведомость",
+    "source": "entity_service",
+    "details": {
+      "count": 1,
+      "start_date": null,
+      "field_name": "name",
+      "value": "Мука"
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
     "category": "WEB",
     "operation": "CALL",
     "status": "SUCCESS",
     "entity_type": "",
     "entity_code": "",
-    "message": "GET / -> 200",
+    "message": "POST /api/osv -> 200",
     "source": "web",
     "details": {
-      "method": "GET",
-      "path": "/",
-      "endpoint": "get_report",
+      "method": "POST",
+      "path": "/api/osv",
+      "endpoint": "build_osv",
       "status_code": 200,
-      "duration_ms": 0.21,
+      "duration_ms": 6.25,
       "remote_addr": "127.0.0.1",
       "query": ""
     }
   },
   {
-    "timestamp": "2026-11-28T18:04:47",
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "WAREHOUSE",
+    "operation": "REPORT",
+    "status": "SUCCESS",
+    "entity_type": "nomenclature",
+    "entity_code": "",
+    "message": "Сформирована оборотно-сальдовая ведомость",
+    "source": "entity_service",
+    "details": {
+      "count": 5,
+      "start_date": "2000-01-01",
+      "field_name": "name",
+      "value": "Молочные продукты"
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
     "category": "WEB",
     "operation": "CALL",
     "status": "SUCCESS",
     "entity_type": "",
     "entity_code": "",
-    "message": "GET /api/report_default/range/bffb10d5-29f1-4954-a6d7-a1efcffc6cb0 -> 200",
+    "message": "POST /api/osv -> 200",
+    "source": "web",
+    "details": {
+      "method": "POST",
+      "path": "/api/osv",
+      "endpoint": "build_osv",
+      "status_code": 200,
+      "duration_ms": 5.17,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "WAREHOUSE",
+    "operation": "REPORT",
+    "status": "SUCCESS",
+    "entity_type": "nomenclature",
+    "entity_code": "",
+    "message": "Сформирована оборотно-сальдовая ведомость",
+    "source": "entity_service",
+    "details": {
+      "count": 1,
+      "start_date": null,
+      "field_name": "name",
+      "value": "Суп"
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "SUCCESS",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "POST /api/report/osv -> 200",
+    "source": "web",
+    "details": {
+      "method": "POST",
+      "path": "/api/report/osv",
+      "endpoint": "build_osv",
+      "status_code": 200,
+      "duration_ms": 5.65,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "WAREHOUSE",
+    "operation": "REPORT",
+    "status": "FAILURE",
+    "entity_type": "nomenclature",
+    "entity_code": "",
+    "message": "Ошибка формирования ОСВ: Error: Inccorect argument! entity_type\nОСВ формируется только по типу 'nomenclature', а передан тип 'group'",
+    "source": "entity_service",
+    "details": {
+      "start_date": null
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "FAILURE",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "POST /api/osv -> 400",
+    "source": "web",
+    "details": {
+      "method": "POST",
+      "path": "/api/osv",
+      "endpoint": "build_osv",
+      "status_code": 400,
+      "duration_ms": 4.87,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "FAILURE",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "POST /api/osv -> 400",
+    "source": "web",
+    "details": {
+      "method": "POST",
+      "path": "/api/osv",
+      "endpoint": "build_osv",
+      "status_code": 400,
+      "duration_ms": 0.14,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "FAILURE",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "POST /api/osv -> 400",
+    "source": "web",
+    "details": {
+      "method": "POST",
+      "path": "/api/osv",
+      "endpoint": "build_osv",
+      "status_code": 400,
+      "duration_ms": 0.46,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "SUCCESS",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "GET /api/report/recipe/555d1332-d56c-4e7e-af59-e682b3b69a32/csv -> 200",
     "source": "web",
     "details": {
       "method": "GET",
-      "path": "/api/report_default/range/bffb10d5-29f1-4954-a6d7-a1efcffc6cb0",
+      "path": "/api/report/recipe/555d1332-d56c-4e7e-af59-e682b3b69a32/csv",
+      "endpoint": "get_entity_report",
+      "status_code": 200,
+      "duration_ms": 0.17,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "SUCCESS",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "GET /api/report/recipe/555d1332-d56c-4e7e-af59-e682b3b69a32/csv -> 200",
+    "source": "web",
+    "details": {
+      "method": "GET",
+      "path": "/api/report/recipe/555d1332-d56c-4e7e-af59-e682b3b69a32/csv",
+      "endpoint": "get_entity_report",
+      "status_code": 200,
+      "duration_ms": 0.17,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "SUCCESS",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "GET /api/report/recipe/555d1332-d56c-4e7e-af59-e682b3b69a32/markdown -> 200",
+    "source": "web",
+    "details": {
+      "method": "GET",
+      "path": "/api/report/recipe/555d1332-d56c-4e7e-af59-e682b3b69a32/markdown",
+      "endpoint": "get_entity_report",
+      "status_code": 200,
+      "duration_ms": 0.23,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "SUCCESS",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "GET /api/report/recipe/555d1332-d56c-4e7e-af59-e682b3b69a32/markdown -> 200",
+    "source": "web",
+    "details": {
+      "method": "GET",
+      "path": "/api/report/recipe/555d1332-d56c-4e7e-af59-e682b3b69a32/markdown",
+      "endpoint": "get_entity_report",
+      "status_code": 200,
+      "duration_ms": 0.3,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "SUCCESS",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "GET /api/report/recipe/555d1332-d56c-4e7e-af59-e682b3b69a32/txt -> 200",
+    "source": "web",
+    "details": {
+      "method": "GET",
+      "path": "/api/report/recipe/555d1332-d56c-4e7e-af59-e682b3b69a32/txt",
+      "endpoint": "get_entity_report",
+      "status_code": 200,
+      "duration_ms": 0.15,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "FAILURE",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "GET /api/report/recipe/555d1332-d56c-4e7e-af59-e682b3b69a32/universal -> 400",
+    "source": "web",
+    "details": {
+      "method": "GET",
+      "path": "/api/report/recipe/555d1332-d56c-4e7e-af59-e682b3b69a32/universal",
+      "endpoint": "get_entity_report",
+      "status_code": 400,
+      "duration_ms": 0.09,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "SUCCESS",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "GET /api/report/recipe/555d1332-d56c-4e7e-af59-e682b3b69a32/xml -> 200",
+    "source": "web",
+    "details": {
+      "method": "GET",
+      "path": "/api/report/recipe/555d1332-d56c-4e7e-af59-e682b3b69a32/xml",
+      "endpoint": "get_entity_report",
+      "status_code": 200,
+      "duration_ms": 0.29,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "SUCCESS",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "GET /api/report/recipe/555d1332-d56c-4e7e-af59-e682b3b69a32/html -> 200",
+    "source": "web",
+    "details": {
+      "method": "GET",
+      "path": "/api/report/recipe/555d1332-d56c-4e7e-af59-e682b3b69a32/html",
+      "endpoint": "get_entity_report",
+      "status_code": 200,
+      "duration_ms": 0.18,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "SUCCESS",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "GET /api/report_default/recipe/555d1332-d56c-4e7e-af59-e682b3b69a32 -> 200",
+    "source": "web",
+    "details": {
+      "method": "GET",
+      "path": "/api/report_default/recipe/555d1332-d56c-4e7e-af59-e682b3b69a32",
       "endpoint": "get_entity_report_by_settings",
       "status_code": 200,
-      "duration_ms": 0.21,
+      "duration_ms": 0.17,
       "remote_addr": "127.0.0.1",
       "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "SUCCESS",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "GET /api/report_default/recipe/555d1332-d56c-4e7e-af59-e682b3b69a32 -> 200",
+    "source": "web",
+    "details": {
+      "method": "GET",
+      "path": "/api/report_default/recipe/555d1332-d56c-4e7e-af59-e682b3b69a32",
+      "endpoint": "get_entity_report_by_settings",
+      "status_code": 200,
+      "duration_ms": 0.15,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "SUCCESS",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "GET /api/report_default/recipe/555d1332-d56c-4e7e-af59-e682b3b69a32 -> 200",
+    "source": "web",
+    "details": {
+      "method": "GET",
+      "path": "/api/report_default/recipe/555d1332-d56c-4e7e-af59-e682b3b69a32",
+      "endpoint": "get_entity_report_by_settings",
+      "status_code": 200,
+      "duration_ms": 0.29,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "SUCCESS",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "GET /api/report_default/nomenclature/73cdb5ea-695b-4199-aa4c-a41b2779302a -> 200",
+    "source": "web",
+    "details": {
+      "method": "GET",
+      "path": "/api/report_default/nomenclature/73cdb5ea-695b-4199-aa4c-a41b2779302a",
+      "endpoint": "get_entity_report_by_settings",
+      "status_code": 200,
+      "duration_ms": 0.11,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "SUCCESS",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "GET /api/report_default/range/00e3c8ff-0b0e-4884-9c5e-3a7eb726fa76 -> 200",
+    "source": "web",
+    "details": {
+      "method": "GET",
+      "path": "/api/report_default/range/00e3c8ff-0b0e-4884-9c5e-3a7eb726fa76",
+      "endpoint": "get_entity_report_by_settings",
+      "status_code": 200,
+      "duration_ms": 0.12,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "FAILURE",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "GET /api/report_default/ingredient/555d1332-d56c-4e7e-af59-e682b3b69a32 -> 400",
+    "source": "web",
+    "details": {
+      "method": "GET",
+      "path": "/api/report_default/ingredient/555d1332-d56c-4e7e-af59-e682b3b69a32",
+      "endpoint": "get_entity_report_by_settings",
+      "status_code": 400,
+      "duration_ms": 0.05,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "WEB",
+    "operation": "CALL",
+    "status": "FAILURE",
+    "entity_type": "",
+    "entity_code": "",
+    "message": "GET /api/report_default/recipe/00000000-0000-0000-0000-000000000000 -> 404",
+    "source": "web",
+    "details": {
+      "method": "GET",
+      "path": "/api/report_default/recipe/00000000-0000-0000-0000-000000000000",
+      "endpoint": "get_entity_report_by_settings",
+      "status_code": 404,
+      "duration_ms": 0.07,
+      "remote_addr": "127.0.0.1",
+      "query": ""
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла settings.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "settings.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла settings.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "settings.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла settings.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "settings.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла settings.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "settings.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла settings.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "settings.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла settings.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "settings.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла settings.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "settings.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла settings.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "settings.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла settings.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "settings.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла settings.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "settings.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла settings.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "settings.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла settings.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "settings.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла settings.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "settings.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла settings.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "settings.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла settings.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "settings.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла settings.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "settings.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла settings.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "settings.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла settings.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "settings.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла settings.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "settings.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла settings.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "settings.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла settings.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "settings.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла settings.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "settings.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла settings.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "settings.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла settings.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "settings.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла settings.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "settings.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла settings.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "settings.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла settings.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "settings.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла settings.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "settings.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла settings.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "settings.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла settings.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "settings.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:17",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла settings.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "settings.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:18",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла settings.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "settings.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:18",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла settings.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "settings.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:18",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла settings.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "settings.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:18",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла settings.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "settings.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:18",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла settings.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "settings.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:18",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла settings.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "settings.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:18",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла settings.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "settings.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:18",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла settings.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "settings.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:18",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла settings.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "settings.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:18",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла settings.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "settings.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:18",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла settings.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "settings.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:18",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла settings.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "settings.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:18",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла settings.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "settings.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:18",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла settings.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "settings.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:18",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла settings.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "settings.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:18",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла settings.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "settings.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:18",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла settings.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "settings.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:18",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла settings.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "settings.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:18",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла settings.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "settings.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:18",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла settings.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "settings.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:18",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла settings.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "settings.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:18",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла settings.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "settings.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:18",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла settings.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "settings.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:18",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла settings.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "settings.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:18",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла settings.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "settings.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:18",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла settings.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "settings.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:18",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла settings.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "settings.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:18",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла settings.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "settings.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:18",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла settings.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "settings.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:18",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла /tmp/pytest-of-alexey_stack/pytest-15/test_load_plain_settings_throu0/settings_plain.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "/tmp/pytest-of-alexey_stack/pytest-15/test_load_plain_settings_throu0/settings_plain.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:18",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла settings.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "settings.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:18",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла /tmp/pytest-of-alexey_stack/pytest-15/test_load_typed_settings_throu0/settings_typed.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "/tmp/pytest-of-alexey_stack/pytest-15/test_load_typed_settings_throu0/settings_typed.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:18",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла settings.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "settings.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:18",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла /tmp/pytest-of-alexey_stack/pytest-15/test_convert_rebuilds_settings0/settings_convert.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "/tmp/pytest-of-alexey_stack/pytest-15/test_convert_rebuilds_settings0/settings_convert.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:18",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла settings.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "settings.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:18",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла settings.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "settings.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:18",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла settings.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "settings.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:18",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла settings.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "settings.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:18",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла settings.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "settings.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:18",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла settings.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "settings.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:18",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла settings.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "settings.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:18",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла settings.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "settings.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:18",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла settings.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "settings.json",
+      "loaded": true
+    }
+  },
+  {
+    "timestamp": "2026-11-28T22:14:18",
+    "category": "SETTINGS",
+    "operation": "LOAD",
+    "status": "SUCCESS",
+    "entity_type": "settings",
+    "entity_code": "",
+    "message": "Настройки загружены из файла settings.json",
+    "source": "settings_manager",
+    "details": {
+      "file": "settings.json",
+      "loaded": true
     }
   }
 ]

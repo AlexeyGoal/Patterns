@@ -3,6 +3,7 @@ from Src.Core.exception import arguments_exception
 from Src.Core.log_type import log_category, log_operation, log_status
 from Src.Core.validator import operation_exception
 from Src.Dtos.filter_dto import filter_dto
+from Src.Dtos.log_event_dto import log_event_dto
 from Src.Logics.deserialize_service import deserialize_service
 from Src.Logics.entity_mapper import entity_mapper
 from Src.Logics.entity_references import entity_references
@@ -381,7 +382,7 @@ class entity_service:
     ) -> None:
 
         try:
-            self.__logger.log(
+            event = log_event_dto(
                 category=(
                     category
                     if category is not None
@@ -395,6 +396,7 @@ class entity_service:
                 details=details,
                 source="entity_service",
             )
+            self.__logger.log(event)
         except Exception:
             # Сбой журналирования не должен прерывать CRUD-операцию.
             pass
