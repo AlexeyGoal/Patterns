@@ -1,14 +1,18 @@
 import datetime
 import os
-from flask import Flask, Response, jsonify, redirect, request, send_from_directory
+import time
+from flask import Flask, Response, g, jsonify, redirect, request, send_from_directory
 from Src.Core.exception import arguments_exception
-from Src.Core.validator import operation_exception
+from Src.Core.log_type import log_category, log_operation, log_status
+from Src.Core.validator import argument_exception, operation_exception
 from Src.Logics.entity_service import entity_service
+from Src.Logics.logging_service import logging_service
 from Src.Logics.settings_manager import settings_manager
 from Src.Logics.storage_manager import storage_manager
 from Src.Logics.report_factory import report_factory
 from Src.Logics.filter_dto_deserializer import filter_dto_deserializer
 from Src.Dtos.filter_dto import filter_dto
+from Src.Dtos.log_event_dto import log_event_dto
 from Src.Dtos.report_type_dto import report_type_dto
 
 try:
@@ -36,6 +40,58 @@ storage.convert()
 factory = report_factory()
 entities = entity_service(storage)
 filter_deserializer = filter_dto_deserializer()
+
+# Субъект журналирования: получает события от CRUD, склада, Web и настроек
+audit_log = logging_service()
+
+
+@app.before_request
+def _start_request_timer():
+    """
+    Запоминает начало обработки HTTP-запроса для журнала Web-вызовов.
+    """
+    g.request_started_at = time.perf_counter()
+
+
+@app.after_request
+def _log_web_request(response):
+    """
+    Фиксирует вызов Web-метода: маршрут, результат и длительность обработки.
+    """
+    started_at = getattr(g, "request_started_at", None)
+    duration_ms = (
+        round((time.perf_counter() - started_at) * 1000, 2)
+        if started_at is not None
+        else None
+    )
+
+    try:
+        event = log_event_dto(
+            category=log_category.WEB,
+            operation=log_operation.CALL,
+            status=(
+                log_status.SUCCESS
+                if response.status_code < 400
+                else log_status.FAILURE
+            ),
+            message=f"{request.method} {request.path} -> {response.status_code}",
+            details={
+                "method": request.method,
+                "path": request.path,
+                "endpoint": request.endpoint or "",
+                "status_code": response.status_code,
+                "duration_ms": duration_ms,
+                "remote_addr": request.remote_addr or "",
+                "query": request.query_string.decode("utf-8", errors="ignore"),
+            },
+            source="web",
+        )
+        audit_log.log(event)
+    except Exception:
+        # Сбой журналирования не должен ломать HTTP-ответ.
+        pass
+
+    return response
 
 
 SWAGGER_URL = "/api/docs"
@@ -139,6 +195,63 @@ def get_report_formats_details():
     HTTP GET endpoint получения подробного описания форматов отчетов.
     """
     return jsonify(factory.format_details())
+
+
+@app.route("/api/logs", methods=["GET"])
+def get_audit_logs():
+    """
+    HTTP GET endpoint получения последних событий журнала аудита.
+    """
+    raw_limit = request.args.get("limit", "100")
+
+    try:
+        limit = int(raw_limit)
+    except (TypeError, ValueError):
+        return _make_json_error("Параметр limit должен быть целым числом", status=400)
+
+    if limit < 0:
+        return _make_json_error("Параметр limit не может быть отрицательным", status=400)
+
+    events = audit_log.events(
+        category=request.args.get("category"),
+        status=request.args.get("status"),
+        limit=limit,
+    )
+
+    return jsonify(events), 200
+
+
+@app.route("/api/settings", methods=["GET"])
+def get_settings():
+    """
+    HTTP GET endpoint получения текущих параметров настроек.
+    """
+    if not settings.is_loaded:
+        settings.load()
+
+    return jsonify(settings.to_dict()), 200
+
+
+@app.route("/api/settings", methods=["PUT", "PATCH"])
+def update_settings():
+    """
+    HTTP PUT/PATCH endpoint изменения параметров настроек.
+
+    Изменение фиксируется в журнале аудита категорией SETTINGS.
+    """
+    try:
+        settings.update(_request_payload())
+    except (
+        arguments_exception,
+        argument_exception,
+        operation_exception,
+        ValueError,
+    ) as ex:
+        return _make_json_error(str(ex), status=400)
+    except Exception as ex:
+        return _make_json_error(f"Ошибка при изменении настроек: {ex}", status=500)
+
+    return jsonify(settings.to_dict()), 200
 
 
 
